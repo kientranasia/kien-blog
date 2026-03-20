@@ -1,6 +1,7 @@
 services:
   web:
-    image: ghcr.io/kientranasia/kien-blog:latest
+    build:
+      context: .
     container_name: kien-blog-web
     restart: unless-stopped
     ports:
