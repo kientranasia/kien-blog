@@ -46,6 +46,21 @@ params:
       name: Instagram
       url: "https://instagram.com/kientranasia"
 
+  # Giscus (comment) integration. You must fill repoId + categoryId from your Giscus setup.
+  giscus:
+    enabled: false
+    repo: "kientranasia/kien-blog"
+    repoId: ""
+    category: ""
+    categoryId: ""
+    mapping: "pathname"
+    strict: "0"
+    reactionsEnabled: "1"
+    emitMetadata: "0"
+    inputPosition: "bottom"
+    theme: "preferred_color_scheme"
+    lang: "vi"
+
   home_recent_limit: 10
   related_limit: 5
   footer:

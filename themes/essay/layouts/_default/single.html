@@ -38,6 +38,31 @@
       {{ .Content }}
     </div>
   </article>
+  {{- with site.Params.giscus -}}
+    {{- if and .enabled .repoId .categoryId }}
+  <section class="block post-comments" aria-label="Comments">
+    <h2 class="block__label">Comments</h2>
+    <div class="giscus-wrapper">
+      <script
+        src="https://giscus.app/client.js"
+        data-repo="{{ .repo }}"
+        data-repo-id="{{ .repoId }}"
+        data-category="{{ .category }}"
+        data-category-id="{{ .categoryId }}"
+        data-mapping='{{ .mapping | default "pathname" }}'
+        data-strict='{{ .strict | default "0" }}'
+        data-reactions-enabled='{{ .reactionsEnabled | default "1" }}'
+        data-emit-metadata='{{ .emitMetadata | default "0" }}'
+        data-input-position='{{ .inputPosition | default "bottom" }}'
+        data-theme='{{ .theme | default "preferred_color_scheme" }}'
+        data-lang='{{ .lang | default "vi" }}'
+        crossorigin="anonymous"
+        async>
+      </script>
+    </div>
+  </section>
+    {{- end -}}
+  {{- end -}}
   {{ partial "related-posts.html" . }}
   <section class="block post-newsletter" aria-label="Đăng ký nhận bài qua email">
     {{- $newsletterSubscribeURL := site.Params.home.newsletter_subscribe_url | default "" -}}
