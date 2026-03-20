@@ -1,27 +1,110 @@
-baseURL: https://YOUR_DOMAIN/
-languageCode: en-us
-title: Kien — Notes
+# Dùng `/` để không gắn domain cố định; khi deploy cần URL tuyệt đối (RSS/canonical), xem README + workflow.
+baseURL: /
+relativeURLs: true
+defaultContentLanguage: vi
+languageCode: vi
+title: Kiên Trần
+
 theme: essay
 
 params:
-  description: Essays on AI, automation, and building.
-  author: Kien Tran
-  subtitle: Long-form notes on software, systems, and tools.
+  home:
+    hero_kicker: ""
+    hero_lead: |
+      Kiên Trần là CEO & Founder của TRANDAO, chuyên phát triển giải pháp AI và tự động hóa cho doanh nghiệp, giúp tối giản vận hành và mở rộng hiệu quả bằng công nghệ.
+    # Ảnh hero trong thư mục /assets/ (ví dụ assets/KienTranDao_Banner.png)
+    hero_image_asset: KienTranDao_Banner.png
+    # Dự phòng: path trong /static/ nếu không dùng asset (để trống = không dùng)
+    hero_image: ""
+    posts_heading: "Bài viết"
+    newsletter_heading: "Nhận bài qua email"
+    newsletter_placeholder: "Nhận bản tin qua email"
+    # URL backend nhận POST để đăng ký newsletter.
+    # Ví dụ: "https://trandao.vn/api/newsletter/subscribe"
+    newsletter_subscribe_url: ""
+    # "json" hoặc "form" (application/x-www-form-urlencoded)
+    newsletter_subscribe_format: "json"
+
+  # Icon: facebook | linkedin | youtube | tiktok | instagram | zalo | github | x | mail | link
+  social:
+    - icon: facebook
+      name: Facebook
+      url: "https://www.facebook.com/kientranasia"
+    - icon: github
+      name: GitHub
+      url: "https://github.com/kientranasia"
+    - icon: x
+      name: X
+      url: "https://x.com/kientranasia"
+    - icon: linkedin
+      name: LinkedIn
+      url: "https://www.linkedin.com/in/kientranasia"
+    - icon: youtube
+      name: YouTube
+      url: "https://www.youtube.com/@kientranasia"
+    - icon: instagram
+      name: Instagram
+      url: "https://instagram.com/kientranasia"
+
+  home_recent_limit: 10
+  related_limit: 5
+  footer:
+    trandao_name: "TRANDAO INVESTMENT"
+    trandao_url: "https://trandao.vn"
+  author: Kiên Trần
+  description: >-
+    Expert Consultant, CEO Athsent — tư vấn chuyển đổi số, BPR và tự động hóa
+    quy trình. 11+ năm thực chiến. Ghi chép dài hơi: startup, life, happy, philosophy.
+  profile:
+    name: Kiên Trần
+    roleLine: "Expert Consultant · CEO Athsent"
+    badge: "Chuyển đổi số · BPR · Workflow Automation"
+    intro: >-
+      Với 11 năm thực chiến, tôi không bán phần mềm. Tôi mang đến tư duy Tái cấu trúc
+      quy trình (BPR) kết hợp công nghệ.
+    mission: >-
+      Tại AutoAI, mục tiêu của tôi là gỡ bỏ “nút thắt” vận hành, giúp doanh nghiệp bạn
+      chạy tự động ngay cả khi bạn vắng mặt.
+    current: "Hiện tại · CEO & Founder · TRANDAO INVESTMENT"
+    highlights:
+      - title: "11+ năm"
+        text: "Tư vấn chuyển đổi số & tự động hóa (BPR)"
+      - title: "Workflow"
+        text: "Chuyên gia Workflow Automation"
+      - title: "Athsent"
+        text: "CEO · nền tảng công nghệ"
+      - title: "Đào tạo"
+        text: "Đội ngũ kế thừa & vận hành"
+
+  pillars:
+    - name: Startup
+      slug: startup
+      hint: "Công ty, sản phẩm, BPR, tự động hóa, go-to-market."
+    - name: Essays
+      slug: philosophy
+      hint: "Bài viết theo chiều sâu: quan sát, học hệ thống, và triết lý vận hành."
+    - name: Happiness
+      slug: happy
+      hint: "Đủ đầy, chơi, niềm vui nhỏ, bền vững cảm xúc."
 
 menu:
   main:
-    - name: Essays
-      url: /posts/
+    - name: Startup
+      url: /categories/startup/
       weight: 10
-    - name: Admin
-      url: /admin/
+    - name: Essays
+      url: /categories/philosophy/
       weight: 20
+    - name: Happiness
+      url: /categories/happy/
+      weight: 30
 
 permalinks:
   posts: /posts/:slug/
 
 taxonomies:
   tag: tags
+  category: categories
 
 markup:
   goldmark:
@@ -31,6 +114,16 @@ markup:
       attribute:
         block: true
         title: true
+
+# Gợi ý bài liên quan (theo categories + tags) — dùng trong single.html
+related:
+  includeNewer: true
+  threshold: 65
+  indices:
+    - name: categories
+      weight: 100
+    - name: tags
+      weight: 70
 
 build:
   buildStats:
@@ -52,4 +145,4 @@ services:
   rss:
     limit: 50
 
-copyright: © {year} Kien Tran
+copyright: "© {year} Kiên Trần"

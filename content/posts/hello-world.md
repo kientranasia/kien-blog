@@ -4,6 +4,8 @@ date: 2025-03-20T09:00:00Z
 draft: false
 description: "A short anchor post explaining the stack and tone of this site."
 slug: why-static-blog-wins
+categories:
+  - Philosophy
 tags:
   - meta
   - hugo
@@ -15,4 +17,4 @@ This blog is intentionally **essay-first**. Posts assume you might read them sta
 
 The admin UI runs at `/admin/` and writes Markdown into this repository. Deployment is automated: push to the main branch, and the pipeline builds the site and packages it for Docker so the public site is always in sync with what is in Git—no manual rebuild on a laptop.
 
-If you are reading this as a template: replace `YOUR_DOMAIN` in `hugo.yaml`, set your GitHub repository in `static/admin/config.yml`, and follow the README for OAuth so Decap CMS can open pull requests or commits on your behalf.
+Để đặt domain cho RSS/canonical khi đã có host cố định, xem `README.md` (biến môi trường `HUGO_BASEURL` khi build). Decap: sửa `static/admin/config.yml` và OAuth theo README.

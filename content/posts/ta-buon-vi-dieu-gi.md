@@ -1,0 +1,54 @@
+---
+title: Ta Buồn Vì Điều Gì
+date: '2023-01-21T15:04:43Z'
+draft: false
+description: Những tháng ngày qua, gặp gỡ rất nhiều người, và cũng gặp rất nhiều người
+  không vui. Ngoài kia, có quá nhiều thứ ảnh hưởng chúng ta, tích cực thì ít, tiêu
+  cực thì nhiều,…
+slug: ta-buon-vi-dieu-gi
+tags:
+- 📓 Personal Growth
+categories:
+- Happy
+---
+
+![](__GHOST_URL__/content/images/wordpress/2023/01/E308DAB9-2899-48D4-BDF7-0EB509EFF059-768x1024.jpeg)
+
+Một Góc Hà Nội ngày Tết 2023 – Cà Phê IZI Tây Hồ
+
+Những tháng ngày qua, gặp gỡ rất nhiều người, và cũng gặp rất nhiều người không vui.
+
+Ngoài kia, có quá nhiều thứ ảnh hưởng chúng ta, tích cực thì ít, tiêu cực thì nhiều, và con người cứ thế buồn nhiều vui ít. Niềm vui thì lại chóng qua, nỗi buồn thì cứ miên man ở lại. Ngày lại ngày qua thế, nỗi buồn chồng chất, niềm vui bay mất, để mặc con người lại với những băn khoăn, trăn trở, buồn bã, chán nản hoá tuyệt vọng. Càng ngày, thế thái nhân tình càng phơi ra nhiều chuyện không vui. Càng ngày, con người ta càng phải đối mặt với nhiều chuyện không vui. Càng ngày, mọi người xung quanh mình càng gặp phải hay tạo ra nhiều chuyện không vui. Và cứ thế, đời là những tháng ngày tiếp nối của chuyện không vui thì chất chồng mà chuyện vui thì nhỏ giọt. Hỏi sao loài người không vui?
+
+Nhưng đó, chỉ là quan sát chung chung của chúng ta, cảm giác chung chung của mỗi người, và có khi, nỗi buồn của bạn cũng lại rất chung chung. Mà chung chung thì không bao giờ giải quyết được vấn đề, vì nó cứ lượn lờ, nhìn không rõ, nghĩ không thông, biết nó đang hiện diện nhưng chẳng hiểu vì sao, hình hài thế nào, nguyên nhân gốc rễ ra sao. Chỉ biết nó ở đó, đang tác động lên tinh thần của mình, khiến cho mình buồn buồn, ngày càng buồn, đặt không ra tên, gọi không nên tiếng. Rồi trong cái mớ buồn buồn loanh quanh, mơ hồ đó, ta loay hoay không biết làm sao để thoát ra, không biết làm gì để rũ bỏ, không thể nghĩ được gì rõ ràng hơn, tương lai hơn, tích cực hơn. Mà nếu cứ để con gà quẩn quanh cái cối xay kiểu đó, thì trước gì nó cũng trở bệnh, ngán ngẩm, mất ý chí mà gục ngã. Ngã xuống, vẫn chưa hiểu tại sao mình gục ngã, vì cái gì mà gục ngã, buồn chuyện gì mà kiệt sức đến như vậy. Cho nên, một khi đã bị giam trong một mớ buồn buồn, có khi bạn nên nghiêm túc tìm cách giải thoát cho bản thân, tránh để cho nó lầy lội tới mức không còn đường tháo lui, không còn cơ hội cho một hành trình mới, mà vì cái gì cũng không rõ. Để giúp các bạn suy nghĩ rõ ràng hơn, hôm nay chia sẻ với các bạn cách tách lớp nỗi buồn, nhìn trực diện vào nó, gọi tên nó, xử nó, từng đứa từng đứa một, để tự chữa bệnh buồn cho mình nhé.
+
+Buồn chuyện thế thái nhân tình
+------------------------------
+
+Mình chỉ là một bản thể nhỏ bé trong vũ trụ này, trên thế giới này, tại quốc gia này, trong xã hội này, tại cộng đồng này, trong cõi mạng này. Và cái tôi nhỏ bé đó đương nhiên phải bị ảnh hưởng bởi những gì đang diễn ra trong những môi trường đó. Vũ trụ này kẻ ác sao hoành hành, thắng thế, chèn ép kẻ thiện lương, buồn. Thế giới này sao vô lý, nhiễu nhương, chém giết nhau, lừa đảo nhau, hỗn độn như cái gánh xiếc, buồn. Đất nước đang làm sao vậy, đảo lộn luân thường, xem thường đạo lý, lớp lớp nhập kho, người người tranh quyền đoạt chức, lừa đảo nhỏ to không thiếu chuyện gì, buồn. Cộng đồng, cuối cùng thứ gì là thật, hay chỉ lùa gà, mượn danh chính nghĩa để dựng lên, xài tên tử tế để lừa tình dối bạc, đến tôn giáo chúng nó cũng chẳng tha, lấy ra làm bình phong để trổ chiêu này, bày chiêu khác, buồn. Thế thái nhân tình, chuyện buồn thì nhiều, chuyện vui thì ít, sáng mở mắt là tin rác đổ vô nhà, có muốn cũng không tránh nổi. Hỏi, sao không buồn cho được?
+
+À, thì đó, cái vòng ảnh hưởng ở ngoài cùng của mỗi chúng ta là ảnh hưởng từ môi trường, và môi trường thì, mỗi thời mỗi thế, chuyện tào lao nó cứ thế túa ra từ lòng tham, sự đen đúa, và cái ego to vật vã của tám tỷ người, đặc biệt là đám lợi ích và cầm quyền. Rồi mình làm được gì? Rồi mình mang vác sự tào lao, vô lý, khùng điên đó vào người cũng không giải quyết được gì. Rồi mình nổi cơn, giận dữ, chán nản, tuyệt vọng cũng chẳng làm mảy may thay đổi bất cứ điều nhỏ nhồi nào trong cái thế trận đó. Nghĩa là, nó chỉ có một chiều, đẩy mình vô thế vũng lầy, một cách hết sức dửng dưng, không quan tâm, thậm chí còn không nhận diện có sự tồn tại của cái bản thể nhỏ bé như hạt bụi đáng thương kia. Ủa ủa, alo alo, vậy tại sao tui phải buồn? Chơi kỳ! Thành ra, thôi dẹp đi nha ba chuyện thế thái nhân tình. Nó là vậy đó, là cái game của một đám đam mê quyền lực, liên quan gì? Thành ra, nếu gọi tên được nỗi buồn mơ hồ kia của bạn là chuyện thế thái nhân tình, thì đề nghị là tìm cách thanh lọc tâm trí, đùa hết rác rưởi ra khỏi nhà, chặn hết ba thứ độc hại không cho nó tự nhiên đổ vô nhà, và không việc gì phải buồn, vì nó có liên quan gì tới cuộc đời mình đâu?
+
+Buồn chuyện con người
+---------------------
+
+Đời này, mỗi người chúng ta đều phải liên quan tới rất nhiều người khác, gia đình nhỏ có, gia đình lớn có, người yêu người hết yêu, bà con họ hàng xa gần cả dây, rồi bạn bè đồng nghiệp, sếp lớn sếp nhỏ, tổ chức này đoàn thể nọ, người quen người thân, người lạ người dưng đếm hoài không xuể. Điều đó có nghĩa là, mỗi người như vậy trong cuộc đời mình, tuỳ theo quan hệ, tuỳ vào tương tác, tuỳ thuộc ơn nghĩa oán hận mà mỗi người như vậy sẽ tạo ra một hay nhiều tầng ảnh hưởng khác nhau lên bản thân mình và cuộc đời mình. Có những tác động ngắn hạn, có những tác động dài hạn, có nhiều ảnh hưởng tích cực, có vô số ảnh hưởng tiêu cực. Có điều, con người mà, họ là những bản thể rất khác nhau, độc đáo và duy nhất của vũ trụ, và họ không có lý do gì phải chịu ảnh hưởng, nghe theo, làm theo, thông cảm hay giúp đỡ gì mình hết. Họ của ngày hôm nay là tác phẩm của tạo hoá, của môi trường, văn hoá và giáo dục từ gia đình, cộng đồng, thế giới riêng của họ. Khi họ lớn lên, họ có những kinh nghiệm và trải qua những trải nghiệm khác nhau, có người trải nghiệm tốt, có rất nhiều người trải nghiệm xấu, có một số người trải qua những trải nghiệm hết sức cực đoan, và lại càng có vô số người gặp đủ thứ loại trải nghiệm lẫn lộn trong đời. Có quá nhiều biến số ảnh hưởng đến tâm tính, giá trị, niềm tin, lựa chọn sống và hành xử của họ. Bạn là ai và có thể can thiệp gì tới họ hay không? Dạ thưa là hoàn toàn không. Bạn nghĩ là có, nhưng kỳ thực là không, vì mỗi chúng ta đều được tạo ra bằng chính hệ niềm tin và dữ liệu, trải nghiệm cá nhân. Do đó, họ mới chính là người chọn có để cho bạn ảnh hưởng họ hay không, hầu hết là không, đôi khi là có nhưng cũng không quá nhiều.
+
+Chiều ngược lại, bạn cũng thế. Ai ảnh hưởng được bạn đâu? Chẳng qua chỉ là bạn cho phép ai ảnh hưởng thì họ có ảnh hưởng thôi, còn lại thì không liên quan. Đến người thân trong nhà, ngay cả cha mẹ chồng vợ mình, thấy vậy thôi chớ ảnh hưởng hay không là lựa chọn của bạn, không liên quan gì tới họ. Mà khi đã là lựa chọn của bạn, nghĩa là bạn tự nguyện để cho họ ảnh hưởng, dù tiêu cực hay tích cực. Cho nên, đừng đổ thừa là ai đó đang khiến cho, làm cho, tạo ra nỗi buồn này nỗi khổ kia cho bạn. Họ không có quyền đó. Họ chỉ vận hành trong thế giới và phạm vi của họ, và nếu chẳng may nó ảnh hưởng gì tới mình, thì đó chỉ là sản phẩm phụ sinh ra trong mớ hỗn độn của cuộc đời họ. Sản phẩm phụ đó, nó có tác động lớn nhỏ kiểu gì tới cuộc đời bạn, không liên quan gì tới họ, mà chỉ liên quan tới chính sự tham sân si của bạn. Bạn muốn nó êm thì nó êm, bạn muốn nó thành chuyện nghiệt ngã thế kỷ thì nó hô biến, bạn muốn nó tốt xấu to nhỏ gì thì nó thành ra như thế mà thôi. Tâm sinh cảnh là như thế. Rồi giờ, bạn ngồi đó nói là mình buồn chuyện con người? Nếu phải buồn, thì có lẽ nên buồn cho sự cố tình mong cầu hay sự kém cỏi trong việc quản trị sự tham sân si của chính mình, sự vô mình và thiếu khả năng quản trị cảm xúc và cuộc đời của chính mình. Vậy, là mình buồn mình đó đúng không? Tự muốn, tự thất vọng, rồi tự buồn tự trách luôn. Là sao? Là ai buồn, buồn ai? Tự mình hết đó mà!
+
+Cho nên, thôi thôi đi, muốn hết buồn chuyện con người thì bản thân bớt bớt đi, đừng expect người ta chuyện gì, cũng đừng dựng chuyện để tự buồn. Hiểu nguyên lý này thì dần dần sẽ bỏ bớt được mấy thứ lu xu bu tưởng chừng rất liên quan nhưng chẳng hề liên quan kia đi là xong. Buồn gì đây trời?
+
+Buồn bản thân
+-------------
+
+Ô, này mới là chuyện lạ nè, buồn bản thân. Có rất nhiều người tôi gặp tự buồn chuyện của bản thân. Em sinh ra không may mắn, gia đình em thiếu điều kiện, em không đẹp chẳng duyên, đời em không thành tích gì, em học dốt, làm không ra tiền, không được đi du học, không ai nâng đỡ thương yêu, blah blah blah…. Gì vậy trời?
+
+Nếu chơi trò kể lể này thì OK, game on – mình cùng thi kể hen, tám tỷ người là tám tỷ sư phụ về môn kể lể. Ai cũng thấy rất rõ thứ mình không có, thứ mình chẳng được, thứ mình ít hơn, kém hơn do sự không công bằng của cuộc đời. Ai cũng vậy hết. Ai dù trong hoàn cảnh nào cũng thấy mình chưa đủ, chưa được vũ trụ này hầu hạ tới nơi tới chốn, dù họ đang ở trong hoàn cảnh kiểu gì. Bằng lòng chưa? Và mình có nhiều thời gian trong cuộc đời hữu hạn này để kể lể lắm sao? Mình muốn kể 1 năm, vài năm, vài chục năm hay hết đời? Rồi kể lể cho nó buồn não ruột xong thì mình được gì, ngoài nỗi buồn miên man vô tận kia? Mà không được gì ngoài cái buồn thì làm vậy để làm chi? Rảnh qua hay sao? Hay đời mình sinh ra cốt chỉ để buồn cho nó giống phim bộ Hàn Quốc? Mà đóng hoài cũng không nổi tiếng, chẳng có tiếng chẳng có miếng thì đóng để làm chi? Rành quá hả? Rảnh thì lo đi học, đi làm, đi trải nghiệm, phát triển bản thân và nắm bắt cơ hội đi kìa. Ngồi đó than trong khi người ta đi mất dép hết rồi, cơ hội người ta chụp hết rồi, người ta bỏ xa mình rồi, vậy là lỗi của ai?
+
+**Nói thiệt, mấy bạn đang người buồn mình là mấy bạn rảnh quá không có chuyện gì làm.** Đời này ai sinh ra cũng có này có kia, có được có mất, và người ta hơn thua nhau chỉ ở chỗ cố gắng, kiên trì, tập trung, chăm chỉ và quyết liệt mà thôi. Bạn có thấy ai ngồi buồn chuyện mình mà thành công không? Người ta đổ mồ hôi sôi nước mắt, lên bờ xuống ruộng để theo đuổi ước mơ và thay đổi cuộc đời kia kìa. Buồn nữa không? Đời còn bấy nhiêu năm đó để buồn. Hay mình cứ ngồi đó buồn cho nó trôi qua cho rồi. Còn thành công hạnh phúc thì nhường cho người khác? Lựa chọn và quyết định này là của bạn. Không có đúng sai gì ở đây, nhưng cũng chẳng có ai đi thông cảm với những câu chuyện buồn mình kiểu đó đâu bạn ạ. Giờ sao? Thôi ha.
+
+**Thiệt tình, sau khi bóc tách nỗi buồn xong, thì mình thấy ủa ủa, buồn gì trời? Chuyện thế thái nhân tính mà buồn là tào lao. Chuyện con người mà buồn là chẳng có liên quan. Chuyện buồn mình thì nó mất thời gian vô ích.**
+
+**Rồi giờ buồn cái gì, buồn ai, buồn để làm gì, buồn thì được gì? Hay thôi, mình gọi được tên nỗi buồn rồi thì mình xếp nó vào nhật ký, gói ghém lại chuyện đã qua để còn lo chuyện tương lai? Buồn hay vui cũng chỉ là từ mình, do mình, bởi mình mà thôi, có liên quan gì tới ai đâu?**
+
+Vậy đi nha!

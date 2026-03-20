@@ -1,10 +1,35 @@
 <!DOCTYPE html>
-<html lang="{{ site.Language.Lang | default "en" }}">
+<html lang="{{ site.Language.Lang | default "vi" }}">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>{{ block "title" . }}{{ with .Title }}{{ . }} · {{ end }}{{ site.Title }}{{ end }}</title>
   <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ site.Params.description }}{{ end }}">
+  {{- $pageTitle := site.Title -}}
+  {{- with .Title }}{{- $pageTitle = . -}}{{- end }}
+  {{- $pageDesc := site.Params.description -}}
+  {{- with .Description }}{{- $pageDesc = . -}}{{- end }}
+  {{- $ogUrl := .Permalink -}}
+  {{- $ogImageUrl := "" -}}
+  {{- $ogImageAsset := site.Params.home.hero_image_asset | default "KienTranDao_Banner.png" -}}
+  {{- with resources.Get $ogImageAsset }}
+    {{- $ogImageUrl = .RelPermalink -}}
+  {{- end }}
+
+  <meta property="og:site_name" content="{{ site.Title }}">
+  <meta property="og:title" content="{{ $pageTitle }}">
+  <meta property="og:description" content="{{ $pageDesc }}">
+  <meta property="og:url" content="{{ $ogUrl }}">
+  <meta property="og:type" content="{{ if eq .Section "posts" }}article{{ else }}website{{ end }}">
+  {{- if $ogImageUrl }}
+  <meta property="og:image" content="{{ absURL $ogImageUrl }}">
+  {{- end }}
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ $pageTitle }}">
+  <meta name="twitter:description" content="{{ $pageDesc }}">
+  {{- if $ogImageUrl }}
+  <meta name="twitter:image" content="{{ absURL $ogImageUrl }}">
+  {{- end }}
   {{- with site.Params.author }}<meta name="author" content="{{ . }}">{{ end }}
   <link rel="canonical" href="{{ .Permalink }}">
   {{- with (site.Home.OutputFormats.Get "RSS") }}
@@ -12,30 +37,172 @@
   {{- end }}
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,8..144,400;0,8..144,600;1,8..144,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
   {{- $style := resources.Get "css/main.css" | minify }}
   <link rel="stylesheet" href="{{ $style.RelPermalink }}">
+
+  {{- /* Personal branding JSON-LD */ -}}
+  {{- $personName := site.Params.profile.name | default site.Title -}}
+  {{- $publisherName := site.Params.footer.trandao_name | default "TRANDAO INVESTMENT" -}}
+  {{- $worksFor := dict "@type" "Organization" "name" "TRANDAO" "url" (absURL "/") -}}
+  {{- $sameAs := slice -}}
+  {{- range site.Params.social -}}
+    {{- if .url }}
+      {{- $sameAs = $sameAs | append .url -}}
+    {{- end -}}
+  {{- end }}
+  <script type="application/ld+json">
+    {{- $person := dict "@context" "https://schema.org" "@type" "Person" "name" $personName "jobTitle" "CEO & Founder" "worksFor" $worksFor "url" (absURL "/") "sameAs" $sameAs -}}
+    {{- $person | jsonify }}
+  </script>
+
+  {{- if eq .Section "posts" }}
+  <script type="application/ld+json">
+    {{- $article := dict "@context" "https://schema.org" "@type" "BlogPosting"
+      "headline" .Title
+      "datePublished" (.Date.Format "2006-01-02")
+      "dateModified" (cond (ne .Lastmod nil) (.Lastmod.Format "2006-01-02") (.Date.Format "2006-01-02"))
+      "description" (or .Description site.Params.description)
+      "author" (dict "@type" "Person" "name" $personName)
+      "publisher" (dict "@type" "Organization" "name" $publisherName)
+      "mainEntityOfPage" (dict "@type" "WebPage" "@id" .Permalink)
+    -}}
+    {{- $article | jsonify }}
+  </script>
+  {{- end }}
 </head>
-<body>
+<body class="{{ if .IsHome }}body--home{{ end }}">
+  {{- $homeOnly := .IsHome }}
+  {{- /* Một cột toàn site; chỉ trang chủ giữ layout-home + hero full-bleed */ -}}
+  {{- $wrapClass := "wrap--narrow" }}
+  {{- $layoutClass := cond $homeOnly "layout-home" "layout-single" }}
   <a class="skip" href="#main">Skip to content</a>
-  <header class="site-header">
-    <div class="wrap">
-      <a class="site-title" href="{{ absURL "/" }}">{{ site.Title }}</a>
-      {{- with site.Params.subtitle }}<p class="site-subtitle">{{ . }}</p>{{ end }}
-      <nav class="nav" aria-label="Primary">
+  <header class="topbar{{ if $homeOnly }} topbar--dark{{ end }}">
+    <div class="topbar__inner wrap {{ if $homeOnly }}wrap--hero-shell{{ else }}{{ $wrapClass }}{{ end }}">
+      <a class="brand" href="{{ absURL "/" }}">{{ site.Title }}</a>
+      <nav class="topnav" aria-label="Primary">
         {{- range site.Menus.main }}
         <a href="{{ absURL .URL }}">{{ .Name }}</a>
         {{- end }}
       </nav>
+
+      <div class="lang-switch" aria-label="Language">
+        <button type="button" class="lang-btn" data-lang="vi" aria-label="VN">VN</button>
+        <span class="lang-sep" aria-hidden="true">|</span>
+        <button type="button" class="lang-btn" data-lang="en" aria-label="EN">EN</button>
+      </div>
     </div>
   </header>
-  <main id="main" class="wrap main">
-    {{ block "main" . }}{{ end }}
+  <main id="main">
+    <div class="wrap {{ if $homeOnly }}wrap--home-bleed{{ else }}{{ $wrapClass }}{{ end }} {{ $layoutClass }}">
+      <div class="layout-main">
+        {{ block "main" . }}{{ end }}
+      </div>
+    </div>
   </main>
   <footer class="site-footer">
-    <div class="wrap">
-      <p>{{ replace site.Copyright "{year}" (now.Format "2006") | safeHTML }}</p>
+    <div class="wrap {{ $wrapClass }} footer__inner">
+      <p class="footer__line">
+        <span>{{ replace site.Copyright "{year}" (now.Format "2006") | safeHTML }}</span>
+        {{- with site.Params.footer }}
+        {{- if and .trandao_url .trandao_name }}
+        <span class="footer__sep" aria-hidden="true"> · </span>
+        <a class="footer__link link-external" href="{{ .trandao_url }}" target="_blank" rel="noopener noreferrer">{{ .trandao_name }}</a>
+        {{- end }}
+        {{- end }}
+      </p>
+
+      {{- $rawSocial := site.Params.social | default slice -}}
+      {{- if gt (len $rawSocial) 0 }}
+      <nav class="home-social home-social--hero" aria-label="Mạng xã hội">
+        <ul class="home-social__list">
+          {{- range $rawSocial }}
+          <li>
+            {{- if .url }}
+            <a class="home-social__link" href="{{ .url }}" target="_blank" rel="noopener noreferrer" title="{{ .name }}" aria-label="{{ .name }}">
+              {{ partial "social-icon.html" . }}
+            </a>
+            {{- else }}
+            <span class="home-social__link home-social__link--placeholder" title="{{ .name }} (thêm URL trong hugo.yaml)" aria-hidden="true">
+              {{ partial "social-icon.html" . }}
+            </span>
+            {{- end }}
+          </li>
+          {{- end }}
+        </ul>
+      </nav>
+      {{- end }}
     </div>
   </footer>
+
+  <div id="google_translate_element" class="google-translate-holder" aria-hidden="true"></div>
+  <script>
+    (function () {
+      var initialized = false;
+
+      function ensureGoogleTranslate() {
+        return new Promise(function (resolve) {
+          if (initialized) return resolve();
+          initialized = true;
+
+          window.googleTranslateElementInit = function () {
+            try {
+              new google.translate.TranslateElement(
+                {
+                  pageLanguage: 'auto',
+                  includedLanguages: 'vi,en',
+                  layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+                },
+                'google_translate_element'
+              );
+            } catch (e) {
+              // ignore
+            }
+            resolve();
+          };
+
+          var s = document.createElement('script');
+          s.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+          s.async = true;
+          document.head.appendChild(s);
+        });
+      }
+
+      function setLang(lang) {
+        // Wait for the combo to appear.
+        var tries = 0;
+        var timer = setInterval(function () {
+          var combo = document.querySelector('.goog-te-combo');
+          if (combo) {
+            combo.value = lang;
+            combo.dispatchEvent(new Event('change'));
+            clearInterval(timer);
+          } else if (tries++ > 60) {
+            clearInterval(timer);
+          }
+        }, 100);
+      }
+
+      function onLangClick(e) {
+        var btn = e.target.closest('.lang-btn[data-lang]');
+        if (!btn) return;
+        var lang = btn.getAttribute('data-lang');
+        localStorage.setItem('siteLang', lang);
+        ensureGoogleTranslate().then(function () {
+          setLang(lang);
+        });
+      }
+
+      document.addEventListener('click', onLangClick);
+
+      // Auto-apply saved preference.
+      var saved = localStorage.getItem('siteLang');
+      if (saved) {
+        ensureGoogleTranslate().then(function () {
+          setLang(saved);
+        });
+      }
+    })();
+  </script>
 </body>
 </html>

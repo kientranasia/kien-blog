@@ -22,8 +22,11 @@ jobs:
           hugo-version: "0.148.2"
           extended: true
 
+      # Tuỳ chọn: GitHub repo → Settings → Variables → HUGO_BASEURL = https://blog.ban.com/
       - name: Build Hugo site
-        run: hugo --minify
+        env:
+          HUGO_BASEURL: ${{ vars.HUGO_BASEURL }}
+        run: hugo --minify --baseURL "${HUGO_BASEURL:-/}"
 
       - uses: docker/setup-buildx-action@v3
 

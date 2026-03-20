@@ -1,10 +1,10 @@
 {{ define "main" }}
 <div class="layout-main-inner wrap-page">
   <header class="page-intro">
+    <p class="page-intro__crumb"><a href="{{ absURL "/" }}">Trang chủ</a></p>
     <h1 class="page-intro__title">{{ .Title }}</h1>
     {{- with .Content }}<div class="prose page-intro__body">{{ . }}</div>{{ end }}
   </header>
-  {{- if .Pages }}
   <ul class="index-posts">
     {{- range (.Paginate .Pages).Pages }}
     <li class="index-posts__row">
@@ -16,6 +16,5 @@
     {{- end }}
   </ul>
   {{- partial "pagination.html" . }}
-  {{- end }}
 </div>
 {{ end }}

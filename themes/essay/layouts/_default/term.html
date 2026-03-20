@@ -1,12 +1,11 @@
 {{ define "main" }}
 <div class="layout-main-inner wrap-page">
   <header class="page-intro">
+    <p class="page-intro__crumb"><a href="{{ absURL "/" }}">Trang chủ</a> · <a href="{{ absURL "/categories/" }}">Danh mục</a></p>
     <h1 class="page-intro__title">{{ .Title }}</h1>
-    {{- with .Content }}<div class="prose page-intro__body">{{ . }}</div>{{ end }}
   </header>
-  {{- if .Pages }}
   <ul class="index-posts">
-    {{- range (.Paginate .Pages).Pages }}
+    {{- range .Pages.ByDate.Reverse }}
     <li class="index-posts__row">
       <time class="index-posts__date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>
       <a class="index-posts__title" href="{{ .Permalink }}">{{ .Title }}</a>
@@ -15,7 +14,5 @@
     </li>
     {{- end }}
   </ul>
-  {{- partial "pagination.html" . }}
-  {{- end }}
 </div>
 {{ end }}

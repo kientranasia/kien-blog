@@ -2,15 +2,15 @@
 {{- if gt $p.TotalPages 1 }}
 <nav class="pagination" aria-label="Pagination">
   {{- if $p.HasPrev }}
-  <a href="{{ $p.Prev.URL }}">← Newer</a>
+  <a class="pagination__link" href="{{ $p.Prev.URL }}">← Mới hơn</a>
   {{- else }}
-  <span class="pagination__muted" aria-hidden="true">← Newer</span>
+  <span class="pagination__muted" aria-hidden="true">← Mới hơn</span>
   {{- end }}
-  <span class="pagination__status">Page {{ $p.PageNumber }} / {{ $p.TotalPages }}</span>
+  <span class="pagination__status">Trang {{ $p.PageNumber }} / {{ $p.TotalPages }}</span>
   {{- if $p.HasNext }}
-  <a href="{{ $p.Next.URL }}">Older →</a>
+  <a class="pagination__link" href="{{ $p.Next.URL }}">Cũ hơn →</a>
   {{- else }}
-  <span class="pagination__muted" aria-hidden="true">Older →</span>
+  <span class="pagination__muted" aria-hidden="true">Cũ hơn →</span>
   {{- end }}
 </nav>
 {{- end }}

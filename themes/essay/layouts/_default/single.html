@@ -1,20 +1,55 @@
 {{ define "main" }}
-<article class="essay prose">
-  <header class="essay__head">
-    <h1 class="essay__title">{{ .Title }}</h1>
-    <div class="essay__meta">
-      {{- $date := .Date.Format "January 2, 2006" }}
-      <time datetime="{{ .Date.Format "2006-01-02" }}">{{ $date }}</time>
-      {{- if gt .ReadingTime 0 }} · {{ .ReadingTime }} min read{{ end -}}
-      {{- with .Params.tags }}
-      ·
-      {{- range $i, $t := . }}{{ if $i }}, {{ end }}<a href="{{ absURL (printf "/tags/%s/" (urlize $t)) }}">{{ $t }}</a>{{ end }}
-      {{- end }}
+<div class="layout-main-inner wrap-page {{ if eq .Section "posts" }}layout-main-inner--post{{ end }}">
+  {{- if eq .Section "posts" }}
+  <p class="back"><a href="{{ absURL "/posts/" }}">← Bài viết</a></p>
+  <article class="essay prose">
+    <header class="essay__head">
+      <h1 class="essay__title">{{ .Title }}</h1>
+      <p class="essay__meta">
+        <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>
+        {{- if gt .ReadingTime 0 }} · {{ .ReadingTime }} phút đọc{{ end -}}
+        {{- with .Params.categories }}
+        ·
+        {{- range $i, $c := . }}{{ if $i }}, {{ end }}<a href="{{ absURL (printf "/categories/%s/" (urlize $c)) }}">{{ $c }}</a>{{ end }}
+        {{- end }}
+        {{- with .Params.tags }}
+        ·
+        {{- range $i, $t := . }}
+          {{- if $i }}, {{ end -}}
+          {{- $tagURL := "" -}}
+          {{- range $slug, $_ := $.Site.Taxonomies.tags -}}
+            {{- with $.Site.GetPage (printf "/tags/%s" $slug) -}}
+              {{- if eq .Title $t -}}
+                {{- $tagURL = .RelPermalink -}}
+              {{- end -}}
+            {{- end -}}
+          {{- end -}}
+          {{- if eq $tagURL "" -}}
+          <a href="{{ absURL (printf "/tags/%s/" (urlize $t)) }}">{{ $t }}</a>
+          {{- else -}}
+          <a href="{{ absURL $tagURL }}">{{ $t }}</a>
+          {{- end -}}
+        {{- end }}
+        {{- end }}
+      </p>
+      {{- with .Description }}<p class="essay__lede">{{ . }}</p>{{ end }}
+    </header>
+    <div class="essay__body">
+      {{ .Content }}
     </div>
-    {{- with .Description }}<p class="essay__lede">{{ . }}</p>{{ end }}
-  </header>
-  <div class="essay__body">
-    {{ .Content }}
-  </div>
-</article>
+  </article>
+  {{ partial "related-posts.html" . }}
+  {{- else }}
+  <p class="back"><a href="{{ absURL "/" }}">← Trang chủ</a></p>
+  <article class="essay prose">
+    <header class="essay__head">
+      <h1 class="essay__title">{{ .Title }}</h1>
+      {{- with .Description }}<p class="essay__lede">{{ . }}</p>{{ end }}
+    </header>
+    <div class="essay__body">
+      {{ .Content }}
+    </div>
+  </article>
+  {{- end }}
+</div>
 {{ end }}

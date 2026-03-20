@@ -1,0 +1,25 @@
+{{ define "main" }}
+<div class="layout-main-inner wrap-page">
+  <header class="page-intro">
+    <p class="page-intro__crumb"><a href="{{ absURL "/" }}">Trang chủ</a></p>
+    <h1 class="page-intro__title">Danh mục</h1>
+  </header>
+  <ul class="index-posts">
+    {{- range site.Params.pillars }}
+      {{- $p := . }}
+      {{- $path := printf "/categories/%s" $p.slug }}
+      {{- with site.GetPage $path }}
+    <li class="index-posts__row">
+      <span class="index-posts__date">{{ len .Pages }} bài</span>
+      <a class="index-posts__title" href="{{ .RelPermalink }}">{{ .Title }}</a>
+    </li>
+      {{- else }}
+    <li class="index-posts__row">
+      <span class="index-posts__date">0 bài</span>
+      <span class="index-posts__title index-posts__title--static">{{ $p.name }}</span>
+    </li>
+      {{- end }}
+    {{- end }}
+  </ul>
+</div>
+{{ end }}

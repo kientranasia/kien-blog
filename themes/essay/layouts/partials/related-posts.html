@@ -1,0 +1,37 @@
+{{- $here := . }}
+{{- $limit := default 5 site.Params.related_limit }}
+{{- $related := site.RegularPages.Related . | first $limit }}
+{{- if and $related (gt (len $related) 0) }}
+<aside class="related" aria-label="Bài liên quan">
+  <h2 class="related__h">Bài liên quan</h2>
+  <ul class="related__list">
+    {{- range $related }}
+    <li class="related__item">
+      <a class="related__link" href="{{ .RelPermalink }}">{{ .Title }}</a>
+      <time class="related__date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "02.01.2006" }}</time>
+    </li>
+    {{- end }}
+  </ul>
+</aside>
+{{- else }}
+{{- $fill := slice }}
+{{- range first 24 (where site.RegularPages "Section" "posts").ByDate.Reverse }}
+  {{- if ne .RelPermalink $here.RelPermalink }}
+    {{- $fill = $fill | append . }}
+  {{- end }}
+{{- end }}
+{{- $fill = first $limit $fill }}
+{{- if gt (len $fill) 0 }}
+<aside class="related" aria-label="Bài gần đây">
+  <h2 class="related__h">Bài gần đây</h2>
+  <ul class="related__list">
+    {{- range $fill }}
+    <li class="related__item">
+      <a class="related__link" href="{{ .RelPermalink }}">{{ .Title }}</a>
+      <time class="related__date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "02.01.2006" }}</time>
+    </li>
+    {{- end }}
+  </ul>
+</aside>
+{{- end }}
+{{- end }}
