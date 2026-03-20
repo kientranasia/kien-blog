@@ -613,23 +613,6 @@ a:focus-visible {
   opacity: 0.55;
 }
 
-.google-translate-holder {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  left: -9999px;
-  top: -9999px;
-}
-
-/* Hide Google translate UI bits (dropdown banner) */
-#google_translate_element .goog-te-gadget .goog-te-combo,
-#google_translate_element .goog-te-gadget,
-.skiptranslate,
-.goog-te-banner-frame {
-  display: none !important;
-}
-
 @media (max-width: 639px) {
   .topbar__inner {
     display: grid;

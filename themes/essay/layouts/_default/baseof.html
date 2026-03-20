@@ -87,11 +87,6 @@
       </nav>
 
       <div class="topbar__right">
-        <div class="lang-switch" aria-label="Language">
-          <button type="button" class="lang-btn" data-lang="vi" aria-label="VN">VN</button>
-          <span class="lang-sep" aria-hidden="true">|</span>
-          <button type="button" class="lang-btn" data-lang="en" aria-label="EN">EN</button>
-        </div>
         <button type="button" class="theme-btn" id="theme-toggle" aria-label="Toggle dark/light theme">
           <span class="theme-icon" id="theme-icon">☾</span>
         </button>
@@ -139,76 +134,6 @@
       {{- end }}
     </div>
   </footer>
-
-  <div id="google_translate_element" class="google-translate-holder" aria-hidden="true"></div>
-  <script>
-    (function () {
-      var initialized = false;
-
-      function ensureGoogleTranslate() {
-        return new Promise(function (resolve) {
-          if (initialized) return resolve();
-          initialized = true;
-
-          window.googleTranslateElementInit = function () {
-            try {
-              new google.translate.TranslateElement(
-                {
-                  pageLanguage: 'auto',
-                  includedLanguages: 'vi,en',
-                  layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-                },
-                'google_translate_element'
-              );
-            } catch (e) {
-              // ignore
-            }
-            resolve();
-          };
-
-          var s = document.createElement('script');
-          s.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
-          s.async = true;
-          document.head.appendChild(s);
-        });
-      }
-
-      function setLang(lang) {
-        // Wait for the combo to appear.
-        var tries = 0;
-        var timer = setInterval(function () {
-          var combo = document.querySelector('.goog-te-combo');
-          if (combo) {
-            combo.value = lang;
-            combo.dispatchEvent(new Event('change'));
-            clearInterval(timer);
-          } else if (tries++ > 60) {
-            clearInterval(timer);
-          }
-        }, 100);
-      }
-
-      function onLangClick(e) {
-        var btn = e.target.closest('.lang-btn[data-lang]');
-        if (!btn) return;
-        var lang = btn.getAttribute('data-lang');
-        localStorage.setItem('siteLang', lang);
-        ensureGoogleTranslate().then(function () {
-          setLang(lang);
-        });
-      }
-
-      document.addEventListener('click', onLangClick);
-
-      // Auto-apply saved preference.
-      var saved = localStorage.getItem('siteLang');
-      if (saved) {
-        ensureGoogleTranslate().then(function () {
-          setLang(saved);
-        });
-      }
-    })();
-  </script>
 
   <script>
     (function () {
