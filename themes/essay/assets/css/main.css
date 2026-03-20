@@ -636,9 +636,17 @@ a:focus-visible {
   .topnav {
     grid-area: nav;
     flex: 0 0 auto;
-    justify-content: center;
-    gap: 0.5rem 0.85rem;
+    justify-content: flex-start;
+    flex-wrap: nowrap; /* Prevent 2-line header menu on mobile */
+    white-space: nowrap;
+    overflow-x: auto;
+    gap: 0.45rem 0.65rem;
     font-size: 0.72rem;
+    scrollbar-width: none; /* Firefox */
+  }
+
+  .topnav::-webkit-scrollbar {
+    display: none; /* WebKit */
   }
 
   .topbar__right {
