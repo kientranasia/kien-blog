@@ -805,7 +805,7 @@ a:focus-visible {
     margin-inline: 0;
     padding: 0.5rem max(1rem, env(safe-area-inset-right, 0px)) max(1rem, env(safe-area-inset-bottom, 0px))
       max(1rem, env(safe-area-inset-left, 0px));
-    justify-content: flex-start;
+    justify-content: flex-end; /* Put lead at the bottom of hero */
     row-gap: 0;
     box-sizing: border-box;
   }
@@ -821,6 +821,16 @@ a:focus-visible {
     background: #0a0a0a;
     color: #fff;
     padding: 1.15rem 0 2.1rem;
+  }
+
+  /* Move hero lead text into the hero image. Keep social + newsletter below hero. */
+  .home-hero-below-summary__inner .home-hero-band__lead {
+    display: none;
+  }
+
+  /* Re-enable lead inside hero for mobile overlay. */
+  .home-hero-band__lead--mobile-hide {
+    display: block !important;
   }
 
   .home-hero-below-summary__inner {
