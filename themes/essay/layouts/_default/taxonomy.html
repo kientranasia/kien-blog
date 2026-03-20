@@ -2,8 +2,18 @@
 <div class="layout-main-inner wrap-page">
   <header class="page-intro">
     <p class="page-intro__crumb"><a href="{{ absURL "/" }}">Trang chủ</a></p>
+    {{- $heading := .Title -}}
+    {{- $singular := .Data.Singular | default "" -}}
+    {{- if eq $singular "category" -}}
+      {{- $termSlug := .Data.Term | urlize -}}
+      {{- range site.Params.pillars -}}
+        {{- if eq .slug $termSlug -}}
+          {{- $heading = .name -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
     {{- if or .Data.Term (and (gt (len .Pages) 0) (eq (index .Pages 0).Section "posts")) -}}
-      <h1 class="page-intro__title">{{ .Title }}</h1>
+      <h1 class="page-intro__title">{{ $heading }}</h1>
     {{- else -}}
       <h1 class="page-intro__title">Danh mục</h1>
     {{- end -}}
