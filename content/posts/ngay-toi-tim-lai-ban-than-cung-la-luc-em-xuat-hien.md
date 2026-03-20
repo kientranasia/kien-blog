@@ -9,7 +9,7 @@ slug: ngay-toi-tim-lai-ban-than-cung-la-luc-em-xuat-hien
 tags:
 - ✍️ Writing
 categories:
-- Philosophy
+- Essays
 ---
 
 Mỗi con người là một vũ trụ thu nhỏ, mang trong mình vô vàn những vì sao lấp lánh, những dải ngân hà xoay vần, và cả những hố đen sâu thẳm của tâm hồn.

@@ -9,7 +9,7 @@ slug: tao-chatgpt-hoan-toan-mien-phi
 tags:
 - 📔 Journal
 categories:
-- Philosophy
+- Essays
 ---
 
 ChatGPT là một con Bot được phát triển bởi Openai sử dụng trí tuệ nhân tạo để giao tiếp của người dùng. Hiện tại bạn đã cảm nhận độ nóng của nó thế nào rồi phải không.

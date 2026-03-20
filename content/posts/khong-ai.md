@@ -9,7 +9,7 @@ slug: khong-ai
 tags:
 - 📔 Journal
 categories:
-- Philosophy
+- Essays
 ---
 
 ✨ *Thiền ca “Không Ai”* – một hành trình trở về chính mình.

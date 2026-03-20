@@ -9,7 +9,7 @@ slug: cong-hien-cho-xa-hoi-trong-thoi-dai-hien-sinh
 tags:
 - 📔 Journal
 categories:
-- Philosophy
+- Essays
 ---
 
 Khi đã hiểu được rằng [ta không thể trở thành bất kỳ ai khác ngoài chính mình](__GHOST_URL__/chung-ta-co-the-tro-thanh-bat-cu-ai/), câu hỏi tiếu theo đặt ra là” “Vậy ta có thể cống hiến gì cho xã hội?” Trong một thế giới không có ý nghĩa sẵn có, việc cống hiến cũng không có một con đường cố định.

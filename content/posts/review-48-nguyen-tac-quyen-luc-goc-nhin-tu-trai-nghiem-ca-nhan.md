@@ -7,7 +7,7 @@ description: Bạn đã từng nghe đến cuốn sách nổi tiếng “48 Nguy
   học thực tế để áp…
 slug: review-48-nguyen-tac-quyen-luc-goc-nhin-tu-trai-nghiem-ca-nhan
 categories:
-- Philosophy
+- Essays
 tags:
 - 📔 Journal
 - ✍️ Writing

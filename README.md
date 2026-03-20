@@ -52,6 +52,18 @@ Open <http://localhost:1313/> and <http://localhost:1313/admin/>.
 hugo new content posts/my-essay-title.md
 ```
 
+## Deploy
+```
+cd /path/to/kien-blog
+
+cat > .env <<'EOF'
+OAUTH_GITHUB_CLIENT_ID=your_client_id
+OAUTH_GITHUB_CLIENT_SECRET=your_client_secret
+EOF
+
+docker compose up -d --pull always
+```
+
 Edit front matter (`draft`, `description`, `slug`, `tags`) and body; commit and push.
 
 ## Stack rationale

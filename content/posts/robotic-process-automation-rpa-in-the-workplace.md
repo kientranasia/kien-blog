@@ -9,7 +9,7 @@ slug: robotic-process-automation-rpa-in-the-workplace
 tags:
 - 📔 Journal
 categories:
-- Philosophy
+- Essays
 ---
 
 ![](__GHOST_URL__/content/images/wordpress/2023/02/RPA-2.jpg)

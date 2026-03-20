@@ -54,7 +54,7 @@ params:
   author: Kiên Trần
   description: >-
     Expert Consultant, CEO Athsent — tư vấn chuyển đổi số, BPR và tự động hóa
-    quy trình. 11+ năm thực chiến. Ghi chép dài hơi: startup, life, happy, philosophy.
+    quy trình. 11+ năm thực chiến. Ghi chép dài hơi: startup, life, happy, essays.
   profile:
     name: Kiên Trần
     roleLine: "Expert Consultant · CEO Athsent"
@@ -81,7 +81,7 @@ params:
       slug: startup
       hint: "Công ty, sản phẩm, BPR, tự động hóa, go-to-market."
     - name: Essays
-      slug: philosophy
+      slug: essays
       hint: "Bài viết theo chiều sâu: quan sát, học hệ thống, và triết lý vận hành."
     - name: Happiness
       slug: happy
@@ -93,7 +93,7 @@ menu:
       url: /categories/startup/
       weight: 10
     - name: Essays
-      url: /categories/philosophy/
+      url: /categories/essays/
       weight: 20
     - name: Happiness
       url: /categories/happy/

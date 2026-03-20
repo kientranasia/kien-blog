@@ -9,7 +9,7 @@ slug: blue-ocean-along-with-digital-transformation
 tags:
 - 📔 Journal
 categories:
-- Philosophy
+- Essays
 ---
 
 ***The Future of the business is Digital, No Doubt about it. The question is about the readiness of the organization to transform inside-out and freshness of Business Model/Strategy based on market demand, the customer wants, and value proportionate***in a way of future-proofing your business to an extent.

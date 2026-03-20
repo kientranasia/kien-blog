@@ -9,7 +9,7 @@ slug: phan-biet-business-analyst-business-analytics
 tags:
 - 🎓 Studying
 categories:
-- Philosophy
+- Essays
 ---
 
 ![????](https://static.xx.fbcdn.net/images/emoji.php/v9/t5c/2/16/1f4a2.png) Mình có background non-IT và tính học khóa Business Analytics rồi xin làm Business Analyst để xin PR

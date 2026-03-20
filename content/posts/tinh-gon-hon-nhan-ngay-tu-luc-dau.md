@@ -9,7 +9,7 @@ slug: tinh-gon-hon-nhan-ngay-tu-luc-dau
 tags:
 - ✍️ Writing
 categories:
-- Philosophy
+- Essays
 ---
 
 Hôn nhân, theo năm tháng, đâu khác gì một căn nhà dãi dầu nhuốm màu thời gian.  

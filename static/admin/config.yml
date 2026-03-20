@@ -38,7 +38,7 @@ collections:
       - { label: Draft, name: draft, widget: boolean, default: true }
       - { label: Description, name: description, widget: string, required: false }
       - { label: URL slug, name: slug, widget: string, required: false, hint: "Optional; falls back to filename." }
-      - { label: Categories, name: categories, widget: list, required: false, hint: "Primary pillar: Startup, Life, Happy, or Philosophy (one list item)." }
+      - { label: Categories, name: categories, widget: list, required: false, hint: "Primary pillar: Startup, Essays, Happy (one list item)." }
       - { label: Tags, name: tags, widget: list, required: false }
       - { label: Body, name: body, widget: markdown }
 

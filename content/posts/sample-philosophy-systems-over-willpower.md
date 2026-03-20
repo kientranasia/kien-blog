@@ -5,7 +5,7 @@ draft: true
 description: "Draft: designing defaults so future-you isn't fighting past-you."
 slug: systems-remember-you
 categories:
-  - Philosophy
+  - Essays
 tags:
   - defaults
   - long-term
@@ -19,4 +19,4 @@ Outline for the finished piece:
 - Good systems reduce decisions; great systems reduce *moral* fatigue
 - What I log publicly vs. privately when building a multi-decade archive
 
-This pairs with the **Philosophy** pillar and with operational essays under **Startup**—link freely when both exist.
+This pairs with the **Essays** pillar and with operational essays under **Startup**—link freely when both exist.

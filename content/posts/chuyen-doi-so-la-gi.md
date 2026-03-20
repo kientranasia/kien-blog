@@ -9,7 +9,7 @@ slug: chuyen-doi-so-la-gi
 tags:
 - 📔 Journal
 categories:
-- Philosophy
+- Essays
 ---
 
 Chuyển đổi số là gì? Tại sao doanh nghiệp cần chuyển đổi số? Bài viết này mình sẽ giải thích ngắn gọn dễ hiểu nhất về Chuyển đổi số và Lý do gì doanh nghiệp của bạn cần chuẩn bị chiến lược và kế hoạch cho chuyển đổi số.

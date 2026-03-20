@@ -9,7 +9,7 @@ slug: how-to-find-your-ikigai
 tags:
 - 📔 Journal
 categories:
-- Philosophy
+- Essays
 ---
 
 There was a time when I was lost in my life.
@@ -108,7 +108,7 @@ My thoughts about the Ikigai
 
 I loved finding my Ikigai! I think that being aligned with your Ikigai is a very good way to be happy and to find purpose in your life by doing something that makes you feel “complete”
 
-I love this philosophy and it’s something that I use a lot in my consultations when people need some clarity in their life.
+I love this approach and it’s something that I use a lot in my consultations when people need some clarity in their life.
 
 The good direction
 ------------------

@@ -9,7 +9,7 @@ slug: tu-do-su-lua-chon-va-trach-nhiem
 tags:
 - ✍️ Writing
 categories:
-- Philosophy
+- Essays
 ---
 
 Chúng ta hay nói về sự tự do, mưu cầu về tự do. Vậy cho phép mình hỏi bạn tự do theo bạn là gì?

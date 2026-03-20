@@ -5,7 +5,7 @@ draft: true
 description: ""
 slug: ""
 categories:
-  - Philosophy
+  - Essays
 tags: []
 ---
 

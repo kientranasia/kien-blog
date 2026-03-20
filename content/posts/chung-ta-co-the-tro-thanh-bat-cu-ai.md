@@ -9,7 +9,7 @@ slug: chung-ta-co-the-tro-thanh-bat-cu-ai
 tags:
 - 📔 Journal
 categories:
-- Philosophy
+- Essays
 ---
 
 Có bao giờ bạn tự hỏi liệu mình có thể trở thành bất cứ ai không? Rằng trong dòng chảy của cuộc sống, bạn không chỉ là “bạn” mà có thể là bất kỳ ai nếu có đủ thời gian và điều kiện? Đây là một câu hỏi không đơn giản, nhưng lại rất đáng để chiêm nghiệm.

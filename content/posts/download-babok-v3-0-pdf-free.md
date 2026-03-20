@@ -9,7 +9,7 @@ slug: download-babok-v3-0-pdf-free
 tags:
 - 🎓 Studying
 categories:
-- Philosophy
+- Essays
 ---
 
 Global Standards of the Business Analysis Profession

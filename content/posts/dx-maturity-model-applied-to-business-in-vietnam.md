@@ -9,7 +9,7 @@ slug: dx-maturity-model-applied-to-business-in-vietnam
 tags:
 - 📔 Journal
 categories:
-- Philosophy
+- Essays
 ---
 
 Actually, digital transformation has become an inevitable trend of businesses in the world as well as in Vietnam. However, to gauge the extent of businesses digital transformation, we need to know how digital maturity is. This article introduces digital maturity concepts as well as digital maturity assessment models that can be applied in Vietnam.

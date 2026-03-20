@@ -9,7 +9,7 @@ slug: tro-ve-voi-nhung-ki-uc-xua-kia-minh-tung-hanh-phuc
 tags:
 - 📔 Journal
 categories:
-- Philosophy
+- Essays
 ---
 
 **Anh ước gì có thể mở lòng mình ra, anh khao khát được yêu, anh hy vọng một ngày em có thể quay trở về cùng anh, ta thôi không yêu đương mà ngồi tự sự, hàn huyên, chữa lành cho những gì mình từng chịu đựng, tổn thương**.

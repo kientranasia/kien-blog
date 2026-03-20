@@ -9,7 +9,7 @@ slug: cho-doi-va-hanh-dong
 tags:
 - 📔 Journal
 categories:
-- Philosophy
+- Essays
 ---
 
 Sự trì hoãn khiến bạn không nhận được kết quả nhiều hơn là hành động sai lầm.

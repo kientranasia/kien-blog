@@ -10,7 +10,7 @@ tags:
 - ✍️ Writing
 - 📔 Journal
 categories:
-- Philosophy
+- Essays
 ---
 
 ### LÃNH ĐẠO – KHỞI NGUỒN TỪ TRÁCH NHIỆM

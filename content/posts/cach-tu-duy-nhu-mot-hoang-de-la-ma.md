@@ -7,7 +7,7 @@ description: 'Review Sách “How to Think Like a Roman Emperor” By Donald Rob
   sống thanh thản nằm…'
 slug: cach-tu-duy-nhu-mot-hoang-de-la-ma
 categories:
-- Philosophy
+- Essays
 tags:
 - 📔 Journal
 ---

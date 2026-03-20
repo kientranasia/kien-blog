@@ -9,7 +9,7 @@ slug: dung-ai-tao-ra-chatbot
 tags:
 - 📔 Journal
 categories:
-- Philosophy
+- Essays
 ---
 
 Hiện tại mọi người không còn lạ gì với ChatGPT nữa. Mình cũng đang sử dụng ChatGPT phục vụ công việc của mình chủ yếu là research, gợi ý. mình cũng tò mò không biết giới hạn của ChatGPT ở đâu? Liệu nó sẽ phụ thuộc vào ChatGPT hay phụ thuộc vào người sử dụng nó.

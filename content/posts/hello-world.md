@@ -5,7 +5,7 @@ draft: false
 description: "A short anchor post explaining the stack and tone of this site."
 slug: why-static-blog-wins
 categories:
-  - Philosophy
+  - Essays
 tags:
   - meta
   - hugo

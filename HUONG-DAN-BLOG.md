@@ -26,11 +26,11 @@ Chỉ cân nhắc khi một trụ có ~10–15 bài và cảm giác “kẹt”:
 
 | Gợi ý | Gần trụ nào | Khi nào tách |
 |--------|----------------|--------------|
-| **Systems** | Startup + Philosophy | Quy trình, kiến trúc thông tin, tự động hóa “xương sống” |
+| **Systems** | Startup + Essays | Quy trình, kiến trúc thông tin, tự động hóa “xương sống” |
 | **Craft** | Startup + Life | Kỹ năng làm nghề, chuẩn nghề, tay nghề tư vấn |
-| **Money & risk** | Startup + Philosophy | Giá, hợp đồng, quyết định tài chính |
+| **Money & risk** | Startup + Essays | Giá, hợp đồng, quyết định tài chính |
 | **Family & care** | Life + Happy | Trách nhiệm, thời gian, ranh giới |
-| **Learning log** | Philosophy + Life | Sách, khóa, mentor — *có kết luận áp dụng* |
+| **Learning log** | Essays + Life | Sách, khóa, mentor — *có kết luận áp dụng* |
 
 Để thêm taxonomy mới: khai báo trong `hugo.yaml`, rồi dùng trong front matter và (nếu cần) chỉnh Decap `static/admin/config.yml`.
 

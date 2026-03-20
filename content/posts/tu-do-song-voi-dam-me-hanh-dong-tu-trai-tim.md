@@ -9,7 +9,7 @@ slug: tu-do-song-voi-dam-me-hanh-dong-tu-trai-tim
 tags:
 - ✍️ Writing
 categories:
-- Philosophy
+- Essays
 ---
 
 Tự do, với tôi, không phải là những chuyến bay vượt đại dương hay sự thoát ly khỏi mọi ràng buộc. Tự do là khi tôi nghe thấy tiếng gọi từ sâu thẳm trong lòng và dám bước đi theo nó, không sợ hãi, không do dự. Là khi tôi sống với những gì tôi yêu – viết blog, nghiên cứu công nghệ, tìm kiếm chính mình, đi du lịch, nấu ăn, và tận hưởng những bữa cơm ngon.

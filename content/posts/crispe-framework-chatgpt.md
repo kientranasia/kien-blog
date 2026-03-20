@@ -9,7 +9,7 @@ slug: crispe-framework-chatgpt
 tags:
 - 📔 Journal
 categories:
-- Philosophy
+- Essays
 ---
 
 ChatGPT là một mô hình AI tiên tiến được thiết kế để hiểu và tạo văn bản giống con người. Nó có thể thực hiện nhiều vai trò khác nhau, bao gồm hoạt động như một công cụ cho các nhà tuyển dụng và người tìm nguồn. Tuy nhiên, việc tối đa hóa lợi ích của ChatGPT có thể là một thách thức, đặc biệt là đối với những người không đặc biệt hiểu biết về công nghệ hoặc chưa quen với AI.

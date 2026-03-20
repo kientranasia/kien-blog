@@ -9,7 +9,7 @@ slug: mung-3-tet-2023-tai-ha-noi
 tags:
 - 📔 Journal
 categories:
-- Philosophy
+- Essays
 ---
 
 Hôm nay trời rét – ăn lẩu thì sướng!

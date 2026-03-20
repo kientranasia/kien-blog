@@ -9,7 +9,7 @@ slug: ban-co-nghe-den-phuong-phap-aspire
 tags:
 - 📔 Journal
 categories:
-- Philosophy
+- Essays
 ---
 
 Với phương pháp này mình nghĩ bạn chỉ cần bỏ ra 20% thời gian bạn học bình thường để tiếp thu hơn 80% lượng kiến thức. Chém gió vậy thôi chứ vào vấn đề chính nhé.

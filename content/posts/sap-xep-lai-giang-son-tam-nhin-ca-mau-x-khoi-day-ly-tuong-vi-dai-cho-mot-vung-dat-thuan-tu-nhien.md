@@ -11,7 +11,7 @@ tags:
 - ✍️ Writing
 - 📔 Journal
 categories:
-- Philosophy
+- Essays
 ---
 
 > “Một con người cần một lý tưởng vĩ đại để hướng tới. Không có lý tưởng, con người dễ bị cuốn vào tầm thường.” – Elon Musk
