@@ -2,8 +2,29 @@
 <div class="layout-main-inner wrap-page">
   <header class="page-intro">
     <p class="page-intro__crumb"><a href="{{ absURL "/" }}">Trang chủ</a></p>
+    {{- if .Data.Term -}}
+    <h1 class="page-intro__title">{{ .Title }}</h1>
+    {{- else -}}
     <h1 class="page-intro__title">Danh mục</h1>
+    {{- end -}}
   </header>
+
+  {{- if .Data.Term -}}
+  {{- if .Pages }}
+  <ul class="index-posts">
+    {{- range .Pages.ByDate.Reverse }}
+    <li class="index-posts__row">
+      <time class="index-posts__date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>
+      <a class="index-posts__title" href="{{ .Permalink }}">{{ .Title }}</a>
+      {{- if .Draft }}<span class="draft-pill">draft</span>{{ end }}
+      {{- with .Description }}<span class="index-posts__desc">{{ . }}</span>{{ end }}
+    </li>
+    {{- end }}
+  </ul>
+  {{- else }}
+  <p class="page-intro__desc">Chưa có bài viết trong nhóm này.</p>
+  {{- end -}}
+  {{- else -}}
   <ul class="index-posts">
     {{- range site.Params.pillars }}
       {{- $p := . }}
@@ -21,5 +42,6 @@
       {{- end }}
     {{- end }}
   </ul>
+  {{- end -}}
 </div>
 {{ end }}

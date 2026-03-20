@@ -645,7 +645,7 @@ a:focus-visible {
 
   .brand {
     grid-area: brand;
-    justify-self: center;
+    justify-self: start;
   }
 
   .topnav {
