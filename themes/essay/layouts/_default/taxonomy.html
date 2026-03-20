@@ -2,15 +2,14 @@
 <div class="layout-main-inner wrap-page">
   <header class="page-intro">
     <p class="page-intro__crumb"><a href="{{ absURL "/" }}">Trang chủ</a></p>
-    {{- if .Data.Term -}}
-    <h1 class="page-intro__title">{{ .Title }}</h1>
+    {{- if or .Data.Term (and (gt (len .Pages) 0) (eq (index .Pages 0).Section "posts")) -}}
+      <h1 class="page-intro__title">{{ .Title }}</h1>
     {{- else -}}
-    <h1 class="page-intro__title">Danh mục</h1>
+      <h1 class="page-intro__title">Danh mục</h1>
     {{- end -}}
   </header>
 
-  {{- if .Data.Term -}}
-  {{- if .Pages }}
+  {{- if or .Data.Term (and (gt (len .Pages) 0) (eq (index .Pages 0).Section "posts")) -}}
   <ul class="index-posts">
     {{- range .Pages.ByDate.Reverse }}
     <li class="index-posts__row">
@@ -21,10 +20,9 @@
     </li>
     {{- end }}
   </ul>
-  {{- else }}
-  <p class="page-intro__desc">Chưa có bài viết trong nhóm này.</p>
-  {{- end -}}
   {{- else -}}
+  {{- $singular := .Data.Singular | default "" -}}
+  {{- if eq $singular "category" }}
   <ul class="index-posts">
     {{- range site.Params.pillars }}
       {{- $p := . }}
@@ -42,6 +40,14 @@
       {{- end }}
     {{- end }}
   </ul>
+  {{- else -}}
+  <ul class="index-posts">
+    <li class="index-posts__row">
+      <span class="index-posts__date">0 bài</span>
+      <span class="index-posts__title index-posts__title--static">Chưa có bài</span>
+    </li>
+  </ul>
   {{- end -}}
-</div>
+  {{- end -}}
+ </div>
 {{ end }}
