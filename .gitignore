@@ -1,4 +1,6 @@
 /public
 /resources
+.last_built_commit
+.build-history.log
 .hugo_build.lock
 .DS_Store

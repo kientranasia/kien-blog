@@ -6,7 +6,7 @@ services:
     restart: unless-stopped
     ports:
       # Cloudflare có thể trỏ trực tiếp tới port 1313 của host
-      - "1313:1313"
+      - "1313:80"
     # Nếu bạn dùng reverse proxy ở ngoài (Nginx/Traefik), có thể bỏ ports mapping.
     # volumes:
     #   - ./public:/usr/share/nginx/html:ro

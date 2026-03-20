@@ -62,9 +62,43 @@ OAUTH_GITHUB_CLIENT_SECRET=your_client_secret
 EOF
 
 docker compose up -d --pull always
+
+
+---
+cd ~/homelab/kien-blog
+git pull
+
+hugo --minify --config hugo.yaml
+
+docker compose up -d --build --force-recreate
+docker compose ps
+docker compose logs web --tail=80
 ```
 
 Edit front matter (`draft`, `description`, `slug`, `tags`) and body; commit and push.
+
+
+
+## Auto build
+1) Trên server, kéo code mới (repo đã có sẵn `auto-deploy.sh`) và đảm bảo file có quyền chạy:
+```bash
+cd ~/homelab/kien-blog
+git pull
+chmod +x auto-deploy.sh
+```
+
+2) Cài cron chạy tự động (mỗi 2 phút)
+crontab -e
+Thêm dòng:
+
+*/2 * * * * /home/kientran/homelab/kien-blog/auto-deploy.sh >/tmp/kien-blog-auto-deploy.log 2>&1
+3) Lưu trữ log build
+- Script sẽ ghi lịch sử vào `.build-history.log` trong thư mục repo.
+- Lúc cron chạy vẫn ghi vào `/tmp/kien-blog-auto-deploy.log` như bạn set ở trên.
+
+4) Test nhanh
+Publish một bài mới trên Decap (draft = OFF).
+Chờ 1–2 phút.
 
 ## Stack rationale
 

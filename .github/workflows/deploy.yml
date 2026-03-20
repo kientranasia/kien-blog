@@ -1,8 +1,7 @@
 name: Build site and publish image
 
 on:
-  push:
-    branches: [main]
+  workflow_dispatch:
 
 permissions:
   contents: read
