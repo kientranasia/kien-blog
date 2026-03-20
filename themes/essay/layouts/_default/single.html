@@ -1,0 +1,20 @@
+{{ define "main" }}
+<article class="essay prose">
+  <header class="essay__head">
+    <h1 class="essay__title">{{ .Title }}</h1>
+    <div class="essay__meta">
+      {{- $date := .Date.Format "January 2, 2006" }}
+      <time datetime="{{ .Date.Format "2006-01-02" }}">{{ $date }}</time>
+      {{- if gt .ReadingTime 0 }} · {{ .ReadingTime }} min read{{ end -}}
+      {{- with .Params.tags }}
+      ·
+      {{- range $i, $t := . }}{{ if $i }}, {{ end }}<a href="{{ absURL (printf "/tags/%s/" (urlize $t)) }}">{{ $t }}</a>{{ end }}
+      {{- end }}
+    </div>
+    {{- with .Description }}<p class="essay__lede">{{ . }}</p>{{ end }}
+  </header>
+  <div class="essay__body">
+    {{ .Content }}
+  </div>
+</article>
+{{ end }}

@@ -1,0 +1,25 @@
+{{ define "main" }}
+<section class="home-lede prose">
+  <h1 class="visually-hidden">{{ site.Title }}</h1>
+  {{- with .Content }}{{ . }}{{ else }}
+  <p>{{ site.Params.description }}</p>
+  {{- end }}
+</section>
+{{- $posts := where site.RegularPages "Section" "posts" }}
+{{- if $posts }}
+<section class="home-recent">
+  <h2>Recent essays</h2>
+  <ul class="post-list">
+    {{- range first 5 $posts }}
+    <li class="post-list__item">
+      <a class="post-list__link" href="{{ .Permalink }}">{{ .Title }}</a>
+      <div class="post-list__meta">
+        <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time>
+      </div>
+    </li>
+    {{- end }}
+  </ul>
+  <p><a href="{{ absURL "/posts/" }}">All essays →</a></p>
+</section>
+{{- end }}
+{{ end }}

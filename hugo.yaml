@@ -1,0 +1,55 @@
+baseURL: https://YOUR_DOMAIN/
+languageCode: en-us
+title: Kien — Notes
+theme: essay
+
+params:
+  description: Essays on AI, automation, and building.
+  author: Kien Tran
+  subtitle: Long-form notes on software, systems, and tools.
+
+menu:
+  main:
+    - name: Essays
+      url: /posts/
+      weight: 10
+    - name: Admin
+      url: /admin/
+      weight: 20
+
+permalinks:
+  posts: /posts/:slug/
+
+taxonomies:
+  tag: tags
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: false
+    parser:
+      attribute:
+        block: true
+        title: true
+
+build:
+  buildStats:
+    disable: true
+
+minify:
+  minifyOutput: true
+
+outputs:
+  home: [HTML, RSS]
+
+pagination:
+  pagerSize: 10
+
+ignoreLogs:
+  - warning-frontmatter-params-overrides
+
+services:
+  rss:
+    limit: 50
+
+copyright: © {year} Kien Tran

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="{{ site.Language.Lang | default "en" }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ block "title" . }}{{ with .Title }}{{ . }} · {{ end }}{{ site.Title }}{{ end }}</title>
+  <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ site.Params.description }}{{ end }}">
+  {{- with site.Params.author }}<meta name="author" content="{{ . }}">{{ end }}
+  <link rel="canonical" href="{{ .Permalink }}">
+  {{- with (site.Home.OutputFormats.Get "RSS") }}
+  <link rel="alternate" type="application/rss+xml" title="{{ site.Title }}" href="{{ .Permalink }}">
+  {{- end }}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,8..144,400;0,8..144,600;1,8..144,400&display=swap" rel="stylesheet">
+  {{- $style := resources.Get "css/main.css" | minify }}
+  <link rel="stylesheet" href="{{ $style.RelPermalink }}">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="site-title" href="{{ absURL "/" }}">{{ site.Title }}</a>
+      {{- with site.Params.subtitle }}<p class="site-subtitle">{{ . }}</p>{{ end }}
+      <nav class="nav" aria-label="Primary">
+        {{- range site.Menus.main }}
+        <a href="{{ absURL .URL }}">{{ .Name }}</a>
+        {{- end }}
+      </nav>
+    </div>
+  </header>
+  <main id="main" class="wrap main">
+    {{ block "main" . }}{{ end }}
+  </main>
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>{{ replace site.Copyright "{year}" (now.Format "2006") | safeHTML }}</p>
+    </div>
+  </footer>
+</body>
+</html>

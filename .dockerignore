@@ -1,0 +1,13 @@
+.git
+.github
+*.md
+!README.md
+content
+themes
+archetypes
+assets
+data
+i18n
+layouts
+hugo.yaml
+**/.DS_Store
