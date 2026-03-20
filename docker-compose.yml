@@ -11,3 +11,13 @@ services:
     # volumes:
     #   - ./public:/usr/share/nginx/html:ro
 
+  cms-backend:
+    image: ghcr.io/njfamirm/decap-cms-github-backend:main
+    container_name: decap-cms-backend
+    restart: unless-stopped
+    environment:
+      # Set these via your shell / .env when you run `docker compose up -d`
+      - OAUTH_GITHUB_CLIENT_ID=${OAUTH_GITHUB_CLIENT_ID}
+      - OAUTH_GITHUB_CLIENT_SECRET=${OAUTH_GITHUB_CLIENT_SECRET}
+      # OAUTH_GITHUB_REDIRECT_URL is handled by `backend.base_url` + /callback in Decap config.
+

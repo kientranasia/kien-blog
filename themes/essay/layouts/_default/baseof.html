@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ site.Language.Lang | default "vi" }}">
+<html lang="{{ site.Language.Lang | default "vi" }}" data-theme="dark">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -86,10 +86,15 @@
         {{- end }}
       </nav>
 
-      <div class="lang-switch" aria-label="Language">
-        <button type="button" class="lang-btn" data-lang="vi" aria-label="VN">VN</button>
-        <span class="lang-sep" aria-hidden="true">|</span>
-        <button type="button" class="lang-btn" data-lang="en" aria-label="EN">EN</button>
+      <div class="topbar__right">
+        <div class="lang-switch" aria-label="Language">
+          <button type="button" class="lang-btn" data-lang="vi" aria-label="VN">VN</button>
+          <span class="lang-sep" aria-hidden="true">|</span>
+          <button type="button" class="lang-btn" data-lang="en" aria-label="EN">EN</button>
+        </div>
+        <button type="button" class="theme-btn" id="theme-toggle" aria-label="Toggle dark/light theme">
+          <span class="theme-icon" id="theme-icon">☾</span>
+        </button>
       </div>
     </div>
   </header>
@@ -202,6 +207,38 @@
           setLang(saved);
         });
       }
+    })();
+  </script>
+
+  <script>
+    (function () {
+      var root = document.documentElement;
+      var btn = document.getElementById('theme-toggle');
+      var icon = document.getElementById('theme-icon');
+      if (!btn || !icon) return;
+
+      function applyTheme(theme) {
+        root.setAttribute('data-theme', theme);
+        localStorage.setItem('siteTheme', theme);
+        icon.textContent = theme === 'dark' ? '☀' : '☾';
+      }
+
+      function init() {
+        var saved = localStorage.getItem('siteTheme');
+        if (saved === 'dark' || saved === 'light') {
+          applyTheme(saved);
+          return;
+        }
+        // Default theme: dark
+        applyTheme('dark');
+      }
+
+      btn.addEventListener('click', function () {
+        var current = root.getAttribute('data-theme') || 'light';
+        applyTheme(current === 'dark' ? 'light' : 'dark');
+      });
+
+      init();
     })();
   </script>
 </body>
