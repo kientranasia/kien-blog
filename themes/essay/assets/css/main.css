@@ -616,10 +616,9 @@ a:focus-visible {
 @media (max-width: 639px) {
   .topbar__inner {
     display: grid;
-    grid-template-columns: 1fr auto;
+    grid-template-columns: auto 1fr auto;
     grid-template-areas:
-      "brand right"
-      "nav nav";
+      "brand nav right";
     align-items: center;
     justify-content: space-between;
     padding: 0.9rem 0 0.75rem;
@@ -629,12 +628,17 @@ a:focus-visible {
   .brand {
     grid-area: brand;
     justify-self: start;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .topnav {
     grid-area: nav;
     flex: 0 0 auto;
     justify-content: center;
+    gap: 0.5rem 0.85rem;
+    font-size: 0.72rem;
   }
 
   .topbar__right {
