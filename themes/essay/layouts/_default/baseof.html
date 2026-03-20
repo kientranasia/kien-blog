@@ -79,7 +79,12 @@
   <a class="skip" href="#main">Skip to content</a>
   <header class="topbar{{ if $homeOnly }} topbar--dark{{ end }}">
     <div class="topbar__inner wrap {{ if $homeOnly }}wrap--hero-shell{{ else }}{{ $wrapClass }}{{ end }}">
-      <a class="brand" href="{{ absURL "/" }}">{{ site.Title }}</a>
+      <div class="topbar__left">
+        <a class="brand" href="{{ absURL "/" }}">{{ site.Title }}</a>
+        <button type="button" class="theme-btn" id="theme-toggle" aria-label="Toggle dark/light theme">
+          <span class="theme-icon" id="theme-icon">☾</span>
+        </button>
+      </div>
       <nav class="topnav" id="topnav-menu" aria-label="Primary">
         {{- range site.Menus.main }}
         <a href="{{ absURL .URL }}">{{ .Name }}</a>
@@ -106,9 +111,6 @@
           aria-expanded="false"
         >
           <span aria-hidden="true">⌕</span>
-        </button>
-        <button type="button" class="theme-btn" id="theme-toggle" aria-label="Toggle dark/light theme">
-          <span class="theme-icon" id="theme-icon">☾</span>
         </button>
       </div>
     </div>
@@ -200,6 +202,7 @@
       if (!toggle || !modal || !closeBtn || !input || !results || !indexEl) return;
 
       var index = [];
+      var header = document.querySelector('header.topbar');
       try {
         index = JSON.parse(indexEl.textContent || '[]');
       } catch (e) {
@@ -209,6 +212,7 @@
       function openModal() {
         modal.classList.add('open');
         toggle.setAttribute('aria-expanded', 'true');
+        if (header) header.classList.add('topbar--search-open');
         // Clear and focus for better UX on mobile keyboards
         input.value = '';
         results.innerHTML = '';
@@ -218,6 +222,7 @@
       function closeModal() {
         modal.classList.remove('open');
         toggle.setAttribute('aria-expanded', 'false');
+        if (header) header.classList.remove('topbar--search-open');
       }
 
       toggle.addEventListener('click', function () {
