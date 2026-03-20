@@ -41,6 +41,8 @@
   {{- $style := resources.Get "css/main.css" | minify }}
   <link rel="stylesheet" href="{{ $style.RelPermalink }}?v={{ now.Unix }}">
 
+  <link rel="icon" type="image/svg+xml" href="{{ absURL "/favicon-k.svg" }}">
+
   {{- /* Personal branding JSON-LD */ -}}
   {{- $personName := site.Params.profile.name | default site.Title -}}
   {{- $publisherName := site.Params.footer.trandao_name | default "TRANDAO INVESTMENT" -}}
