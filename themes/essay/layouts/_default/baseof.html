@@ -240,7 +240,16 @@
       });
 
       function normalize(s) {
-        return String(s || '').toLowerCase();
+        var str = String(s || '').toLowerCase();
+        // Diacritic-insensitive normalization (Vietnamese).
+        try {
+          str = str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+        } catch (e) {
+          // If normalize() is not supported, fall back to lowercase only.
+        }
+        // Replace punctuation with spaces so token matching is more forgiving.
+        str = str.replace(/[^a-z0-9\s]/g, ' ');
+        return str;
       }
 
       function tokenize(q) {
