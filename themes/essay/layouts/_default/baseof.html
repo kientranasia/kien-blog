@@ -97,6 +97,16 @@
         >
           <span aria-hidden="true">☰</span>
         </button>
+        <button
+          type="button"
+          class="search-toggle"
+          id="search-toggle"
+          aria-label="Search posts"
+          aria-controls="search-modal"
+          aria-expanded="false"
+        >
+          <span aria-hidden="true">⌕</span>
+        </button>
         <button type="button" class="theme-btn" id="theme-toggle" aria-label="Toggle dark/light theme">
           <span class="theme-icon" id="theme-icon">☾</span>
         </button>
@@ -144,6 +154,144 @@
       {{- end }}
     </div>
   </footer>
+
+  <div class="search-modal" id="search-modal" role="dialog" aria-modal="true" aria-labelledby="search-title">
+    <div class="search-modal__panel" role="document">
+      <div class="search-modal__top">
+        <h2 class="search-modal__title" id="search-title">Search</h2>
+        <button type="button" class="search-modal__close" id="search-close" aria-label="Close search">
+          ×
+        </button>
+      </div>
+      <input
+        id="search-input"
+        class="search-modal__input"
+        type="search"
+        inputmode="search"
+        autocomplete="off"
+        placeholder="Search posts..."
+        aria-label="Search posts"
+      />
+      <div class="search-modal__results" id="search-results" aria-live="polite"></div>
+      <div class="search-modal__hint visually-hidden">Type to search across posts.</div>
+    </div>
+  </div>
+
+  {{- $searchItems := slice -}}
+  {{- range site.RegularPages -}}
+  {{- if eq .Section "posts" -}}
+  {{- $searchItems = $searchItems | append (dict
+    "title" .Title
+    "url" .RelPermalink
+    "text" (.Plain | truncate 220)
+  ) -}}
+  {{- end -}}
+  {{- end -}}
+  <script type="application/json" id="search-index">{{ $searchItems | jsonify }}</script>
+
+  <script>
+    (function () {
+      var toggle = document.getElementById('search-toggle');
+      var modal = document.getElementById('search-modal');
+      var closeBtn = document.getElementById('search-close');
+      var input = document.getElementById('search-input');
+      var results = document.getElementById('search-results');
+      var indexEl = document.getElementById('search-index');
+      if (!toggle || !modal || !closeBtn || !input || !results || !indexEl) return;
+
+      var index = [];
+      try {
+        index = JSON.parse(indexEl.textContent || '[]');
+      } catch (e) {
+        index = [];
+      }
+
+      function openModal() {
+        modal.classList.add('open');
+        toggle.setAttribute('aria-expanded', 'true');
+        // Clear and focus for better UX on mobile keyboards
+        input.value = '';
+        results.innerHTML = '';
+        input.focus();
+      }
+
+      function closeModal() {
+        modal.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+
+      toggle.addEventListener('click', function () {
+        if (modal.classList.contains('open')) closeModal();
+        else openModal();
+      });
+
+      closeBtn.addEventListener('click', closeModal);
+      modal.addEventListener('click', function (e) {
+        if (e.target === modal) closeModal();
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') closeModal();
+      });
+
+      function normalize(s) {
+        return String(s || '').toLowerCase();
+      }
+
+      function tokenize(q) {
+        return normalize(q).split(/\\s+/).filter(Boolean);
+      }
+
+      function scoreItem(item, tokens) {
+        var hay = normalize((item.title || '') + ' ' + (item.text || ''));
+        var score = 0;
+        for (var i = 0; i < tokens.length; i++) {
+          if (hay.indexOf(tokens[i]) !== -1) score++;
+        }
+        return score;
+      }
+
+      function renderList(list) {
+        results.innerHTML = '';
+        if (!list.length) {
+          var empty = document.createElement('div');
+          empty.className = 'search-modal__empty';
+          empty.textContent = 'No results.';
+          results.appendChild(empty);
+          return;
+        }
+
+        for (var i = 0; i < list.length; i++) {
+          var item = list[i];
+          var a = document.createElement('a');
+          a.className = 'search-modal__result';
+          a.href = item.url;
+          a.textContent = item.title;
+          results.appendChild(a);
+        }
+      }
+
+      input.addEventListener('input', function () {
+        var q = input.value.trim();
+        if (!q) {
+          results.innerHTML = '';
+          return;
+        }
+
+        var tokens = tokenize(q);
+        var scored = [];
+        for (var i = 0; i < index.length; i++) {
+          var item = index[i];
+          var s = scoreItem(item, tokens);
+          if (s > 0) scored.push({ item: item, score: s });
+        }
+
+        scored.sort(function (a, b) { return b.score - a.score; });
+        var best = scored.slice(0, 10).map(function (x) { return x.item; });
+        renderList(best);
+      });
+    })();
+  </script>
 
   <script>
     (function () {
