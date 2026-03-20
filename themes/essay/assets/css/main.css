@@ -543,8 +543,9 @@ a:focus-visible {
 .topnav {
   display: flex;
   flex-wrap: wrap;
-  flex: 1;
-  justify-content: center;
+  flex: 0 0 auto;
+  justify-content: flex-end;
+  margin-left: auto; /* Dồn menu sang phải (desktop) */
   gap: 0.65rem 1.1rem;
   font-size: 0.75rem;
   font-weight: 700;
