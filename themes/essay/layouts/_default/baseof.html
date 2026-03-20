@@ -3,10 +3,14 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>{{ block "title" . }}{{ with .Title }}{{ . }} · {{ end }}{{ site.Title }}{{ end }}</title>
-  <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ site.Params.description }}{{ end }}">
   {{- $pageTitle := site.Title -}}
   {{- with .Title }}{{- $pageTitle = . -}}{{- end }}
+  {{- $fullTitle := $pageTitle -}}
+  {{- if not .IsHome -}}
+    {{- $fullTitle = printf "%s · %s" $pageTitle site.Title -}}
+  {{- end }}
+  <title>{{ $fullTitle }}</title>
+  <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ site.Params.description }}{{ end }}">
   {{- $pageDesc := site.Params.description -}}
   {{- with .Description }}{{- $pageDesc = . -}}{{- end }}
   {{- $ogUrl := .Permalink -}}
@@ -17,7 +21,7 @@
   {{- end }}
 
   <meta property="og:site_name" content="{{ site.Title }}">
-  <meta property="og:title" content="{{ $pageTitle }}">
+  <meta property="og:title" content="{{ $fullTitle }}">
   <meta property="og:description" content="{{ $pageDesc }}">
   <meta property="og:url" content="{{ $ogUrl }}">
   <meta property="og:type" content="{{ if eq .Section "posts" }}article{{ else }}website{{ end }}">
@@ -25,7 +29,7 @@
   <meta property="og:image" content="{{ absURL $ogImageUrl }}">
   {{- end }}
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="{{ $pageTitle }}">
+  <meta name="twitter:title" content="{{ $fullTitle }}">
   <meta name="twitter:description" content="{{ $pageDesc }}">
   {{- if $ogImageUrl }}
   <meta name="twitter:image" content="{{ absURL $ogImageUrl }}">
