@@ -469,6 +469,7 @@ a:focus-visible {
 .topbar {
   border-bottom: 1px solid var(--border);
   background: var(--bg);
+  position: relative;
 }
 
 .topbar--dark {
@@ -487,6 +488,28 @@ a:focus-visible {
 
 .topbar--dark .topnav a:hover {
   color: #fff;
+}
+
+.menu-toggle {
+  display: none;
+  appearance: none;
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  opacity: 0.7;
+  line-height: 1;
+  font-size: 1.1rem;
+}
+
+.menu-toggle:hover {
+  opacity: 1;
+}
+
+.topbar--dark .menu-toggle {
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .topbar__inner {
@@ -616,8 +639,8 @@ a:focus-visible {
 @media (max-width: 639px) {
   .topbar__inner {
     display: grid !important;
-    grid-template-columns: minmax(0, auto) 1fr minmax(0, auto) !important;
-    grid-template-areas: "brand nav right" !important;
+    grid-template-columns: 1fr auto !important;
+    grid-template-areas: "brand right" !important;
     align-items: center;
     justify-content: space-between;
     padding: 0.9rem 0 0.75rem;
@@ -633,24 +656,46 @@ a:focus-visible {
   }
 
   .topnav {
-    grid-area: nav;
-    flex: 0 0 auto;
-    justify-content: flex-start;
-    flex-wrap: nowrap !important; /* Prevent 2-line header menu on mobile */
-    white-space: nowrap !important;
-    overflow-x: auto;
-    gap: 0.45rem 0.65rem;
-    font-size: 0.72rem;
-    scrollbar-width: none; /* Firefox */
+    position: absolute;
+    top: calc(100% - 1px);
+    left: 1rem;
+    right: 1rem;
+    z-index: 50;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.15rem;
+    padding: 0.65rem 0.35rem;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    background: var(--bg);
   }
 
-  .topnav::-webkit-scrollbar {
-    display: none; /* WebKit */
+  .topbar--menu-open .topnav {
+    display: flex;
+  }
+
+  .topnav a {
+    display: block;
+    width: 100%;
+    padding: 0.62rem 0.85rem;
+    border-radius: 12px;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.72rem;
+    font-weight: 800;
   }
 
   .topbar__right {
     grid-area: right;
     justify-content: flex-end;
+    gap: 0.6rem;
+  }
+
+  .menu-toggle {
+    display: inline-flex;
   }
 }
 

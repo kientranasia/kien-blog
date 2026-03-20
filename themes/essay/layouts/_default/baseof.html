@@ -80,13 +80,23 @@
   <header class="topbar{{ if $homeOnly }} topbar--dark{{ end }}">
     <div class="topbar__inner wrap {{ if $homeOnly }}wrap--hero-shell{{ else }}{{ $wrapClass }}{{ end }}">
       <a class="brand" href="{{ absURL "/" }}">{{ site.Title }}</a>
-      <nav class="topnav" aria-label="Primary">
+      <nav class="topnav" id="topnav-menu" aria-label="Primary">
         {{- range site.Menus.main }}
         <a href="{{ absURL .URL }}">{{ .Name }}</a>
         {{- end }}
       </nav>
 
       <div class="topbar__right">
+        <button
+          type="button"
+          class="menu-toggle"
+          id="menu-toggle"
+          aria-label="Open menu"
+          aria-controls="topnav-menu"
+          aria-expanded="false"
+        >
+          <span aria-hidden="true">☰</span>
+        </button>
         <button type="button" class="theme-btn" id="theme-toggle" aria-label="Toggle dark/light theme">
           <span class="theme-icon" id="theme-icon">☾</span>
         </button>
@@ -134,6 +144,38 @@
       {{- end }}
     </div>
   </footer>
+
+  <script>
+    (function () {
+      var header = document.querySelector('header.topbar');
+      var toggle = document.getElementById('menu-toggle');
+      var nav = document.getElementById('topnav-menu');
+      if (!header || !toggle || !nav) return;
+
+      function setOpen(open) {
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        header.classList.toggle('topbar--menu-open', open);
+      }
+
+      toggle.addEventListener('click', function () {
+        setOpen(!header.classList.contains('topbar--menu-open'));
+      });
+
+      nav.addEventListener('click', function (e) {
+        if (e.target.closest('a')) setOpen(false);
+      });
+
+      document.addEventListener('click', function (e) {
+        if (!header.classList.contains('topbar--menu-open')) return;
+        if (header.contains(e.target)) return;
+        setOpen(false);
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') setOpen(false);
+      });
+    })();
+  </script>
 
   <script>
     (function () {
