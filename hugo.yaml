@@ -21,7 +21,7 @@ params:
     newsletter_placeholder: "Nhận bản tin qua email"
     # URL backend nhận POST để đăng ký newsletter.
     # Ví dụ: "https://trandao.vn/api/newsletter/subscribe"
-    newsletter_subscribe_url: "https://auto.athsent.com/webhook-test/9b277322-f778-4768-ad7b-7d4b312ca052"
+    newsletter_subscribe_url: "https://auto.athsent.com/webhook/9b277322-f778-4768-ad7b-7d4b312ca052"
     # "json" hoặc "form" (application/x-www-form-urlencoded)
     newsletter_subscribe_format: "json"
 
