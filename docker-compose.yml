@@ -1,7 +1,6 @@
 services:
   web:
-    build:
-      context: .
+    image: ghcr.io/kientranasia/kien-blog:latest
     container_name: kien-blog-web
     restart: unless-stopped
     ports:
@@ -10,6 +9,8 @@ services:
     # Nếu bạn dùng reverse proxy ở ngoài (Nginx/Traefik), có thể bỏ ports mapping.
     # volumes:
     #   - ./public:/usr/share/nginx/html:ro
+    depends_on:
+      - cms-backend
 
   cms-backend:
     image: ghcr.io/njfamirm/decap-cms-github-backend:main
