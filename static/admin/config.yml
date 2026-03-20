@@ -20,6 +20,10 @@ backend:
 media_folder: static/uploads
 public_folder: /uploads
 
+# Used by Decap CMS to generate correct live/admin URLs when behind a reverse proxy.
+site_url: https://kientran.asia
+display_url: https://kientran.asia
+
 slug:
   encoding: ascii
   clean_accents: true
