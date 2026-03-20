@@ -615,10 +615,9 @@ a:focus-visible {
 
 @media (max-width: 639px) {
   .topbar__inner {
-    display: grid;
-    grid-template-columns: auto 1fr auto;
-    grid-template-areas:
-      "brand nav right";
+    display: grid !important;
+    grid-template-columns: minmax(0, auto) 1fr minmax(0, auto) !important;
+    grid-template-areas: "brand nav right" !important;
     align-items: center;
     justify-content: space-between;
     padding: 0.9rem 0 0.75rem;
@@ -637,8 +636,8 @@ a:focus-visible {
     grid-area: nav;
     flex: 0 0 auto;
     justify-content: flex-start;
-    flex-wrap: nowrap; /* Prevent 2-line header menu on mobile */
-    white-space: nowrap;
+    flex-wrap: nowrap !important; /* Prevent 2-line header menu on mobile */
+    white-space: nowrap !important;
     overflow-x: auto;
     gap: 0.45rem 0.65rem;
     font-size: 0.72rem;
