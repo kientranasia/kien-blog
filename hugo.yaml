@@ -1,6 +1,7 @@
-# Dùng `/` để không gắn domain cố định; khi deploy cần URL tuyệt đối (RSS/canonical), xem README + workflow.
-baseURL: /
-relativeURLs: true
+# URL tuyệt đối cho canonical, Open Graph, RSS, sitemap (SEO). Local: `hugo server` tự dùng host dev.
+baseURL: https://kientran.asia/
+relativeURLs: false
+enableRobotsTXT: true
 defaultContentLanguage: vi
 languageCode: vi
 title: Kiên Trần
@@ -52,6 +53,12 @@ params:
     trandao_name: "TRANDAO INVESTMENT"
     trandao_url: "https://trandao.vn"
   author: Kiên Trần
+  seo:
+    # twitter:site — không bắt buộc; bỏ trống nếu không dùng
+    twitter_site: "@kientranasia"
+    og_locale: "vi_VN"
+    og_locale_alternate: "en_US"
+    theme_color: "#0f1413"
   description: >-
     Expert Consultant, CEO Athsent — tư vấn chuyển đổi số, BPR và tự động hóa
     quy trình. 11+ năm thực chiến. Ghi chép dài hơi: startup, life, happy, essays.
@@ -131,6 +138,10 @@ build:
 
 minify:
   minifyOutput: true
+
+sitemap:
+  changefreq: monthly
+  priority: 0.5
 
 outputs:
   home: [HTML, RSS]

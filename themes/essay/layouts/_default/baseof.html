@@ -3,16 +3,16 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  {{- $pageTitle := site.Title -}}
-  {{- with .Title }}{{- $pageTitle = . -}}{{- end }}
-  {{- $fullTitle := $pageTitle -}}
+  {{- $fullTitle := site.Title -}}
   {{- if not .IsHome -}}
-    {{- $fullTitle = printf "%s · %s" $pageTitle site.Title -}}
+    {{- $t := .Title | default site.Title -}}
+    {{- $fullTitle = printf "%s · %s" $t site.Title -}}
   {{- end }}
   <title>{{ $fullTitle }}</title>
-  <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ site.Params.description }}{{ end }}">
   {{- $pageDesc := site.Params.description -}}
   {{- with .Description }}{{- $pageDesc = . -}}{{- end }}
+  {{- $pageDesc = $pageDesc | plainify | strings.TrimSpace | truncate 160 -}}
+  <meta name="description" content="{{ $pageDesc }}">
   {{- $ogUrl := .Permalink -}}
   {{- $ogImageUrl := "" -}}
   {{- $ogImageAsset := site.Params.home.hero_image_asset | default "KienTranDao_Banner.png" -}}
@@ -20,15 +20,25 @@
     {{- $ogImageUrl = .RelPermalink -}}
   {{- end }}
 
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  {{- with site.Params.seo.theme_color }}<meta name="theme-color" content="{{ . }}">{{ end }}
   <meta property="og:site_name" content="{{ site.Title }}">
   <meta property="og:title" content="{{ $fullTitle }}">
   <meta property="og:description" content="{{ $pageDesc }}">
   <meta property="og:url" content="{{ $ogUrl }}">
+  {{- with site.Params.seo.og_locale }}<meta property="og:locale" content="{{ . }}">{{ end }}
+  {{- with site.Params.seo.og_locale_alternate }}<meta property="og:locale:alternate" content="{{ . }}">{{ end }}
   <meta property="og:type" content="{{ if eq .Section "posts" }}article{{ else }}website{{ end }}">
   {{- if $ogImageUrl }}
   <meta property="og:image" content="{{ absURL $ogImageUrl }}">
+  <meta property="og:image:alt" content="{{ site.Title }}">
+  {{- end }}
+  {{- if eq .Section "posts" }}
+  <meta property="article:published_time" content="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">
+  <meta property="article:modified_time" content="{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}">
   {{- end }}
   <meta name="twitter:card" content="summary_large_image">
+  {{- with site.Params.seo.twitter_site }}<meta name="twitter:site" content="{{ . }}">{{ end }}
   <meta name="twitter:title" content="{{ $fullTitle }}">
   <meta name="twitter:description" content="{{ $pageDesc }}">
   {{- if $ogImageUrl }}
@@ -50,30 +60,49 @@
   {{- /* Personal branding JSON-LD */ -}}
   {{- $personName := site.Params.profile.name | default site.Title -}}
   {{- $publisherName := site.Params.footer.trandao_name | default "TRANDAO INVESTMENT" -}}
-  {{- $worksFor := dict "@type" "Organization" "name" "TRANDAO" "url" (absURL "/") -}}
+  {{- $orgURL := site.Params.footer.trandao_url | default (absURL "/") -}}
+  {{- $worksFor := dict "@type" "Organization" "name" "TRANDAO" "url" $orgURL -}}
   {{- $sameAs := slice -}}
   {{- range site.Params.social -}}
     {{- if .url }}
       {{- $sameAs = $sameAs | append .url -}}
     {{- end -}}
   {{- end }}
+  {{- $personDesc := site.Params.description | plainify | strings.TrimSpace | truncate 320 -}}
   <script type="application/ld+json">
-    {{- $person := dict "@context" "https://schema.org" "@type" "Person" "name" $personName "jobTitle" "CEO & Founder" "worksFor" $worksFor "url" (absURL "/") "sameAs" $sameAs -}}
-    {{- $person | jsonify }}
+    {{- $person := dict "@context" "https://schema.org" "@type" "Person" "name" $personName "jobTitle" "CEO & Founder" "description" $personDesc "worksFor" $worksFor "url" (absURL "/") "sameAs" $sameAs -}}
+    {{- $person | jsonify | safeJS }}
   </script>
 
+  {{- if .IsHome }}
+  <script type="application/ld+json">
+    {{- $webDesc := site.Params.description | plainify | strings.TrimSpace | truncate 320 -}}
+    {{- $website := dict "@context" "https://schema.org" "@type" "WebSite" "name" site.Title "url" (absURL "/") "description" $webDesc "inLanguage" "vi" -}}
+    {{- $website | jsonify | safeJS }}
+  </script>
+  {{- end }}
+
   {{- if eq .Section "posts" }}
+  {{- $pubLogo := absURL "/favicon-k.svg" -}}
+  {{- $publisher := dict "@type" "Organization" "name" $publisherName "url" $orgURL "logo" (dict "@type" "ImageObject" "url" $pubLogo) -}}
+  {{- $articleDescRaw := .Description | default site.Params.description -}}
+  {{- $articleDesc := $articleDescRaw | plainify | strings.TrimSpace | truncate 320 -}}
+  {{- $articleImage := "" -}}
+  {{- if $ogImageUrl }}{{ $articleImage = absURL $ogImageUrl }}{{ end }}
   <script type="application/ld+json">
     {{- $article := dict "@context" "https://schema.org" "@type" "BlogPosting"
       "headline" .Title
-      "datePublished" (.Date.Format "2006-01-02")
-      "dateModified" (cond (ne .Lastmod nil) (.Lastmod.Format "2006-01-02") (.Date.Format "2006-01-02"))
-      "description" (or .Description site.Params.description)
-      "author" (dict "@type" "Person" "name" $personName)
-      "publisher" (dict "@type" "Organization" "name" $publisherName)
+      "datePublished" (.Date.Format "2006-01-02T15:04:05Z07:00")
+      "dateModified" (.Lastmod.Format "2006-01-02T15:04:05Z07:00")
+      "description" $articleDesc
+      "inLanguage" "vi"
+      "wordCount" .WordCount
+      "author" (dict "@type" "Person" "name" $personName "url" (absURL "/"))
+      "publisher" $publisher
       "mainEntityOfPage" (dict "@type" "WebPage" "@id" .Permalink)
     -}}
-    {{- $article | jsonify }}
+    {{- if $articleImage }}{{ $article = merge $article (dict "image" (slice $articleImage)) }}{{ end }}
+    {{- $article | jsonify | safeJS }}
   </script>
   {{- end }}
 </head>

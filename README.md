@@ -14,9 +14,9 @@ Open <http://localhost:1313/> and <http://localhost:1313/admin/>.
 
 ## First-time configuration
 
-1. **`baseURL`** — Mặc định trong `hugo.yaml` là `/` + `relativeURLs: true` (không gắn domain giả). Khi đã có domain ổn định:
-   - **Build local / CI có URL tuyệt đối:** `hugo --minify --baseURL "https://blog.example.com/"`  
-   - **GitHub Actions:** đặt biến repo **`HUGO_BASEURL`** (Settings → Secrets and variables → Actions → Variables), workflow sẽ truyền vào Hugo.
+1. **`baseURL`** — Trong `hugo.yaml` đang dùng **`https://kientran.asia/`** (canonical, Open Graph, RSS, sitemap). Xem thêm `enableRobotsTXT` và `sitemap` trong cùng file.
+   - **Đổi domain:** sửa `baseURL` trong `hugo.yaml` (và `static/admin/config.yml` nếu dùng Decap).
+   - **Preview local:** `hugo server` dùng host dev; không cần truyền `--baseURL` trừ khi bạn muốn ép URL.
 
 2. **Decap + GitHub** — Edit `static/admin/config.yml`:
    - Set `backend.repo` to `your-username/your-repo`.
