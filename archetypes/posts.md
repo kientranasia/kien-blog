@@ -6,7 +6,7 @@ draft: true
 description: ""
 # Tùy chọn: tiêu đề tab khác với title bài (nếu cần nhồi từ khóa ngắn). Mặc định dùng title.
 # seo_title: ""
-slug: ""
+# slug: chỉ thêm khi cần URL khác tên file; mặc định Hugo lấy slug từ tên file (.md).
 categories:
   - Essays
 tags: []

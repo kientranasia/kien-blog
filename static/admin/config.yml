@@ -35,13 +35,14 @@ collections:
     label_singular: Essay
     folder: content/posts
     create: true
+    # Tên file = slugify(title). KHÔNG thêm field tên "slug" — trùng biến {{slug}} trong template → lỗi rỗng/sai URL.
+    identifier_field: title
     slug: "{{slug}}"
     fields:
       - { label: Title, name: title, widget: string }
       - { label: Publish date, name: date, widget: datetime }
       - { label: Draft, name: draft, widget: boolean, default: true }
       - { label: Description, name: description, widget: string, required: false }
-      - { label: URL slug, name: slug, widget: string, required: false, hint: "Optional; falls back to filename." }
       - { label: Categories, name: categories, widget: list, required: false, hint: "Primary pillar: Startup, Essays, Happy (one list item)." }
       - { label: Tags, name: tags, widget: list, required: false }
       - { label: Body, name: body, widget: markdown }
