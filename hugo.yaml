@@ -59,9 +59,16 @@ params:
     og_locale: "vi_VN"
     og_locale_alternate: "en_US"
     theme_color: "#0f1413"
+    # Tiêu đề tab trang chủ (meta & og:title). Để trống = chỉ dùng site.title ("Kiên Trần").
+    home_title: "Kiên Trần · CEO TRANDAO | Chuyển đổi số, AI & tự động hóa"
+    # Meta description trang chủ (~150–160 ký tự; khớp Google snippet)
+    home_description: >-
+      Blog của Kiên Trần — CEO TRANDAO: chuyển đổi số, AI và tự động hóa cho doanh nghiệp.
+      Bài viết về startup, essays và happiness; 11+ năm thực chiến tại kientran.asia.
+  # Mặc định toàn site + fallback khi trang không có description riêng
   description: >-
-    Expert Consultant, CEO Athsent — tư vấn chuyển đổi số, BPR và tự động hóa
-    quy trình. 11+ năm thực chiến. Ghi chép dài hơi: startup, life, happy, essays.
+    Kiên Trần — CEO TRANDAO: tư vấn chuyển đổi số, AI & workflow automation cho doanh nghiệp.
+    Blog: startup, essays, happiness. Đọc miễn phí.
   profile:
     name: Kiên Trần
     roleLine: "Expert Consultant · CEO Athsent"

@@ -4,13 +4,35 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   {{- $fullTitle := site.Title -}}
-  {{- if not .IsHome -}}
+  {{- if .IsHome -}}
+    {{- with site.Params.seo.home_title }}{{ $fullTitle = . }}{{ end -}}
+  {{- else -}}
     {{- $t := .Title | default site.Title -}}
+    {{- with .Params.seo_title }}{{ $t = . }}{{ end -}}
     {{- $fullTitle = printf "%s · %s" $t site.Title -}}
   {{- end }}
   <title>{{ $fullTitle }}</title>
-  {{- $pageDesc := site.Params.description -}}
-  {{- with .Description }}{{- $pageDesc = . -}}{{- end }}
+  {{- $pageDesc := "" -}}
+  {{- if .IsHome -}}
+    {{- $pageDesc = site.Params.seo.home_description | default site.Params.description -}}
+  {{- else if .Description -}}
+    {{- $pageDesc = .Description -}}
+  {{- else if and (eq .Kind "page") (eq .Section "posts") -}}
+    {{- $pageDesc = .Summary | plainify | strings.TrimSpace -}}
+    {{- if or (not $pageDesc) (lt (len $pageDesc) 50) -}}
+      {{- $pageDesc = .Plain | plainify | strings.TrimSpace | truncate 300 -}}
+    {{- end -}}
+  {{- else if eq .Kind "term" -}}
+    {{- if eq .Data.Singular "category" -}}
+      {{- $pageDesc = printf "Danh mục %s — bài viết và ghi chép của %s." .Title site.Title -}}
+    {{- else -}}
+      {{- $pageDesc = printf "Bài viết gắn tag «%s» — %s." .Title site.Title -}}
+    {{- end -}}
+  {{- else if eq .Kind "taxonomy" -}}
+    {{- $pageDesc = printf "Danh mục %s — blog %s." .Title site.Title -}}
+  {{- else -}}
+    {{- $pageDesc = printf "%s — %s." .Title site.Title -}}
+  {{- end -}}
   {{- $pageDesc = $pageDesc | plainify | strings.TrimSpace | truncate 160 -}}
   <meta name="description" content="{{ $pageDesc }}">
   {{- $ogUrl := .Permalink -}}
@@ -28,12 +50,12 @@
   <meta property="og:url" content="{{ $ogUrl }}">
   {{- with site.Params.seo.og_locale }}<meta property="og:locale" content="{{ . }}">{{ end }}
   {{- with site.Params.seo.og_locale_alternate }}<meta property="og:locale:alternate" content="{{ . }}">{{ end }}
-  <meta property="og:type" content="{{ if eq .Section "posts" }}article{{ else }}website{{ end }}">
+  <meta property="og:type" content="{{ if and (eq .Kind "page") (eq .Section "posts") }}article{{ else }}website{{ end }}">
   {{- if $ogImageUrl }}
   <meta property="og:image" content="{{ absURL $ogImageUrl }}">
   <meta property="og:image:alt" content="{{ site.Title }}">
   {{- end }}
-  {{- if eq .Section "posts" }}
+  {{- if and (eq .Kind "page") (eq .Section "posts") }}
   <meta property="article:published_time" content="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">
   <meta property="article:modified_time" content="{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}">
   {{- end }}
@@ -76,17 +98,16 @@
 
   {{- if .IsHome }}
   <script type="application/ld+json">
-    {{- $webDesc := site.Params.description | plainify | strings.TrimSpace | truncate 320 -}}
+    {{- $webDesc := site.Params.seo.home_description | default site.Params.description | plainify | strings.TrimSpace | truncate 320 -}}
     {{- $website := dict "@context" "https://schema.org" "@type" "WebSite" "name" site.Title "url" (absURL "/") "description" $webDesc "inLanguage" "vi" -}}
     {{- $website | jsonify | safeJS }}
   </script>
   {{- end }}
 
-  {{- if eq .Section "posts" }}
+  {{- if and (eq .Kind "page") (eq .Section "posts") }}
   {{- $pubLogo := absURL "/favicon-k.svg" -}}
   {{- $publisher := dict "@type" "Organization" "name" $publisherName "url" $orgURL "logo" (dict "@type" "ImageObject" "url" $pubLogo) -}}
-  {{- $articleDescRaw := .Description | default site.Params.description -}}
-  {{- $articleDesc := $articleDescRaw | plainify | strings.TrimSpace | truncate 320 -}}
+  {{- $articleDesc := $pageDesc | plainify | strings.TrimSpace | truncate 320 -}}
   {{- $articleImage := "" -}}
   {{- if $ogImageUrl }}{{ $articleImage = absURL $ogImageUrl }}{{ end }}
   <script type="application/ld+json">
