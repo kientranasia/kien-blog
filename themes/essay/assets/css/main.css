@@ -10,7 +10,7 @@
   --max: 40rem;
   --max-wide: 48rem;
   --max-layout: 68rem;
-  --font: Inter, "Source Sans 3", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  --font: "Space Mono", ui-monospace, "Cascadia Code", "SF Mono", Menlo, Consolas, monospace;
   --lh: 1.82;
   --lh-tight: 1.55;
   --size: 1rem;
@@ -1351,6 +1351,7 @@ a:focus-visible {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 4;
+  line-clamp: 4;
 }
 
 @media (max-width: 520px) {
