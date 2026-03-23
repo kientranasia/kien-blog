@@ -103,15 +103,25 @@ params:
 
 menu:
   main:
+    - name: Blogs
+      identifier: blogs
+      url: /posts/
+      weight: 10
     - name: Startup
+      identifier: startup
       url: /categories/startup/
       weight: 10
+      parent: blogs
     - name: Essays
+      identifier: essays
       url: /categories/essays/
       weight: 20
+      parent: blogs
     - name: Happiness
+      identifier: happiness
       url: /categories/happy/
       weight: 30
+      parent: blogs
     - name: Services
       url: /services/
       weight: 40
