@@ -856,6 +856,21 @@ a:focus-visible {
   background-repeat: no-repeat;
 }
 
+.home-hero-band__bg::after {
+  content: "";
+  position: absolute;
+  inset: -35%;
+  z-index: 0;
+  pointer-events: none;
+  /* "Aurora ring" vibe giống ảnh tham khảo (gradient nhanh, nhẹ) */
+  background-image:
+    radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0) 45%),
+    conic-gradient(from 210deg at 50% 50%, rgba(79, 70, 229, 0.85), rgba(168, 85, 247, 0.85), rgba(249, 115, 22, 0.78), rgba(34, 197, 94, 0.75), rgba(79, 70, 229, 0.85));
+  opacity: 0.18;
+  filter: blur(40px);
+  transform: rotate(15deg);
+}
+
 .home-hero-band__inner {
   position: relative;
   z-index: 1;
@@ -867,11 +882,34 @@ a:focus-visible {
   min-height: clamp(26rem, 72svh, 40rem);
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
   text-align: center;
   /* Khoảng cách giữa kicker → lead → social → newsletter */
   row-gap: clamp(1.15rem, 3.5vw, 1.85rem);
+}
+
+.home-landing__title {
+  margin: 0;
+  font-size: clamp(2.25rem, 5.5vw, 3.75rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+
+.home-landing__subtitle {
+  margin: 0;
+  max-width: 48rem;
+  font-size: clamp(1rem, 2.4vw, 1.2rem);
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.home-landing__cta {
+  margin-top: clamp(1.1rem, 2.2vw, 1.75rem);
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 /* Mobile: banner full ngang, chiều cao theo tỷ lệ ảnh (--hero-aspect từ Hugo), ảnh không crop (contain) */
@@ -898,7 +936,7 @@ a:focus-visible {
     margin-inline: 0;
     padding: 0.5rem max(1rem, env(safe-area-inset-right, 0px)) max(1rem, env(safe-area-inset-bottom, 0px))
       max(1rem, env(safe-area-inset-left, 0px));
-    justify-content: flex-end; /* Put lead at the bottom of hero */
+    justify-content: center;
     row-gap: 0;
     box-sizing: border-box;
   }
@@ -1230,11 +1268,11 @@ a:focus-visible {
 }
 
 .home-hero-band__inner .home-newsletter__pill .home-newsletter__btn {
-  background: transparent;
-  color: rgba(255, 255, 255, 0.95);
-  box-shadow: none;
+  background: linear-gradient(90deg, rgba(79, 70, 229, 1) 0%, rgba(168, 85, 247, 1) 50%, rgba(249, 115, 22, 1) 100%);
+  color: #ffffff;
+  box-shadow: 0 8px 22px rgba(79, 70, 229, 0.25);
   cursor: pointer;
-  border: 1px solid rgba(255, 255, 255, 0.26);
+  border: none;
 }
 
 .home-hero-band__inner .home-newsletter__pill .home-newsletter__btn:disabled {

@@ -32,101 +32,30 @@
 <section class="home-hero-band"{{- if $heroStyle }} style="{{ $heroStyle | safe.CSS }}"{{- end }} aria-label="{{ site.Title }}">
   <div class="home-hero-band__bg" aria-hidden="true"></div>
   <div class="home-hero-band__inner">
-    {{- with $home.hero_kicker }}
-    <p class="home-hero-band__kicker">{{ . }}</p>
-    {{- end }}
-    {{- with $heroLead }}
-    <div class="home-hero-band__lead home-hero-band__lead--mobile-hide">{{ . | markdownify }}</div>
-    {{- end }}
-    {{- if gt (len $rawSocial) 0 }}
-    <nav class="home-social home-social--hero home-social--on-dark home-hero-band__social--mobile-hide" aria-label="Mạng xã hội">
-      <ul class="home-social__list">
-        {{- range $rawSocial }}
-        <li>
-          {{- if .url }}
-          <a class="home-social__link" href="{{ .url }}" target="_blank" rel="noopener noreferrer" title="{{ .name }}" aria-label="{{ .name }}">
-            {{ partial "social-icon.html" . }}
-          </a>
-          {{- else }}
-          <span class="home-social__link home-social__link--placeholder" title="{{ .name }} (thêm URL trong hugo.yaml)" aria-hidden="true">{{ partial "social-icon.html" . }}</span>
-          {{- end }}
-        </li>
-        {{- end }}
-      </ul>
-    </nav>
+    <h1 class="home-landing__title">{{ .Title }}</h1>
+
+    {{- if .Description }}
+    <p class="home-landing__subtitle">{{ .Description }}</p>
+    {{- else if $heroLead }}
+    <div class="home-landing__subtitle">{{ $heroLead | markdownify }}</div>
     {{- end }}
 
-    <div class="home-newsletter home-newsletter--pill home-newsletter--mobile-hide">
-      <h2 class="visually-hidden">{{ default "Đăng ký nhận bài qua email" $home.newsletter_heading }}</h2>
-      <div class="home-newsletter__pill" role="group" aria-label="Đăng ký newsletter"
-        data-subscribe-url="{{ $newsletterSubscribeURL }}" data-subscribe-format="{{ $newsletterSubscribeFormat }}">
-        <label class="visually-hidden" for="home-nl-email">Email</label>
-        <input id="home-nl-email" class="home-newsletter__input" type="email" name="email" autocomplete="email" placeholder="{{ $nlPlaceholder }}">
-        <button type="button" class="home-newsletter__btn">Đăng ký</button>
+    <div class="home-landing__cta">
+      <div class="home-newsletter home-newsletter--pill">
+        <h2 class="visually-hidden">{{ default "Đăng ký nhận bài qua email" $home.newsletter_heading }}</h2>
+        <div class="home-newsletter__pill" role="group" aria-label="Đăng ký newsletter"
+          data-subscribe-url="{{ $newsletterSubscribeURL }}" data-subscribe-format="{{ $newsletterSubscribeFormat }}">
+          <label class="visually-hidden" for="home-nl-email">Email</label>
+          <input id="home-nl-email" class="home-newsletter__input" type="email" name="email" autocomplete="email" placeholder="{{ $nlPlaceholder }}">
+          <button type="button" class="home-newsletter__btn">Đăng ký</button>
+        </div>
+        <p class="home-newsletter__status visually-hidden" aria-live="polite"></p>
       </div>
-      <p class="home-newsletter__status visually-hidden" aria-live="polite"></p>
     </div>
   </div>
 </section>
-
-{{- if or $heroLead (gt (len $rawSocial) 0) }}
-<section class="home-hero-below-summary" aria-label="Giới thiệu">
-  <div class="home-hero-below-summary__inner">
-    {{- with $heroLead }}
-    <div class="home-hero-band__lead">{{ . | markdownify }}</div>
-    {{- end }}
-    {{- if gt (len $rawSocial) 0 }}
-    <nav class="home-social home-social--hero home-social--on-dark" aria-label="Mạng xã hội">
-      <ul class="home-social__list">
-        {{- range $rawSocial }}
-        <li>
-          {{- if .url }}
-          <a class="home-social__link" href="{{ .url }}" target="_blank" rel="noopener noreferrer" title="{{ .name }}" aria-label="{{ .name }}">
-            {{ partial "social-icon.html" . }}
-          </a>
-          {{- else }}
-          <span class="home-social__link home-social__link--placeholder" title="{{ .name }} (thêm URL trong hugo.yaml)" aria-hidden="true">{{ partial "social-icon.html" . }}</span>
-          {{- end }}
-        </li>
-        {{- end }}
-      </ul>
-    </nav>
-    {{- end }}
-
-    <div class="home-newsletter home-newsletter--pill home-newsletter--mobile-show">
-      <h2 class="visually-hidden">{{ default "Đăng ký nhận bài qua email" $home.newsletter_heading }}</h2>
-      <div class="home-newsletter__pill" role="group" aria-label="Đăng ký newsletter"
-        data-subscribe-url="{{ $newsletterSubscribeURL }}" data-subscribe-format="{{ $newsletterSubscribeFormat }}">
-        <label class="visually-hidden" for="home-nl-email-mobile">Email</label>
-        <input id="home-nl-email-mobile" class="home-newsletter__input" type="email" name="email" autocomplete="email" placeholder="{{ $nlPlaceholder }}">
-        <button type="button" class="home-newsletter__btn">Đăng ký</button>
-      </div>
-      <p class="home-newsletter__status visually-hidden" aria-live="polite"></p>
-    </div>
-  </div>
-</section>
-{{- end }}
 
 <div class="home-below-hero">
-<section class="home-posts" aria-labelledby="home-posts-heading">
-  <h2 id="home-posts-heading" class="home-posts__h">{{ default "Bài viết" $home.posts_heading }}</h2>
-  {{- if $posts }}
-  <ul class="index-posts">
-    {{- range $posts }}
-    <li class="index-posts__row">
-      <time class="index-posts__date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>
-      <a class="index-posts__title" href="{{ .Permalink }}">{{ .Title }}</a>
-      {{- if .Draft }}<span class="draft-pill">draft</span>{{ end }}
-      {{- with .Description }}<span class="index-posts__desc">{{ . }}</span>{{ end }}
-    </li>
-    {{- end }}
-  </ul>
-  <p class="index-posts__more"><a href="{{ absURL "/posts/" }}">Xem tất cả bài</a></p>
-  {{- else }}
-  <p class="home-posts__empty">Chưa có bài nào. Viết trong <code>content/posts/</code> hoặc qua <a href="{{ absURL "/admin/" }}">Admin</a>.</p>
-  {{- end }}
-</section>
-
 {{- with .Content }}
 <section class="block home-below-hero__block">
   <div class="prose">{{ . }}</div>
