@@ -22,9 +22,9 @@
   {{- else if .Description -}}
     {{- $pageDesc = .Description -}}
   {{- else if and (eq .Kind "page") (eq .Section "posts") -}}
-    {{- $pageDesc = .Summary | plainify | strings.TrimSpace -}}
+    {{- $pageDesc = .Summary | plainify -}}
     {{- if or (not $pageDesc) (lt (len $pageDesc) 50) -}}
-      {{- $pageDesc = .Plain | plainify | strings.TrimSpace | truncate 300 -}}
+      {{- $pageDesc = .Plain | plainify | truncate 300 -}}
     {{- end -}}
   {{- else if eq .Kind "term" -}}
     {{- if eq .Data.Singular "category" -}}
@@ -37,7 +37,7 @@
   {{- else -}}
     {{- $pageDesc = printf "%s — %s." .Title site.Title -}}
   {{- end -}}
-  {{- $pageDesc = $pageDesc | plainify | strings.TrimSpace | truncate 160 -}}
+  {{- $pageDesc = $pageDesc | plainify | truncate 160 -}}
   <meta name="description" content="{{ $pageDesc }}">
   {{- $ogUrl := .Permalink -}}
   {{- $ogImageUrl := "" -}}
@@ -94,7 +94,7 @@
       {{- $sameAs = $sameAs | append .url -}}
     {{- end -}}
   {{- end }}
-  {{- $personDesc := site.Params.description | plainify | strings.TrimSpace | truncate 320 -}}
+  {{- $personDesc := site.Params.description | plainify | truncate 320 -}}
   <script type="application/ld+json">
     {{- $person := dict "@context" "https://schema.org" "@type" "Person" "name" $personName "jobTitle" "CEO & Founder" "description" $personDesc "worksFor" $worksFor "url" (absURL "/") "sameAs" $sameAs -}}
     {{- $person | jsonify | safeJS }}
@@ -102,7 +102,7 @@
 
   {{- if .IsHome }}
   <script type="application/ld+json">
-    {{- $webDesc := site.Params.seo.home_description | default site.Params.description | plainify | strings.TrimSpace | truncate 320 -}}
+    {{- $webDesc := site.Params.seo.home_description | default site.Params.description | plainify | truncate 320 -}}
     {{- $website := dict "@context" "https://schema.org" "@type" "WebSite" "name" site.Title "url" (absURL "/") "description" $webDesc "inLanguage" "vi" -}}
     {{- $website | jsonify | safeJS }}
   </script>
@@ -111,7 +111,7 @@
   {{- if and (eq .Kind "page") (eq .Section "posts") }}
   {{- $pubLogo := absURL "/favicon-k.svg" -}}
   {{- $publisher := dict "@type" "Organization" "name" $publisherName "url" $orgURL "logo" (dict "@type" "ImageObject" "url" $pubLogo) -}}
-  {{- $articleDesc := $pageDesc | plainify | strings.TrimSpace | truncate 320 -}}
+  {{- $articleDesc := $pageDesc | plainify | truncate 320 -}}
   {{- $articleImage := "" -}}
   {{- if $ogImageUrl }}{{ $articleImage = absURL $ogImageUrl }}{{ end }}
   <script type="application/ld+json">
