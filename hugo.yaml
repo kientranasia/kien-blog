@@ -112,6 +112,18 @@ menu:
     - name: Happiness
       url: /categories/happy/
       weight: 30
+    - name: Services
+      url: /services/
+      weight: 40
+    - name: Cases
+      url: /cases/
+      weight: 50
+    - name: About
+      url: /about/
+      weight: 60
+    - name: Contact
+      url: /contact/
+      weight: 70
 
 permalinks:
   posts: /posts/:slug/
@@ -123,7 +135,7 @@ taxonomies:
 markup:
   goldmark:
     renderer:
-      unsafe: false
+      unsafe: true
     parser:
       attribute:
         block: true

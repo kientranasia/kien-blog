@@ -1,15 +1,26 @@
 ---
-title: "About Me"
-description: "CEO & Founder TRANDAO — giải pháp AI, tự động hóa và tư duy vận hành tinh gọn."
+title: "Về Kiên Trần Trung"
+description: "Founder Athsent. AI builder từ Cà Mau – Consulting cho doanh nghiệp Việt."
 slug: about
 ---
+# Về tôi
 
-Kiên Trần là **CEO & Founder** của [TRANDAO](https://trandao.vn), một đơn vị tập trung xây dựng các giải pháp AI và tự động hóa cho doanh nghiệp.
+**Kiên Trần Trung (Kenny)**, Cà Mau.
 
-Anh bắt đầu sự nghiệp với vai trò **Solution Consultant** và **Presales**, làm việc trực tiếp với các bài toán phức tạp trong các ngành như xây dựng, sản xuất và logistics. Qua đó, anh nhận ra rằng phần lớn doanh nghiệp không thiếu công nghệ, mà thiếu cách áp dụng công nghệ đúng vào vận hành.
+## Expertise
+- **AI Video Analytics** (construction safety).
+- **Workflow Automation** (N8N/Zapier/FB Graph API).
+- **Web/App dev** (React/Hugo/WordPress).
 
-Hiện tại, Kiên tập trung vào việc thiết kế và triển khai **AI Agents** cùng **workflow automation**, giúp doanh nghiệp giảm phụ thuộc vào con người, tối ưu quy trình và mở rộng một cách bền vững.
+## Projects
+- **Athsent**: Edge AI safety platform.
+- **CaMauConnect**: Local biz directory + QR automation.
+- **Ca Mau Business Club**: Community SaaS.
 
-Bên cạnh công việc chính, anh xây dựng blog như một không gian chia sẻ. Những gì được viết ở đây không phải lý thuyết, mà là kinh nghiệm thực chiến, những bài học từ dự án, và góc nhìn về cách AI có thể thay đổi cách doanh nghiệp vận hành.
+## Triết lý
+**Local-first AI**: giúp SMEs tỉnh lẻ (Cà Mau/ĐBSCL) cạnh tranh với HN/SG bằng automation giá rẻ, deploy nhanh.
 
-Mục tiêu của anh rất đơn giản. Giúp doanh nghiệp vận hành tinh gọn hơn. Quyết định nhanh hơn. Và phát triển dựa trên hệ thống, không chỉ dựa vào con người.
+## Đã làm với
+Construction firms, seafood exporters, local startups.
+
+[Work with me](/services/) | [Essays cũ](/categories/essays/)
