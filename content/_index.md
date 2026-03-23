@@ -1,7 +1,6 @@
 ---
 title: "Kiên Trần Trung – AI & Workflow Automation"
 description: "Consulting, Integration, Implement cho doanh nghiệp Việt. Từ Cà Mau đến toàn quốc."
-menu: main
 ---
 # AI Workflow Automation cho Doanh nghiệp Việt
 
