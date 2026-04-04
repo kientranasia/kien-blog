@@ -1,11 +1,12 @@
-{{- /* Mô tả danh sách: ưu tiên description, không có thì rút từ Summary hoặc Plain */ -}}
+{{- /* Mô tả danh sách: ưu tiên description, không có thì rút từ Summary hoặc Plain.
+     Dùng replaceRE thay strings.TrimSpace — Hugo 0.92 (Ubuntu) chưa có strings.TrimSpace. */ -}}
 {{- $d := "" -}}
 {{- if .Description -}}
-  {{- $d = .Description -}}
+  {{- $d = .Description | replaceRE "^\\s+|\\s+$" "" -}}
 {{- else if .Summary -}}
-  {{- $d = .Summary | plainify | strings.TrimSpace -}}
+  {{- $d = .Summary | plainify | replaceRE "^\\s+|\\s+$" "" -}}
 {{- else -}}
-  {{- $d = .Plain | plainify | truncate 200 -}}
+  {{- $d = .Plain | plainify | truncate 200 | replaceRE "^\\s+|\\s+$" "" -}}
 {{- end -}}
 {{- with $d -}}
 <span class="index-posts__desc">{{ . }}</span>
