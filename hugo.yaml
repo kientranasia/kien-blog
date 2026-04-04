@@ -48,6 +48,7 @@ params:
       url: "https://instagram.com/kientranasia"
 
   home_recent_limit: 10
+  home_category_limit: 8
   related_limit: 5
   footer:
     trandao_name: "TRANDAO INVESTMENT"
@@ -122,18 +123,6 @@ menu:
       url: /categories/happy/
       weight: 30
       parent: blogs
-    - name: Services
-      url: /services/
-      weight: 40
-    - name: Cases
-      url: /cases/
-      weight: 50
-    - name: About
-      url: /about/
-      weight: 60
-    - name: Contact
-      url: /contact/
-      weight: 70
 
 permalinks:
   posts: /posts/:slug/
