@@ -187,12 +187,6 @@
     <div class="wrap {{ $wrapClass }} footer__inner">
       <p class="footer__line">
         <span>{{ replace site.Copyright "{year}" (now.Format "2006") | safeHTML }}</span>
-        {{- with site.Params.footer }}
-        {{- if and .trandao_url .trandao_name }}
-        <span class="footer__sep" aria-hidden="true"> · </span>
-        <a class="footer__link link-external" href="{{ .trandao_url }}" target="_blank" rel="noopener noreferrer">{{ .trandao_name }}</a>
-        {{- end }}
-        {{- end }}
       </p>
 
       {{- $rawSocial := site.Params.social | default slice -}}

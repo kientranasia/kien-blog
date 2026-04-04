@@ -94,7 +94,7 @@
       <time class="index-posts__date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>
       <a class="index-posts__title" href="{{ .Permalink }}">{{ .Title }}</a>
       {{- if .Draft }}<span class="draft-pill">draft</span>{{ end }}
-      {{- with .Description }}<span class="index-posts__desc">{{ . }}</span>{{ end }}
+      {{ partial "post-list-desc.html" . }}
     </li>
     {{- end }}
   </ul>
@@ -105,17 +105,18 @@
 </section>
 
 {{- range $pillars }}
-{{- $pname := .name }}
 {{- $pslug := .slug }}
 {{- $phint := .hint | default "" }}
-{{- $catPosts := first $pillarLimit (where $allPosts "Params.categories" "intersect" (slice $pname)).ByDate.Reverse }}
+{{- $match := .category | default .name }}
+{{- $catURL := absURL (printf "/categories/%s/" $pslug) }}
+{{- $catPosts := first $pillarLimit (where $allPosts "Params.categories" "intersect" (slice $match)).ByDate.Reverse }}
 <section class="home-blog-pillar" aria-labelledby="pillar-{{ $pslug }}">
   <div class="home-blog-pillar__head">
     <div>
-      <h2 id="pillar-{{ $pslug }}" class="home-blog-pillar__title">{{ $pname }}</h2>
+      <h2 id="pillar-{{ $pslug }}" class="home-blog-pillar__title">{{ .name }}</h2>
       {{- if $phint }}<p class="home-blog-pillar__hint">{{ $phint }}</p>{{ end }}
     </div>
-    <a class="home-blog-pillar__all" href="{{ absURL (printf "/categories/%s/" $pslug) }}">Danh mục →</a>
+    <a class="home-blog-pillar__all" href="{{ $catURL }}">Xem thêm</a>
   </div>
   {{- if gt (len $catPosts) 0 }}
   <ul class="index-posts">
@@ -124,10 +125,11 @@
       <time class="index-posts__date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>
       <a class="index-posts__title" href="{{ .Permalink }}">{{ .Title }}</a>
       {{- if .Draft }}<span class="draft-pill">draft</span>{{ end }}
-      {{- with .Description }}<span class="index-posts__desc">{{ . }}</span>{{ end }}
+      {{ partial "post-list-desc.html" . }}
     </li>
     {{- end }}
   </ul>
+  <p class="index-posts__more"><a href="{{ $catURL }}">Xem thêm →</a></p>
   {{- else }}
   <p class="home-posts__empty">Chưa có bài trong danh mục này.</p>
   {{- end }}

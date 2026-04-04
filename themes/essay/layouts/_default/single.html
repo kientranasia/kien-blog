@@ -32,6 +32,7 @@
         {{- end }}
         {{- end }}
       </p>
+      {{ partial "post-tts.html" . }}
       {{- with .Description }}<p class="essay__lede">{{ . }}</p>{{ end }}
     </header>
     <div class="essay__body">
@@ -135,6 +136,174 @@
             btn.disabled = false;
           });
       });
+    })();
+  </script>
+  <script>
+    (function () {
+      var root = document.querySelector('[data-tts-root]');
+      var fallback = document.querySelector('[data-tts-fallback]');
+      if (!root || !('speechSynthesis' in window)) {
+        if (fallback) {
+          fallback.hidden = false;
+          fallback.classList.remove('visually-hidden');
+        }
+        return;
+      }
+      root.hidden = false;
+
+      var article = document.querySelector('article.essay');
+      if (!article) return;
+
+      var btnPlay = root.querySelector('[data-tts-action="play"]');
+      var btnPause = root.querySelector('[data-tts-action="pause"]');
+      var btnStop = root.querySelector('[data-tts-action="stop"]');
+      if (!btnPlay || !btnPause || !btnStop) return;
+
+      var chunks = [];
+      var chunkIndex = 0;
+      var state = 'idle';
+
+      function siteLang() {
+        var l = (document.documentElement.getAttribute('lang') || 'vi').toLowerCase();
+        return l.indexOf('en') === 0 ? 'en' : 'vi';
+      }
+
+      function pickVoice(utterance) {
+        var primary = siteLang();
+        var voices = speechSynthesis.getVoices();
+        if (!voices || !voices.length) return;
+        var i;
+        var v;
+        for (i = 0; i < voices.length; i++) {
+          var lang = (voices[i].lang || '').toLowerCase();
+          if (primary === 'vi' && lang.indexOf('vi') === 0) {
+            v = voices[i];
+            break;
+          }
+          if (primary === 'en' && lang.indexOf('en') === 0) {
+            v = voices[i];
+            break;
+          }
+        }
+        if (!v) {
+          for (i = 0; i < voices.length; i++) {
+            if ((voices[i].lang || '').toLowerCase().indexOf('en') === 0) {
+              v = voices[i];
+              break;
+            }
+          }
+        }
+        if (!v) v = voices[0];
+        utterance.voice = v;
+        utterance.lang = primary === 'en' ? 'en-US' : 'vi-VN';
+      }
+
+      function extractText() {
+        var el = article.cloneNode(true);
+        el.querySelectorAll('.essay-tts, script, style, .visually-hidden').forEach(function (n) {
+          n.remove();
+        });
+        var t = (el.innerText || '').replace(/\s+/g, ' ').trim();
+        return t;
+      }
+
+      function splitChunks(text, maxLen) {
+        var out = [];
+        var rest = text;
+        maxLen = maxLen || 220;
+        while (rest.length > maxLen) {
+          var cut = rest.lastIndexOf(' ', maxLen);
+          if (cut < 40) cut = maxLen;
+          out.push(rest.slice(0, cut).trim());
+          rest = rest.slice(cut).trim();
+        }
+        if (rest) out.push(rest);
+        return out.filter(Boolean);
+      }
+
+      function setButtons() {
+        if (state === 'idle') {
+          btnPlay.hidden = false;
+          btnPlay.textContent = 'Nghe';
+          btnPause.hidden = true;
+          btnStop.hidden = true;
+        } else if (state === 'playing') {
+          btnPlay.hidden = true;
+          btnPause.hidden = false;
+          btnPause.textContent = 'Tạm dừng';
+          btnStop.hidden = false;
+        } else if (state === 'paused') {
+          btnPlay.hidden = false;
+          btnPlay.textContent = 'Tiếp tục';
+          btnPause.hidden = true;
+          btnStop.hidden = false;
+        }
+      }
+
+      function speakNext() {
+        if (chunkIndex >= chunks.length) {
+          state = 'idle';
+          chunkIndex = 0;
+          setButtons();
+          return;
+        }
+        var u = new SpeechSynthesisUtterance(chunks[chunkIndex]);
+        chunkIndex++;
+        pickVoice(u);
+        u.onend = function () {
+          speakNext();
+        };
+        u.onerror = function () {
+          state = 'idle';
+          chunkIndex = 0;
+          setButtons();
+        };
+        speechSynthesis.speak(u);
+      }
+
+      function startFresh() {
+        var text = extractText();
+        if (!text) return;
+        speechSynthesis.cancel();
+        chunks = splitChunks(text);
+        chunkIndex = 0;
+        state = 'playing';
+        setButtons();
+        speakNext();
+      }
+
+      btnPlay.addEventListener('click', function () {
+        if (state === 'paused') {
+          speechSynthesis.resume();
+          state = 'playing';
+          setButtons();
+          return;
+        }
+        startFresh();
+      });
+
+      btnPause.addEventListener('click', function () {
+        if (state !== 'playing') return;
+        speechSynthesis.pause();
+        state = 'paused';
+        setButtons();
+      });
+
+      btnStop.addEventListener('click', function () {
+        speechSynthesis.cancel();
+        state = 'idle';
+        chunkIndex = 0;
+        setButtons();
+      });
+
+      function loadVoices() {
+        speechSynthesis.getVoices();
+      }
+      if (speechSynthesis.onvoiceschanged !== undefined) {
+        speechSynthesis.onvoiceschanged = loadVoices;
+      }
+      loadVoices();
+      setButtons();
     })();
   </script>
   {{- else }}

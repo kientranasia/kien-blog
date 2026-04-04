@@ -1957,6 +1957,77 @@ a:focus-visible {
   margin: 0 0 1rem;
 }
 
+/* Text-to-speech (Web Speech API) */
+.essay-tts {
+  margin: 0 0 1rem;
+  padding: 0.65rem 0 1rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.essay-tts__label {
+  display: block;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.5rem;
+}
+
+.essay-tts__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.essay-tts__btn {
+  font-family: inherit;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  padding: 0.4rem 0.85rem;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--fg);
+  cursor: pointer;
+  line-height: 1.2;
+}
+
+.essay-tts__btn:hover {
+  border-color: var(--muted);
+  color: var(--fg);
+}
+
+.essay-tts__btn--primary {
+  background: var(--fg);
+  color: var(--bg);
+  border-color: var(--fg);
+}
+
+.essay-tts__btn--primary:hover {
+  opacity: 0.92;
+}
+
+.essay-tts__btn--ghost {
+  font-weight: 500;
+  background: transparent;
+}
+
+.essay-tts__note {
+  margin: 0.65rem 0 0;
+  font-size: 0.75rem;
+  line-height: 1.45;
+  color: var(--muted);
+  max-width: 40rem;
+}
+
+.essay-tts__unsupported {
+  font-size: 0.8125rem;
+  color: var(--muted);
+  margin: 0 0 1rem;
+}
+
 .essay__lede {
   font-size: 0.9375rem;
   color: var(--muted);

@@ -20,7 +20,7 @@
       <time class="index-posts__date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>
       <a class="index-posts__title" href="{{ .Permalink }}">{{ .Title }}</a>
       {{- if .Draft }}<span class="draft-pill">draft</span>{{ end }}
-      {{- with .Description }}<span class="index-posts__desc">{{ . }}</span>{{ end }}
+      {{ partial "post-list-desc.html" . }}
     </li>
     {{- end }}
   </ul>

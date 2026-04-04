@@ -1,0 +1,12 @@
+{{- /* Mô tả danh sách: ưu tiên description, không có thì rút từ Summary hoặc Plain */ -}}
+{{- $d := "" -}}
+{{- if .Description -}}
+  {{- $d = .Description -}}
+{{- else if .Summary -}}
+  {{- $d = .Summary | plainify | strings.TrimSpace -}}
+{{- else -}}
+  {{- $d = .Plain | plainify | truncate 200 -}}
+{{- end -}}
+{{- with $d -}}
+<span class="index-posts__desc">{{ . }}</span>
+{{- end -}}

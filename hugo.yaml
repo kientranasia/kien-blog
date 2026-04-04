@@ -48,8 +48,10 @@ params:
       url: "https://instagram.com/kientranasia"
 
   home_recent_limit: 10
-  home_category_limit: 8
+  home_category_limit: 5
   related_limit: 5
+  # Bật nút “Đọc bài” (Text-to-Speech) trên mỗi bài posts. Tắt: false. Từng bài: front matter `tts: false`.
+  post_tts: true
   footer:
     trandao_name: "TRANDAO INVESTMENT"
     trandao_url: "https://trandao.vn"
@@ -100,6 +102,8 @@ params:
       hint: "Bài viết theo chiều sâu: quan sát, học hệ thống, và triết lý vận hành."
     - name: Happiness
       slug: happy
+      # Khớp giá trị trong front matter categories: (Happy), không dùng "Happiness"
+      category: Happy
       hint: "Đủ đầy, chơi, niềm vui nhỏ, bền vững cảm xúc."
 
 menu:
@@ -174,4 +178,4 @@ services:
   rss:
     limit: 50
 
-copyright: "© {year} Kiên Trần"
+copyright: "© {year} Kiên Trần CEO @ TRANDAO"
