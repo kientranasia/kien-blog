@@ -2112,6 +2112,14 @@ html[data-theme="dark"] .home-social__link:hover {
   line-height: 1.85;
 }
 
+.prose img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.85rem;
+  margin: 1.5rem 0;
+  display: block;
+}
+
 .prose ul,
 .prose ol {
   margin: 0 0 1em;

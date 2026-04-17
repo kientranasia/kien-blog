@@ -29,7 +29,10 @@
             h('span', {}, '📺 Video YouTube: ' + videoUrl)
           ) : (imageSrc ? h('img', { src: imageSrc, style: { width: '100%', borderRadius: '12px', marginBottom: '20px', maxHeight: '300px', objectFit: 'cover' } }) : null),
           
-          h('div', { className: 'prose' }, body)
+          h('div', { className: 'prose' }, 
+            h('style', {}, '.prose img { max-width: 100%; height: auto; border-radius: 8px; margin: 10px 0; }'),
+            body
+          )
         );
       }
     });
