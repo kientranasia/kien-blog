@@ -143,17 +143,6 @@
 </head>
 
 <body class="body--home">
-  <script>
-    (function () {
-      var root = document.documentElement;
-      function applyTheme(theme) {
-        root.setAttribute('data-theme', theme);
-        localStorage.setItem('siteTheme', theme);
-      }
-      var saved = localStorage.getItem('siteTheme') || 'light';
-      applyTheme(saved);
-    })();
-  </script>
   {{- $pillars := site.Params.pillars | default slice }}
   {{- $home := site.Params.home | default dict }}
   {{- $profile := site.Params.profile | default dict }}

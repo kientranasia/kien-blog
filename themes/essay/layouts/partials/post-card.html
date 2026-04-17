@@ -9,7 +9,8 @@
     <div class="social-feed-post__top-meta">
       <time class="social-feed-post__time" datetime="{{ $page.Date.Format "2006-01-02" }}">{{ $page.Date.Format "02 Jan 2006" }}</time>
     </div>
-    <!-- Media Section (YouTube Only) -->
+
+    <!-- Media Section -->
     {{- if $videoUrl }}
       <div class="social-feed-post__video">
         {{- $ytId := "" -}}
@@ -22,17 +23,17 @@
         {{- if $ytId }}
           <iframe src="https://www.youtube.com/embed/{{ $ytId }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
         {{- else }}
-          <!-- Fallback to featured image if link is invalid or not YouTube -->
           {{- if $postImg }}
           <a class="social-feed-post__image-link" href="{{ $page.RelPermalink }}">
-            <div class="social-feed-post__image" style="background-image: url('{{ $postImg }}');"></div>
+            <img src="{{ $postImg }}" alt="{{ $page.Title }}" class="social-feed-post__img" loading="lazy">
           </a>
           {{- end }}
         {{- end }}
       </div>
     {{- else if $images }}
-      <!-- Collage Style Gallery -->
-      <div class="social-feed-post__gallery social-gallery--{{ len $images }}">
+      <!-- Gallery Grid -->
+      {{- $count := len $images -}}
+      <div class="social-feed-post__gallery social-gallery--{{ if gt $count 4 }}many{{ else }}{{ $count }}{{ end }}">
         {{- range $images }}
         <div class="social-gallery__item">
           <img src="{{ relURL . }}" alt="Post image" loading="lazy">
@@ -41,7 +42,7 @@
       </div>
     {{- else if $postImg }}
       <a class="social-feed-post__image-link" href="{{ $page.RelPermalink }}">
-        <div class="social-feed-post__image" style="background-image: url('{{ $postImg }}');"></div>
+        <img src="{{ $postImg }}" alt="{{ $page.Title }}" class="social-feed-post__img" loading="lazy">
       </a>
     {{- end }}
 
