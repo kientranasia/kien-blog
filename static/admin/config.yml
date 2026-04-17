@@ -40,12 +40,14 @@ collections:
     slug: "{{slug}}"
     fields:
       - { label: Title, name: title, widget: string }
+      - { label: "Slug (Tùy chỉnh URL)", name: slug, widget: string, required: false, hint: "Ví dụ: 'con-nguoi-va-ai' - Để trống nếu muốn dùng mặc định." }
       - { label: Publish date, name: date, widget: datetime }
-      - { label: Video URL (YouTube), name: video_url, widget: string, required: false, hint: "Link YouTube để hiển thị video thay cho ảnh." }
-      - { label: Images Gallery, name: images, widget: list, field: { label: Image, name: image, widget: image }, required: false, hint: "Danh sách ảnh để tạo lưới ảnh (Collage)." }
+      - { label: "Feature Image (Ảnh đại diện)", name: featured_image, widget: image, required: false, hint: "Ảnh chính hiển thị ở đầu bài viết." }
+      - { label: "Video URL (YouTube)", name: video_url, widget: string, required: false, hint: "Dán link YouTube (ví dụ: https://www.youtube.com/watch?v=...) để hiển thị video." }
+      - { label: "Images Gallery (Bộ sưu tập)", name: images, widget: list, field: { label: Image, name: image, widget: image }, required: false, hint: "Nhiều ảnh để tạo lưới Collage (chỉ hiện nếu không có Video)." }
       - { label: Draft, name: draft, widget: boolean, default: true }
-      - { label: Description, name: description, widget: string, required: false }
-      - { label: Categories, name: categories, widget: list, required: false, hint: "Primary pillar: Startup, Essays, Happy (one list item)." }
+      - { label: Description, name: description, widget: string, required: false, hint: "Mô tả ngắn cho SEO và mạng xã hội." }
+      - { label: Categories, name: categories, widget: list, required: false, hint: "Cột trụ chính: Startup, Essays, Happy." }
       - { label: Tags, name: tags, widget: list, required: false }
       - { label: Body, name: body, widget: markdown }
 
