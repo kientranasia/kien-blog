@@ -1,5 +1,55 @@
 {{ define "main" }}
+{{- $images := .Params.images -}}
+{{- $featuredImg := partial "post-feature-image.html" (dict "page" .) -}}
+{{- $videoUrl := .Params.video_url -}}
+
 <div class="layout-main-inner wrap-page {{ if eq .Section "posts" }}layout-main-inner--post{{ end }}">
+
+  {{ if eq .Section "posts" }}
+
+  {{- /* === Gallery Slider (multiple images) === */}}
+  {{- if and $images (gt (len $images) 0) }}
+  <div class="post-slider" id="post-slider">
+    <div class="post-slider__track" id="post-slider-track">
+      {{- range $i, $img := $images }}
+      <div class="post-slider__slide{{ if eq $i 0 }} post-slider__slide--active{{ end }}">
+        <img src="{{ relURL $img }}" alt="Ảnh {{ add $i 1 }}" loading="{{ if eq $i 0 }}eager{{ else }}lazy{{ end }}">
+      </div>
+      {{- end }}
+    </div>
+    {{- if gt (len $images) 1 }}
+    <button class="post-slider__btn post-slider__btn--prev" id="slider-prev" aria-label="Ảnh trước">‹</button>
+    <button class="post-slider__btn post-slider__btn--next" id="slider-next" aria-label="Ảnh tiếp">›</button>
+    <div class="post-slider__dots" id="slider-dots">
+      {{- range $i, $img := $images }}
+      <button class="post-slider__dot{{ if eq $i 0 }} post-slider__dot--active{{ end }}" data-index="{{ $i }}" aria-label="Ảnh {{ add $i 1 }}"></button>
+      {{- end }}
+    </div>
+    <span class="post-slider__counter" id="slider-counter">1 / {{ len $images }}</span>
+    {{- end }}
+  </div>
+
+  {{- /* === Single featured image or video === */}}
+  {{- else if $videoUrl }}
+  <div class="post-hero-video">
+    {{- $ytId := "" -}}
+    {{- if (findRE `youtube\.com/watch\?v=([^&]+)` $videoUrl) -}}
+      {{- $ytId = replaceRE `.*youtube\.com/watch\?v=([^&]+).*` "$1" $videoUrl -}}
+    {{- else if (findRE `youtu\.be/([^?]+)` $videoUrl) -}}
+      {{- $ytId = replaceRE `.*youtu\.be/([^?]+).*` "$1" $videoUrl -}}
+    {{- end -}}
+    {{- if $ytId }}
+    <iframe src="https://www.youtube.com/embed/{{ $ytId }}" title="{{ .Title }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    {{- end }}
+  </div>
+  {{- else if $featuredImg }}
+  <div class="post-hero-image">
+    <img src="{{ $featuredImg }}" alt="{{ .Title }}" loading="eager">
+  </div>
+  {{- end }}
+
+  {{ end }}
+
   <article class="essay prose">
     {{ if eq .Section "posts" }}
     <header class="essay__head">
@@ -37,4 +87,47 @@
     {{ partial "related-posts.html" . }}
   {{ end }}
 </div>
+
+{{- if and .Params.images (gt (len .Params.images) 1) }}
+<script>
+(function() {
+  var track = document.getElementById('post-slider-track');
+  var dots = document.querySelectorAll('#slider-dots .post-slider__dot');
+  var counter = document.getElementById('slider-counter');
+  var slides = document.querySelectorAll('#post-slider .post-slider__slide');
+  var total = slides.length;
+  var current = 0;
+
+  function goTo(n) {
+    slides[current].classList.remove('post-slider__slide--active');
+    dots[current].classList.remove('post-slider__dot--active');
+    current = (n + total) % total;
+    slides[current].classList.add('post-slider__slide--active');
+    dots[current].classList.add('post-slider__dot--active');
+    if (counter) counter.textContent = (current + 1) + ' / ' + total;
+  }
+
+  var prevBtn = document.getElementById('slider-prev');
+  var nextBtn = document.getElementById('slider-next');
+  if (prevBtn) prevBtn.addEventListener('click', function() { goTo(current - 1); });
+  if (nextBtn) nextBtn.addEventListener('click', function() { goTo(current + 1); });
+
+  dots.forEach(function(dot, i) {
+    dot.addEventListener('click', function() { goTo(i); });
+  });
+
+  // Touch/swipe support
+  var startX = 0;
+  var slider = document.getElementById('post-slider');
+  if (slider) {
+    slider.addEventListener('touchstart', function(e) { startX = e.touches[0].clientX; }, { passive: true });
+    slider.addEventListener('touchend', function(e) {
+      var diff = startX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 40) goTo(diff > 0 ? current + 1 : current - 1);
+    }, { passive: true });
+  }
+})();
+</script>
+{{- end }}
 {{ end }}
+

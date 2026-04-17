@@ -2059,6 +2059,149 @@ html[data-theme="dark"] .home-social__link:hover {
   line-height: 1.88;
 }
 
+/* ===== Post Hero: single featured image ===== */
+.post-hero-image {
+  margin-bottom: 2rem;
+  border-radius: 1.25rem;
+  overflow: hidden;
+  background: #f1f3f4;
+}
+
+.post-hero-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ===== Post Hero: video ===== */
+.post-hero-video {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%;
+  border-radius: 1.25rem;
+  overflow: hidden;
+  background: #000;
+  margin-bottom: 2rem;
+  box-shadow: 0 12px 32px rgba(0,0,0,0.12);
+}
+
+.post-hero-video iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* ===== Post Slider / Gallery Carousel ===== */
+.post-slider {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1.25rem;
+  background: #0a0a0a;
+  margin-bottom: 2rem;
+  user-select: none;
+  /* Limit max height while preserving image ratio */
+  max-height: 600px;
+}
+
+.post-slider__track {
+  position: relative;
+}
+
+.post-slider__slide {
+  display: none;
+}
+
+.post-slider__slide--active {
+  display: block;
+}
+
+.post-slider__slide img {
+  width: 100%;
+  height: auto;
+  max-height: 600px;
+  object-fit: contain;
+  display: block;
+  border-radius: 1.25rem;
+}
+
+/* Prev / Next buttons */
+.post-slider__btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  appearance: none;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(6px);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 2.75rem;
+  height: 2.75rem;
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.post-slider__btn:hover {
+  background: rgba(0, 0, 0, 0.7);
+  transform: translateY(-50%) scale(1.08);
+}
+
+.post-slider__btn--prev { left: 0.85rem; }
+.post-slider__btn--next { right: 0.85rem; }
+
+/* Dot indicators */
+.post-slider__dots {
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.45rem;
+  z-index: 10;
+}
+
+.post-slider__dot {
+  appearance: none;
+  border: none;
+  background: rgba(255, 255, 255, 0.45);
+  border-radius: 50%;
+  width: 0.55rem;
+  height: 0.55rem;
+  padding: 0;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.post-slider__dot--active {
+  background: #fff;
+  transform: scale(1.25);
+}
+
+/* Counter badge */
+.post-slider__counter {
+  position: absolute;
+  top: 0.85rem;
+  right: 0.85rem;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.2rem 0.65rem;
+  border-radius: 999px;
+  z-index: 10;
+  font-family: "Manrope", sans-serif;
+  letter-spacing: 0.04em;
+}
+
 .index-posts__more a {
   font-weight: 600;
 }
