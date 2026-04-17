@@ -178,6 +178,8 @@
   {{- $youtubeEmbedURL = printf "https://www.youtube.com/embed/videoseries?list=%s" $youtubeUploadsID }}
   {{- end }}
 
+  <div id="reading-progress" class="reading-progress"></div>
+
   <header class="site-header">
     <div class="wrap site-header__inner">
       <button type="button" class="site-header__burger" id="mobile-burger" aria-label="Menu">
@@ -544,9 +546,15 @@
         // Close mobile drawer if open
         closeMobileMenu();
 
+        // Trigger Shimmer Effect
+        document.body.classList.add('is-loading');
+
         fetch(url, { headers: { 'X-Requested-With': 'fetch' }, cache: 'no-cache' })
           .then(res => res.text())
           .then(html => {
+            // Remove Shimmer Effect
+            document.body.classList.remove('is-loading');
+
             var parser = new DOMParser();
             var doc = parser.parseFromString(html, 'text/html');
             var mainContent = doc.querySelector('#center-column-content') || doc.querySelector('.layout-main-inner') || doc.body;
@@ -567,6 +575,7 @@
                 renderTOC();
                 renderRelated(doc);
                 initGiscus();
+                initCopyButtons();
               }
 
               if (updateHistory !== false) {
@@ -672,6 +681,9 @@
           setTimeout(() => { if (!drawer.classList.contains('mobile-drawer--open')) drawer.hidden = true; }, 300);
         }
 
+              setTimeout(function() { if (!drawer.classList.contains('mobile-drawer--open')) drawer.hidden = true; }, 300);
+        }
+
         burger.addEventListener('click', openMenu);
         if (closeBtn) closeBtn.addEventListener('click', closeMobileMenu);
         if (backdrop) backdrop.addEventListener('click', closeMobileMenu);
@@ -689,7 +701,54 @@
         }
       })();
 
-      // Newsletter Logic
+      // Reading Features
+      (function() {
+        // Progress Bar
+        var progress = document.getElementById('reading-progress');
+        if (progress) {
+          window.addEventListener('scroll', function() {
+            var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            var scrolled = (winScroll / height) * 100;
+            progress.style.width = scrolled + "%";
+          }, { passive: true });
+        }
+
+        // Copy Code Buttons
+        window.initCopyButtons = function() {
+          document.querySelectorAll('.prose pre').forEach(function(codeBlock) {
+            if (codeBlock.querySelector('.copy-code-btn')) return;
+            
+            var btn = document.createElement('button');
+            btn.className = 'copy-code-btn';
+            btn.type = 'button';
+            btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"></path></svg>';
+            btn.title = 'Copy code';
+            
+            btn.addEventListener('click', function() {
+              var text = codeBlock.textContent.trim();
+              navigator.clipboard.writeText(text).then(function() {
+                var original = btn.innerHTML;
+                btn.innerHTML = '<span>OK!</span>';
+                btn.classList.add('copy-code-btn--success');
+                setTimeout(function() {
+                  btn.innerHTML = original;
+                  btn.classList.remove('copy-code-btn--success');
+                }, 2000);
+              });
+            });
+            
+            codeBlock.style.position = 'relative';
+            codeBlock.appendChild(btn);
+          });
+        };
+
+        // Run on load and after SPA navigation
+        initCopyButtons();
+        // Since navigateTo is global, we can hook it or just call init in .then
+      })();
+
+      // Newsletter Logic (Existing)
       // Chatbot Logic
       (function () {
         var chatbot = document.getElementById('chatbot');
