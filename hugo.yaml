@@ -21,10 +21,12 @@ params:
     newsletter_heading: "Nhận bài qua email"
     newsletter_placeholder: "Nhận bản tin qua email"
     # URL backend nhận POST để đăng ký newsletter.
-    # Ví dụ: "https://trandao.vn/api/newsletter/subscribe"
-    newsletter_subscribe_url: "https://auto.athsent.com/webhook/9b277322-f778-4768-ad7b-7d4b312ca052"
+    # Ví dụ: "https://formsubmit.co/ajax/kientrancm@gmail.com"
+    newsletter_subscribe_url: "https://formsubmit.co/ajax/kientrancm@gmail.com"
     # "json" hoặc "form" (application/x-www-form-urlencoded)
     newsletter_subscribe_format: "json"
+    youtube_channel_url: "https://www.youtube.com/@kientranasia"
+    youtube_channel_id: "UCpnvIYcMflly1nsJ9x6PDag"
 
   # Icon: facebook | linkedin | youtube | tiktok | instagram | zalo | github | x | mail | link
   social:
@@ -51,7 +53,7 @@ params:
   home_category_limit: 5
   related_limit: 5
   # Bật nút “Đọc bài” (Text-to-Speech) trên mỗi bài posts. Tắt: false. Từng bài: front matter `tts: false`.
-  post_tts: true
+  post_tts: false
   footer:
     trandao_name: "TRANDAO INVESTMENT"
     trandao_url: "https://trandao.vn"
@@ -74,6 +76,7 @@ params:
     Blog: startup, essays, happiness. Đọc miễn phí.
   profile:
     name: Kiên Trần
+    location: "Vietnam"
     roleLine: "Expert Consultant · CEO Athsent"
     badge: "Chuyển đổi số · BPR · Workflow Automation"
     intro: >-
@@ -166,7 +169,7 @@ sitemap:
   priority: 0.5
 
 outputs:
-  home: [HTML, RSS]
+  home: [HTML, RSS, JSON]
 
 pagination:
   pagerSize: 10

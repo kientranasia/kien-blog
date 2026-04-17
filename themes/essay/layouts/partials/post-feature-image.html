@@ -1,0 +1,30 @@
+{{- $page := .page -}}
+{{- $home := site.Params.home | default dict -}}
+{{- $candidates := slice
+  ($page.Params.featured_image | default "")
+  ($page.Params.image | default "")
+  ($page.Params.cover | default "")
+  ($page.Params.thumbnail | default "")
+-}}
+{{- $img := "" -}}
+
+{{- range $candidates }}
+  {{- if and (not $img) . }}
+    {{- $value := . -}}
+    {{- if or (hasPrefix $value "http://") (hasPrefix $value "https://") }}
+      {{- $img = $value -}}
+    {{- else }}
+      {{- with $page.Resources.GetMatch $value }}
+        {{- $img = .RelPermalink -}}
+      {{- else }}
+        {{- with resources.Get $value }}
+          {{- $img = .RelPermalink -}}
+        {{- else }}
+          {{- $img = relURL $value -}}
+        {{- end }}
+      {{- end }}
+    {{- end }}
+  {{- end }}
+{{- end }}
+
+{{- return $img -}}

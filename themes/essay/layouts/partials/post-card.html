@@ -1,0 +1,83 @@
+{{- $page := .page -}}
+{{- $isFeatured := .isFeatured | default false -}}
+{{- $videoUrl := $page.Params.video_url -}}
+{{- $images := $page.Params.images -}}
+{{- $postImg := partial "post-feature-image.html" (dict "page" $page) -}}
+
+<article class="social-feed-post {{ if $isFeatured }}social-feed-post--featured{{ end }} {{ if not (or $videoUrl $images $postImg) }}social-feed-post--text-only{{ end }}">
+  <div class="social-feed-post__body">
+    <div class="social-feed-post__top-meta">
+      <time class="social-feed-post__time" datetime="{{ $page.Date.Format "2006-01-02" }}">{{ $page.Date.Format "02 Jan 2006" }}</time>
+    </div>
+    <!-- Media Section (YouTube Only) -->
+    {{- if $videoUrl }}
+      <div class="social-feed-post__video">
+        {{- $ytId := "" -}}
+        {{- if (findRE `youtube\.com/watch\?v=([^&]+)` $videoUrl) -}}
+          {{- $ytId = index (findRESubmatch `youtube\.com/watch\?v=([^&]+)` $videoUrl) 0 1 -}}
+        {{- else if (findRE `youtu\.be/([^?]+)` $videoUrl) -}}
+          {{- $ytId = index (findRESubmatch `youtu\.be/([^?]+)` $videoUrl) 0 1 -}}
+        {{- end -}}
+        
+        {{- if $ytId }}
+          <iframe src="https://www.youtube.com/embed/{{ $ytId }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        {{- else }}
+          <!-- Fallback to featured image if link is invalid or not YouTube -->
+          {{- if $postImg }}
+          <a class="social-feed-post__image-link" href="{{ $page.RelPermalink }}">
+            <div class="social-feed-post__image" style="background-image: url('{{ $postImg }}');"></div>
+          </a>
+          {{- end }}
+        {{- end }}
+      </div>
+    {{- else if $images }}
+      <!-- Collage Style Gallery -->
+      <div class="social-feed-post__gallery social-gallery--{{ len $images }}">
+        {{- range $images }}
+        <div class="social-gallery__item">
+          <img src="{{ relURL . }}" alt="Post image" loading="lazy">
+        </div>
+        {{- end }}
+      </div>
+    {{- else if $postImg }}
+      <a class="social-feed-post__image-link" href="{{ $page.RelPermalink }}">
+        <div class="social-feed-post__image" style="background-image: url('{{ $postImg }}');"></div>
+      </a>
+    {{- end }}
+
+    <div class="social-feed-post__content">
+      {{- with $page.Params.categories }}
+      <div class="social-feed-tags">
+        {{- range . }}
+        <a class="social-feed-tag" href="{{ relURL (printf "/categories/%s/" (urlize .)) }}">{{ . }}</a>
+        {{- end }}
+      </div>
+      {{- end }}
+      
+      <h3 class="social-feed-post__title"><a href="{{ $page.RelPermalink }}">{{ $page.Title }}</a></h3>
+      
+      <div class="social-feed-post__desc prose">
+        {{- if not (or $videoUrl $images $postImg) }}
+          <!-- Text Only: Show ~25% of content or at least a generous portion -->
+          {{ $page.Summary }}
+          {{ if $page.Truncated }}
+          <p><a href="{{ $page.RelPermalink }}" class="social-feed-post__read-more">...xem thêm</a></p>
+          {{ end }}
+        {{- else }}
+          {{ $page.Summary | plainify | truncate 180 }}
+        {{- end }}
+      </div>
+
+      <div class="social-feed-post__meta">
+        <span>{{ $page.ReadingTime }} min read</span>
+        {{- with $page.Params.tags }}
+        <span class="social-feed-hashtags">
+          {{- range . }}
+          <a class="social-feed-hashtag" href="{{ relURL (printf "/tags/%s/" (urlize .)) }}">#{{ . }}</a>
+          {{- end }}
+        </span>
+        {{- end }}
+      </div>
+    </div>
+  </div>
+</article>

@@ -1,0 +1,30 @@
+{{- $taxonomy := .taxonomy | default "" -}}
+{{- $termTitle := .term | default "" -}}
+{{- $permalink := "" -}}
+
+{{- if and $taxonomy $termTitle -}}
+  {{- if eq $taxonomy "tags" -}}
+    {{- range $slug, $_ := site.Taxonomies.tags -}}
+      {{- with site.GetPage (printf "/tags/%s" $slug) -}}
+        {{- if eq .Title $termTitle -}}
+          {{- $permalink = .RelPermalink -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+  {{- else if eq $taxonomy "categories" -}}
+    {{- range $slug, $_ := site.Taxonomies.categories -}}
+      {{- with site.GetPage (printf "/categories/%s" $slug) -}}
+        {{- if eq .Title $termTitle -}}
+          {{- $permalink = .RelPermalink -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if not $permalink -}}
+  {{- $permalink = absURL (printf "/%s/%s/" $taxonomy (urlize $termTitle)) -}}
+{{- end -}}
+
+{{- return $permalink -}}
+

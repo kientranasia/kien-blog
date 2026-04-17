@@ -1,28 +1,23 @@
 {{ define "main" }}
-<div class="layout-main-inner wrap-page">
-  <header class="page-intro">
-    <p class="page-intro__crumb"><a href="{{ absURL "/" }}">Trang chủ</a> · <a href="{{ absURL "/categories/" }}">Danh mục</a></p>
-    {{- $heading := .Title -}}
-    {{- $singular := .Data.Singular | default "" -}}
-    {{- if eq $singular "category" -}}
-      {{- $termSlug := .Data.Term | urlize -}}
-      {{- range site.Params.pillars -}}
-        {{- if eq .slug $termSlug -}}
-          {{- $heading = .name -}}
-        {{- end -}}
-      {{- end -}}
+{{- $heading := .Title -}}
+{{- $singular := .Data.Singular | default "" -}}
+{{- if eq $singular "category" -}}
+  {{- $termSlug := .Data.Term | urlize -}}
+  {{- range site.Params.pillars -}}
+    {{- if eq .slug $termSlug -}}
+      {{- $heading = .name -}}
     {{- end -}}
-    <h1 class="page-intro__title">{{ $heading }}</h1>
-  </header>
-  <ul class="index-posts">
-    {{- range .Pages.ByDate.Reverse }}
-    <li class="index-posts__row">
-      <time class="index-posts__date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>
-      <a class="index-posts__title" href="{{ .Permalink }}">{{ .Title }}</a>
-      {{- if .Draft }}<span class="draft-pill">draft</span>{{ end }}
-      {{ partial "post-list-desc.html" . }}
-    </li>
-    {{- end }}
-  </ul>
+  {{- end -}}
+{{- end -}}
+<div class="taxo-page">
+
+
+  <div class="social-feed-stream">
+    <div class="social-feed-list">
+      {{- range .Pages.ByDate.Reverse }}
+        {{ partial "post-card.html" (dict "page" . "isFeatured" false) }}
+      {{- end }}
+    </div>
+  </div>
 </div>
 {{ end }}

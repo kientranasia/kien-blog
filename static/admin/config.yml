@@ -41,6 +41,8 @@ collections:
     fields:
       - { label: Title, name: title, widget: string }
       - { label: Publish date, name: date, widget: datetime }
+      - { label: Video URL (YouTube), name: video_url, widget: string, required: false, hint: "Link YouTube để hiển thị video thay cho ảnh." }
+      - { label: Images Gallery, name: images, widget: list, field: { label: Image, name: image, widget: image }, required: false, hint: "Danh sách ảnh để tạo lưới ảnh (Collage)." }
       - { label: Draft, name: draft, widget: boolean, default: true }
       - { label: Description, name: description, widget: string, required: false }
       - { label: Categories, name: categories, widget: list, required: false, hint: "Primary pillar: Startup, Essays, Happy (one list item)." }
@@ -53,6 +55,34 @@ collections:
       - label: Home
         name: home
         file: content/_index.md
+        fields:
+          - { label: Title, name: title, widget: string }
+          - { label: Description, name: description, widget: string, required: false }
+          - { label: "n8n Chatbot Webhook", name: chatbot_webhook, widget: string, required: false, hint: "Địa chỉ Webhook n8n để kết nối chatbot." }
+          - { label: Body, name: body, widget: markdown }
+      - label: Home Sidebar
+        name: home_sidebar
+        file: content/home/sidebar.md
+        fields:
+          - { label: Title, name: title, widget: string }
+          - label: Links
+            name: links
+            widget: list
+            summary: "{{fields.label}}"
+            fields:
+              - { label: Label, name: label, widget: string }
+              - { label: URL, name: url, widget: string }
+          - { label: Bio (body), name: body, widget: markdown }
+      - label: About
+        name: about
+        file: content/about.md
+        fields:
+          - { label: Title, name: title, widget: string }
+          - { label: Description, name: description, widget: string, required: false }
+          - { label: Body, name: body, widget: markdown }
+      - label: Contact
+        name: contact
+        file: content/contact.md
         fields:
           - { label: Title, name: title, widget: string }
           - { label: Description, name: description, widget: string, required: false }

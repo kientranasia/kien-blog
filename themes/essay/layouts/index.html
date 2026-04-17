@@ -1,207 +1,26 @@
 {{ define "main" }}
 {{- $postLimit := default 10 site.Params.home_recent_limit }}
-{{- $pillarLimit := default 8 site.Params.home_category_limit }}
 {{- $allPosts := where (where site.RegularPages "Section" "posts") "Draft" false }}
 {{- $posts := first $postLimit $allPosts.ByDate.Reverse }}
-{{- $pillars := site.Params.pillars | default slice }}
-{{- $home := site.Params.home | default dict }}
-{{- $heroLead := $home.hero_lead | default "" }}
-{{- $heroImgURL := "" }}
-{{- $heroW := 0 }}
-{{- $heroH := 0 }}
-{{- $heroAsset := $home.hero_image_asset | default "KienTranDao_Banner.png" }}
-{{- with resources.Get $heroAsset }}
-  {{- $heroImgURL = .RelPermalink }}
-  {{- if and .Width .Height }}
-  {{- $heroW = .Width }}
-  {{- $heroH = .Height }}
+{{- $featured := cond (gt (len $posts) 0) (index $posts 0) nil }}
+{{- $feedPosts := cond (gt (len $posts) 1) (after 1 $posts) (slice) }}
+
+<div class="social-feed-stream" id="social-feed-stream">
+  {{- with $featured }}
+  {{ partial "post-card.html" (dict "page" . "isFeatured" true) }}
   {{- end }}
-{{- end }}
-{{- if and (not $heroImgURL) $home.hero_image }}
-  {{- $heroImgURL = relURL $home.hero_image }}
-{{- end }}
-{{- $heroStyle := "" }}
-{{- if $heroImgURL }}
-  {{- $heroStyle = printf "--hero-image: url('%s');" $heroImgURL }}
-{{- end }}
-{{- if and $heroW $heroH }}
-  {{- $heroStyle = printf "%s --hero-aspect: %d/%d;" $heroStyle $heroW $heroH }}
-{{- end }}
-{{- $nlPlaceholder := $home.newsletter_placeholder | default "Nhận bản tin qua email" }}
-{{- $rawSocial := site.Params.social | default slice }}
-{{- $newsletterSubscribeURL := $home.newsletter_subscribe_url | default "" }}
-{{- $newsletterSubscribeFormat := $home.newsletter_subscribe_format | default "json" }}
 
-<section class="home-hero-band"{{- if $heroStyle }} style="{{ $heroStyle | safe.CSS }}"{{- end }} aria-label="{{ site.Title }}">
-  <div class="home-hero-band__bg" aria-hidden="true"></div>
-  <div class="home-hero-band__inner">
-    <h1 class="home-landing__title">{{ .Title }}</h1>
-
-    {{- if .Description }}
-    <p class="home-landing__subtitle">{{ .Description }}</p>
-    {{- else if $heroLead }}
-    <div class="home-landing__subtitle">{{ $heroLead | markdownify }}</div>
+  <section class="social-feed-list" aria-labelledby="social-feed-list-heading">
+    <h2 id="social-feed-list-heading" class="visually-hidden">Recent posts</h2>
+    {{- range $feedPosts }}
+    {{ partial "post-card.html" (dict "page" . "isFeatured" false) }}
     {{- end }}
 
-    {{- if gt (len $rawSocial) 0 }}
-    <nav class="home-social home-social--hero home-social--on-dark" aria-label="Mạng xã hội">
-      <ul class="home-social__list">
-        {{- range $rawSocial }}
-        <li>
-          {{- if .url }}
-          <a class="home-social__link" href="{{ .url }}" target="_blank" rel="noopener noreferrer" title="{{ .name }}" aria-label="{{ .name }}">
-            {{ partial "social-icon.html" . }}
-          </a>
-          {{- else }}
-          <span class="home-social__link home-social__link--placeholder" title="{{ .name }} (thêm URL trong hugo.yaml)" aria-hidden="true">
-            {{ partial "social-icon.html" . }}
-          </span>
-          {{- end }}
-        </li>
-        {{- end }}
-      </ul>
-    </nav>
-    {{- end }}
-
-    <div class="home-landing__cta">
-      <div class="home-newsletter home-newsletter--pill">
-        <h2 class="visually-hidden">{{ default "Đăng ký nhận bài qua email" $home.newsletter_heading }}</h2>
-        <div class="home-newsletter__pill" role="group" aria-label="Đăng ký newsletter"
-          data-subscribe-url="{{ $newsletterSubscribeURL }}" data-subscribe-format="{{ $newsletterSubscribeFormat }}">
-          <label class="visually-hidden" for="home-nl-email">Email</label>
-          <input id="home-nl-email" class="home-newsletter__input" type="email" name="email" autocomplete="email" placeholder="{{ $nlPlaceholder }}">
-          <button type="button" class="home-newsletter__btn">Đăng ký</button>
-        </div>
-        <p class="home-newsletter__status visually-hidden" aria-live="polite"></p>
-      </div>
+    {{- if eq (len $posts) 0 }}
+    <div class="social-feed-empty">
+      <p class="home-posts__empty">Chưa có bài viết nào.</p>
     </div>
-  </div>
-</section>
-
-<div class="home-below-hero">
-{{- with .Content }}
-<section class="block home-below-hero__block">
-  <div class="prose">{{ . }}</div>
-</section>
-{{- end }}
-
-<section class="home-posts home-blog-recent" aria-labelledby="home-recent-heading">
-  <h2 id="home-recent-heading" class="home-posts__h">{{ default "Bài viết mới" $home.posts_heading }}</h2>
-  {{- if gt (len $posts) 0 }}
-  <ul class="index-posts">
-    {{- range $posts }}
-    <li class="index-posts__row">
-      <time class="index-posts__date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>
-      <a class="index-posts__title" href="{{ .Permalink }}">{{ .Title }}</a>
-      {{- if .Draft }}<span class="draft-pill">draft</span>{{ end }}
-      {{ partial "post-list-desc.html" . }}
-    </li>
     {{- end }}
-  </ul>
-  <p class="index-posts__more"><a href="{{ absURL "/posts/" }}">Xem tất cả bài viết →</a></p>
-  {{- else }}
-  <p class="home-posts__empty">Chưa có bài viết nào.</p>
-  {{- end }}
-</section>
-
-{{- range $pillars }}
-{{- $pslug := .slug }}
-{{- $phint := .hint | default "" }}
-{{- $match := .category | default .name }}
-{{- $catURL := absURL (printf "/categories/%s/" $pslug) }}
-{{- $catPosts := first $pillarLimit (where $allPosts "Params.categories" "intersect" (slice $match)).ByDate.Reverse }}
-<section class="home-blog-pillar" aria-labelledby="pillar-{{ $pslug }}">
-  <div class="home-blog-pillar__head">
-    <div>
-      <h2 id="pillar-{{ $pslug }}" class="home-blog-pillar__title">{{ .name }}</h2>
-      {{- if $phint }}<p class="home-blog-pillar__hint">{{ $phint }}</p>{{ end }}
-    </div>
-    <a class="home-blog-pillar__all" href="{{ $catURL }}">Xem thêm</a>
-  </div>
-  {{- if gt (len $catPosts) 0 }}
-  <ul class="index-posts">
-    {{- range $catPosts }}
-    <li class="index-posts__row">
-      <time class="index-posts__date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>
-      <a class="index-posts__title" href="{{ .Permalink }}">{{ .Title }}</a>
-      {{- if .Draft }}<span class="draft-pill">draft</span>{{ end }}
-      {{ partial "post-list-desc.html" . }}
-    </li>
-    {{- end }}
-  </ul>
-  <p class="index-posts__more"><a href="{{ $catURL }}">Xem thêm →</a></p>
-  {{- else }}
-  <p class="home-posts__empty">Chưa có bài trong danh mục này.</p>
-  {{- end }}
-</section>
-{{- end }}
+  </section>
 </div>
-<script>
-  (function () {
-    function isValidEmail(email) {
-      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(email || '').trim());
-    }
-
-    function setStatus(wrapper, msg) {
-      var status = wrapper.querySelector('.home-newsletter__status');
-      if (!status) return;
-      status.textContent = msg;
-      status.classList.remove('visually-hidden');
-    }
-
-    document.addEventListener('click', function (e) {
-      var btn = e.target.closest('.home-newsletter__btn');
-      if (!btn) return;
-
-      var wrapper = btn.closest('.home-newsletter');
-      var pill = btn.closest('.home-newsletter__pill');
-      if (!wrapper || !pill) return;
-
-      var input = pill.querySelector('input[type="email"]');
-      if (!input) return;
-
-      var email = input.value;
-      if (!isValidEmail(email)) {
-        setStatus(wrapper, 'Vui lòng nhập email hợp lệ.');
-        return;
-      }
-
-      var url = pill.getAttribute('data-subscribe-url') || '';
-      var format = pill.getAttribute('data-subscribe-format') || 'json';
-
-      if (!url) {
-        setStatus(wrapper, 'Chưa cấu hình URL đăng ký newsletter.');
-        return;
-      }
-
-      btn.disabled = true;
-      setStatus(wrapper, 'Đang gửi...');
-
-      var headers = {};
-      var body = null;
-      if (format === 'form') {
-        var params = new URLSearchParams();
-        params.set('email', email);
-        body = params.toString();
-        headers['Content-Type'] = 'application/x-www-form-urlencoded';
-      } else {
-        headers['Content-Type'] = 'application/json';
-        body = JSON.stringify({ email: email });
-      }
-
-      fetch(url, { method: 'POST', headers: headers, body: body })
-        .then(function (res) {
-          if (!res.ok) throw new Error('Bad response: ' + res.status);
-          input.value = '';
-          setStatus(wrapper, 'Cảm ơn bạn. Bạn đã đăng ký thành công.');
-        })
-        .catch(function () {
-          setStatus(wrapper, 'Không thể gửi đăng ký. Vui lòng thử lại.');
-        })
-        .finally(function () {
-          btn.disabled = false;
-        });
-    });
-  })();
-</script>
 {{ end }}

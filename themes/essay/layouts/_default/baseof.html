@@ -1,41 +1,42 @@
 <!DOCTYPE html>
-<html lang="{{ site.Language.Lang | default "vi" }}" data-theme="dark">
+<html lang="{{ site.Language.Lang | default " vi" }}" data-theme="light">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   {{- $fullTitle := site.Title -}}
   {{- if .IsHome -}}
-    {{- $fullTitle = (.Title | default site.Title) -}}
+  {{- $fullTitle = (.Title | default site.Title) -}}
   {{- else -}}
-    {{- $t := .Title | default site.Title -}}
-    {{- with .Params.seo_title }}{{ $t = . }}{{ end -}}
-    {{- $fullTitle = printf "%s · %s" $t site.Title -}}
+  {{- $t := .Title | default site.Title -}}
+  {{- with .Params.seo_title }}{{ $t = . }}{{ end -}}
+  {{- $fullTitle = printf "%s · %s" $t site.Title -}}
   {{- end }}
   <title>{{ $fullTitle }}</title>
   {{- $pageDesc := "" -}}
   {{- if .IsHome -}}
-    {{- if .Description -}}
-      {{- $pageDesc = .Description -}}
-    {{- else -}}
-      {{- $pageDesc = site.Params.seo.home_description | default site.Params.description -}}
-    {{- end -}}
-  {{- else if .Description -}}
-    {{- $pageDesc = .Description -}}
-  {{- else if and (eq .Kind "page") (eq .Section "posts") -}}
-    {{- $pageDesc = .Summary | plainify -}}
-    {{- if or (not $pageDesc) (lt (len $pageDesc) 50) -}}
-      {{- $pageDesc = .Plain | plainify | truncate 300 -}}
-    {{- end -}}
-  {{- else if eq .Kind "term" -}}
-    {{- if eq .Data.Singular "category" -}}
-      {{- $pageDesc = printf "Danh mục %s — bài viết và ghi chép của %s." .Title site.Title -}}
-    {{- else -}}
-      {{- $pageDesc = printf "Bài viết gắn tag «%s» — %s." .Title site.Title -}}
-    {{- end -}}
-  {{- else if eq .Kind "taxonomy" -}}
-    {{- $pageDesc = printf "Danh mục %s — blog %s." .Title site.Title -}}
+  {{- if .Description -}}
+  {{- $pageDesc = .Description -}}
   {{- else -}}
-    {{- $pageDesc = printf "%s — %s." .Title site.Title -}}
+  {{- $pageDesc = site.Params.seo.home_description | default site.Params.description -}}
+  {{- end -}}
+  {{- else if .Description -}}
+  {{- $pageDesc = .Description -}}
+  {{- else if and (eq .Kind "page") (eq .Section "posts") -}}
+  {{- $pageDesc = .Summary | plainify -}}
+  {{- if or (not $pageDesc) (lt (len $pageDesc) 50) -}}
+  {{- $pageDesc = .Plain | plainify | truncate 300 -}}
+  {{- end -}}
+  {{- else if eq .Kind "term" -}}
+  {{- if eq .Data.Singular "category" -}}
+  {{- $pageDesc = printf "Danh mục %s — bài viết và ghi chép của %s." .Title site.Title -}}
+  {{- else -}}
+  {{- $pageDesc = printf "Bài viết gắn tag «%s» — %s." .Title site.Title -}}
+  {{- end -}}
+  {{- else if eq .Kind "taxonomy" -}}
+  {{- $pageDesc = printf "Danh mục %s — blog %s." .Title site.Title -}}
+  {{- else -}}
+  {{- $pageDesc = printf "%s — %s." .Title site.Title -}}
   {{- end -}}
   {{- $pageDesc = $pageDesc | plainify | truncate 160 -}}
   <meta name="description" content="{{ $pageDesc }}">
@@ -43,45 +44,53 @@
   {{- $ogImageUrl := "" -}}
   {{- $ogImageAsset := site.Params.home.hero_image_asset | default "KienTranDao_Banner.png" -}}
   {{- with resources.Get $ogImageAsset }}
-    {{- $ogImageUrl = .RelPermalink -}}
+  {{- $ogImageUrl = .RelPermalink -}}
   {{- end }}
 
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
-  {{- with site.Params.seo.theme_color }}<meta name="theme-color" content="{{ . }}">{{ end }}
+  {{- with site.Params.seo.theme_color }}
+  <meta name="theme-color" content="{{ . }}">{{ end }}
   <meta property="og:site_name" content="{{ site.Title }}">
   <meta property="og:title" content="{{ $fullTitle }}">
   <meta property="og:description" content="{{ $pageDesc }}">
   <meta property="og:url" content="{{ $ogUrl }}">
-  {{- with site.Params.seo.og_locale }}<meta property="og:locale" content="{{ . }}">{{ end }}
-  {{- with site.Params.seo.og_locale_alternate }}<meta property="og:locale:alternate" content="{{ . }}">{{ end }}
-  <meta property="og:type" content="{{ if and (eq .Kind "page") (eq .Section "posts") }}article{{ else }}website{{ end }}">
+  {{- with site.Params.seo.og_locale }}
+  <meta property="og:locale" content="{{ . }}">{{ end }}
+  {{- with site.Params.seo.og_locale_alternate }}
+  <meta property="og:locale:alternate" content="{{ . }}">{{ end }}
+  <meta property="og:type" content="{{ if and (eq .Kind " page") (eq .Section "posts" ) }}article{{ else }}website{{ end
+    }}">
   {{- if $ogImageUrl }}
   <meta property="og:image" content="{{ absURL $ogImageUrl }}">
   <meta property="og:image:alt" content="{{ site.Title }}">
   {{- end }}
   {{- if and (eq .Kind "page") (eq .Section "posts") }}
-  <meta property="article:published_time" content="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">
-  <meta property="article:modified_time" content="{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}">
+  <meta property="article:published_time" content="{{ .Date.Format " 2006-01-02T15:04:05Z07:00" }}">
+  <meta property="article:modified_time" content="{{ .Lastmod.Format " 2006-01-02T15:04:05Z07:00" }}">
   {{- end }}
   <meta name="twitter:card" content="summary_large_image">
-  {{- with site.Params.seo.twitter_site }}<meta name="twitter:site" content="{{ . }}">{{ end }}
+  {{- with site.Params.seo.twitter_site }}
+  <meta name="twitter:site" content="{{ . }}">{{ end }}
   <meta name="twitter:title" content="{{ $fullTitle }}">
   <meta name="twitter:description" content="{{ $pageDesc }}">
   {{- if $ogImageUrl }}
   <meta name="twitter:image" content="{{ absURL $ogImageUrl }}">
   {{- end }}
-  {{- with site.Params.author }}<meta name="author" content="{{ . }}">{{ end }}
+  {{- with site.Params.author }}
+  <meta name="author" content="{{ . }}">{{ end }}
   <link rel="canonical" href="{{ .Permalink }}">
   {{- with (site.Home.OutputFormats.Get "RSS") }}
   <link rel="alternate" type="application/rss+xml" title="{{ site.Title }}" href="{{ .Permalink }}">
   {{- end }}
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Manrope:wght@500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,600;6..72,700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap"
+    rel="stylesheet">
   {{- $style := resources.Get "css/main.css" | minify }}
   <link rel="stylesheet" href="{{ $style.RelPermalink }}?v={{ now.Unix }}">
 
-  <link rel="icon" type="image/svg+xml" href="{{ absURL "/favicon-k.svg" }}">
+  <link rel="icon" type="image/svg+xml" href="{{ absURL " /favicon-k.svg" }}">
 
   {{- /* Personal branding JSON-LD */ -}}
   {{- $personName := site.Params.profile.name | default site.Title -}}
@@ -90,9 +99,9 @@
   {{- $worksFor := dict "@type" "Organization" "name" "TRANDAO" "url" $orgURL -}}
   {{- $sameAs := slice -}}
   {{- range site.Params.social -}}
-    {{- if .url }}
-      {{- $sameAs = $sameAs | append .url -}}
-    {{- end -}}
+  {{- if .url }}
+  {{- $sameAs = $sameAs | append .url -}}
+  {{- end -}}
   {{- end }}
   {{- $personDesc := site.Params.description | plainify | truncate 320 -}}
   <script type="application/ld+json">
@@ -110,7 +119,8 @@
 
   {{- if and (eq .Kind "page") (eq .Section "posts") }}
   {{- $pubLogo := absURL "/favicon-k.svg" -}}
-  {{- $publisher := dict "@type" "Organization" "name" $publisherName "url" $orgURL "logo" (dict "@type" "ImageObject" "url" $pubLogo) -}}
+  {{- $publisher := dict "@type" "Organization" "name" $publisherName "url" $orgURL "logo" (dict "@type" "ImageObject"
+  "url" $pubLogo) -}}
   {{- $articleDesc := $pageDesc | plainify | truncate 320 -}}
   {{- $articleImage := "" -}}
   {{- if $ogImageUrl }}{{ $articleImage = absURL $ogImageUrl }}{{ end }}
@@ -131,60 +141,237 @@
   </script>
   {{- end }}
 </head>
-<body class="{{ if .IsHome }}body--home{{ end }}">
-  {{- $homeOnly := .IsHome }}
-  {{- /* Một cột toàn site; chỉ trang chủ giữ layout-home + hero full-bleed */ -}}
-  {{- $wrapClass := "wrap--narrow" }}
-  {{- $layoutClass := cond $homeOnly "layout-home" "layout-single" }}
-  <a class="skip" href="#main">Skip to content</a>
-  <header class="topbar{{ if $homeOnly }} topbar--dark{{ end }}">
-    <div class="topbar__inner wrap {{ if $homeOnly }}wrap--hero-shell{{ else }}{{ $wrapClass }}{{ end }}">
-      <div class="topbar__left">
-        <a class="brand" href="{{ absURL "/" }}">{{ site.Title }}</a>
-        <button type="button" class="theme-btn" id="theme-toggle" aria-label="Toggle dark/light theme">
-          <span class="theme-icon" id="theme-icon">☾</span>
-        </button>
-      </div>
-      <nav class="topnav" id="topnav-menu" aria-label="Primary">
-        {{- range site.Menus.main }}
-          {{- if .Children }}
-          <details class="topnav-details">
-            <summary>{{ .Name }}</summary>
-            <div class="topnav-submenu" aria-label="{{ .Name }} submenu">
-              {{- range .Children }}
-                <a href="{{ absURL .URL }}">{{ .Name }}</a>
-              {{- end }}
-            </div>
-          </details>
-          {{- else }}
-          <a href="{{ absURL .URL }}">{{ .Name }}</a>
-          {{- end }}
-        {{- end }}
-      </nav>
 
-      <div class="topbar__right">
-        <button
-          type="button"
-          class="menu-toggle"
-          id="menu-toggle"
-          aria-label="Open menu"
-          aria-controls="topnav-menu"
-          aria-expanded="false"
-        >
-          <span aria-hidden="true">☰</span>
-        </button>
+<body class="body--home">
+  <script>
+    (function () {
+      var root = document.documentElement;
+      function applyTheme(theme) {
+        root.setAttribute('data-theme', theme);
+        localStorage.setItem('siteTheme', theme);
+      }
+      var saved = localStorage.getItem('siteTheme') || 'light';
+      applyTheme(saved);
+    })();
+  </script>
+  {{- $pillars := site.Params.pillars | default slice }}
+  {{- $home := site.Params.home | default dict }}
+  {{- $profile := site.Params.profile | default dict }}
+  {{- $rawSocial := site.Params.social | default slice }}
+  {{- $homeSidebar := site.GetPage "home/sidebar" }}
+  {{- $homeLinks := slice }}
+  {{- with $homeSidebar }}
+  {{- with .Params.links }}{{ $homeLinks = . }}{{ end -}}
+  {{- end }}
+  {{- $tagTerms := first 10 site.Taxonomies.tags.ByCount }}
+  {{- $nlPlaceholder := $home.newsletter_placeholder | default "Nhận bản tin qua email" }}
+  {{- $newsletterSubscribeURL := $home.newsletter_subscribe_url | default "" }}
+  {{- $newsletterSubscribeFormat := $home.newsletter_subscribe_format | default "json" }}
+  {{- $youtubeChannelURL := $home.youtube_channel_url | default "https://www.youtube.com/@kientranasia" }}
+  {{- $youtubeChannelID := $home.youtube_channel_id | default "" }}
+  {{- $youtubeUploadsID := "" }}
+  {{- if and $youtubeChannelID (hasPrefix $youtubeChannelID "UC") }}
+  {{- $youtubeUploadsID = printf "UU%s" (substr $youtubeChannelID 2) }}
+  {{- end }}
+  {{- $youtubeEmbedURL := "" }}
+  {{- if $youtubeUploadsID }}
+  {{- $youtubeEmbedURL = printf "https://www.youtube.com/embed/videoseries?list=%s" $youtubeUploadsID }}
+  {{- end }}
+
+  <header class="site-header">
+    <div class="wrap site-header__inner">
+      <button type="button" class="site-header__burger" id="mobile-burger" aria-label="Menu">
+        <span></span>
+        <span></span>
+      </button>
+      <div class="site-header__logo">
+        <a href="{{ relURL "/" }}" class="site-logo">KIENTRAN</a>
       </div>
+      <button type="button" class="site-header__search-btn" id="mobile-search-btn" aria-label="Search">
+        <svg class="social-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      </button>
     </div>
   </header>
-  <main id="main">
-    <div class="wrap {{ if $homeOnly }}wrap--home-bleed{{ else }}{{ $wrapClass }}{{ end }} {{ $layoutClass }}">
-      <div class="layout-main">
-        {{ block "main" . }}{{ end }}
+
+  <nav class="mobile-drawer" id="mobile-drawer" hidden>
+    <div class="mobile-drawer__inner">
+      <div class="mobile-drawer__head">
+        <span class="mobile-drawer__logo">KIENTRAN</span>
+        <button type="button" class="mobile-drawer__close" id="mobile-drawer-close">&times;</button>
+      </div>
+      
+      <div class="mobile-drawer__section">
+        <h3 class="mobile-drawer__label">Khám phá</h3>
+        <nav class="mobile-drawer__nav">
+          {{- range $pillars }}
+          <a href="{{ relURL (printf "/categories/%s/" .slug) }}" class="mobile-drawer__link">{{ .name }}</a>
+          {{- end }}
+        </nav>
+      </div>
+
+      {{- if gt (len $tagTerms) 0 }}
+      <div class="mobile-drawer__section">
+        <h3 class="mobile-drawer__label">Hashtags</h3>
+        <div class="mobile-drawer__tags">
+          {{- range $tagTerms }}
+          <a href="{{ .Page.RelPermalink }}" class="mobile-drawer__tag">#{{ .Page.Title }}</a>
+          {{- end }}
+        </div>
+      </div>
+      {{- end }}
+
+      <div class="mobile-drawer__footer">
+        <p class="mobile-drawer__copyright">&copy; {{ now.Format "2006" }} Kien Tran</p>
       </div>
     </div>
-  </main>
+    <div class="mobile-drawer__backdrop" id="mobile-drawer-backdrop"></div>
+  </nav>
+
+  <div class="wrap wrap--home-shell layout-home">
+    <section class="social-home" aria-label="Media Platform">
+      <aside class="social-home__rail social-home__rail--left">
+        <div class="social-card social-profile">
+          <div class="social-profile__avatar" aria-hidden="true">{{ slicestr site.Title 0 1 }}</div>
+          <p class="social-profile__eyebrow">The Curator</p>
+          <h1 class="social-profile__name">{{ site.Title }}</h1>
+          {{- with $profile.roleLine }}
+          <p class="social-profile__meta">{{ . }}</p>
+          {{- end }}
+          {{- with $profile.location }}
+          <p class="social-profile__location">{{ . }}</p>
+          {{- end }}
+          {{- if and $homeSidebar (gt (len ($homeSidebar.Content | plainify)) 0) }}
+          <div class="social-profile__bio">{{ $homeSidebar.Content }}</div>
+          {{- else if site.Params.description }}
+          <p class="social-profile__bio">{{ site.Params.description }}</p>
+          {{- end }}
+
+          {{- if gt (len $rawSocial) 0 }}
+          <nav class="social-profile__social" aria-label="Mạng xã hội">
+            <ul class="home-social__list social-profile__social-list">
+              {{- range $rawSocial }}
+              <li>
+                {{- if .url }}
+                <a class="home-social__link" href="{{ .url }}" target="_blank" rel="noopener noreferrer"
+                  title="{{ .name }}" aria-label="{{ .name }}">
+                  {{ partial "social-icon.html" . }}
+                </a>
+                {{- else }}
+                <span class="home-social__link home-social__link--placeholder" title="{{ .name }}" aria-hidden="true">
+                  {{ partial "social-icon.html" . }}
+                </span>
+                {{- end }}
+              </li>
+              {{- end }}
+            </ul>
+          </nav>
+          {{- end }}
+        </div>
+
+        <nav class="social-side-nav" aria-label="Khám phá">
+          {{- range $pillars }}
+          <a class="social-side-nav__item {{ if eq $.RelPermalink (relURL (printf "/categories/%s/" .slug))
+            }}social-side-nav__item--active{{ end }}" href="{{ relURL (printf "/categories/%s/" .slug) }}">{{ .name
+            }}</a>
+          {{- end }}
+        </nav>
+
+        {{- if gt (len $homeLinks) 0 }}
+        <section class="social-card social-links" aria-labelledby="home-links-heading">
+          <h2 id="home-links-heading" class="social-card__title">Links</h2>
+          <ul class="social-links__list">
+            {{- range $homeLinks }}
+            <li class="social-links__item">
+              <a href="{{ .url }}" target="_blank" rel="noopener noreferrer">{{ .label }}</a>
+            </li>
+            {{- end }}
+          </ul>
+        </section>
+        {{- end }}
+      </aside>
+
+      <div class="social-home__feed">
+        <header class="social-feed-header">
+          <div>
+            <p class="social-feed-header__eyebrow" id="feed-super-title">Timeline</p>
+            <h2 class="social-feed-header__title" id="feed-main-title">{{ default "Home" $home.posts_heading }}</h2>
+          </div>
+          <nav class="social-feed-header__tabs" aria-label="Điều hướng nhanh">
+            <a class="social-feed-header__tab {{ if .IsHome }}social-feed-header__tab--active{{ end }}"
+              href="{{ relURL "/" }}">Home</a>
+            <a class="social-feed-header__tab {{ if eq .RelPermalink "/about/" }}social-feed-header__tab--active{{ end
+              }}" href="{{ relURL "/about/" }}" data-page-link>About</a>
+            <a class="social-feed-header__tab {{ if eq .RelPermalink "/contact/" }}social-feed-header__tab--active{{
+              end }}" href="{{ relURL "/contact/" }}" data-page-link>Contact</a>
+          </nav>
+        </header>
+
+        <div id="center-column-content">
+          {{ block "main" . }}{{ end }}
+        </div>
+      </div>
+
+      <aside class="social-home__rail social-home__rail--right">
+        <div class="social-right-rail__default" id="social-right-rail-default">
+          <section class="social-search-card" aria-labelledby="search-heading">
+            <h2 id="search-heading" class="visually-hidden">Search</h2>
+            <input class="social-search-card__input" id="home-search" type="text" placeholder="Search archive..."
+              aria-label="Search archive" autocomplete="off" />
+            <div class="social-search-card__results" id="home-search-results" hidden></div>
+          </section>
+
+          {{- if $youtubeEmbedURL }}
+          <section class="social-card social-video-card" aria-labelledby="youtube-latest-heading">
+            <p class="social-newsletter-card__eyebrow">Latest Video</p>
+            <h2 id="youtube-latest-heading" class="social-card__title">YouTube</h2>
+            <div class="social-video-card__embed">
+              <iframe src="{{ $youtubeEmbedURL }}" title="YouTube" loading="lazy" allowfullscreen></iframe>
+            </div>
+            <p class="social-video-card__text">Video mới nhất từ kênh YouTube của Kiên Trần.</p>
+          </section>
+          {{- end }}
+
+          <section class="social-card social-trending">
+            <h2 class="social-card__title">Hashtags</h2>
+            <div class="social-hashtag-list">
+              {{- range $tagTerms }}
+              <a class="social-hashtag-list__item" href="{{ .Page.RelPermalink }}">
+                <span>{{ .Page.Title }}</span>
+                <strong>{{ .Count }}</strong>
+              </a>
+              {{- end }}
+            </div>
+          </section>
+
+          <section class="social-card social-newsletter-card">
+            <p class="social-newsletter-card__eyebrow">Technical Brief</p>
+            <h2 class="social-card__title">{{ default "Nhận bài qua email" $home.newsletter_heading }}</h2>
+            <div class="home-newsletter">
+              <div class="home-newsletter__pill" data-subscribe-url="{{ $newsletterSubscribeURL }}"
+                data-subscribe-format="{{ $newsletterSubscribeFormat }}">
+                <input class="home-newsletter__input" type="email" placeholder="{{ $nlPlaceholder }}">
+                <button type="button" class="home-newsletter__btn">Join</button>
+              </div>
+              <p class="home-newsletter__status visually-hidden"></p>
+            </div>
+          </section>
+        </div>
+
+        <div class="social-right-rail__detail" id="social-right-rail-detail" hidden>
+          <section class="social-card social-reading-panel">
+            <h2 class="social-card__title">Mục lục</h2>
+            <div class="social-reading-panel__toc" data-detail-toc></div>
+          </section>
+          <section class="social-card social-reading-panel">
+            <h2 class="social-card__title">Bài liên quan</h2>
+            <div class="social-reading-panel__related" data-detail-related></div>
+          </section>
+        </div>
+      </aside>
+    </section>
+  </div>
   <footer class="site-footer">
-    <div class="wrap {{ $wrapClass }} footer__inner">
+    <div class="wrap wrap--narrow footer__inner">
       <p class="footer__line">
         <span>{{ replace site.Copyright "{year}" (now.Format "2006") | safeHTML }}</span>
       </p>
@@ -196,11 +383,13 @@
           {{- range $rawSocial }}
           <li>
             {{- if .url }}
-            <a class="home-social__link" href="{{ .url }}" target="_blank" rel="noopener noreferrer" title="{{ .name }}" aria-label="{{ .name }}">
+            <a class="home-social__link" href="{{ .url }}" target="_blank" rel="noopener noreferrer" title="{{ .name }}"
+              aria-label="{{ .name }}">
               {{ partial "social-icon.html" . }}
             </a>
             {{- else }}
-            <span class="home-social__link home-social__link--placeholder" title="{{ .name }} (thêm URL trong hugo.yaml)" aria-hidden="true">
+            <span class="home-social__link home-social__link--placeholder"
+              title="{{ .name }} (thêm URL trong hugo.yaml)" aria-hidden="true">
               {{ partial "social-icon.html" . }}
             </span>
             {{- end }}
@@ -212,68 +401,385 @@
     </div>
   </footer>
 
+  <button type="button" class="to-top" id="to-top" aria-label="Cuộn lên đầu trang" title="Lên đầu trang" hidden>
+    ↑
+  </button>
+
+  <div class="chatbot" id="chatbot">
+    <button type="button" class="chatbot__trigger" id="chatbot-trigger" aria-label="Mở khung trò chuyện">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 1 1-7.6-11.7 8.38 8.38 0 0 1 3.8.9L21 3z"></path>
+      </svg>
+    </button>
+    <div class="chatbot__window" id="chatbot-window" hidden>
+      <header class="chatbot__header">
+        <div class="chatbot__header-info">
+          <strong>Kiên Trần AI Assistant</strong>
+          <span>Trực tuyến</span>
+        </div>
+        <button type="button" class="chatbot__close" id="chatbot-close">×</button>
+      </header>
+      <div class="chatbot__messages" id="chatbot-messages">
+        <div class="chatbot__msg chatbot__msg--bot">Xin chào! Tôi là <strong>Kiên Trần AI Assistant</strong>, giúp cung cấp cũng như hỗ trợ Kiên Trần.</div>
+      </div>
+      <form class="chatbot__input-area" id="chatbot-form">
+        <input type="text" id="chatbot-input" placeholder="Nhập tin nhắn..." autocomplete="off">
+        <button type="submit" id="chatbot-send">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <line x1="22" y1="2" x2="11" y2="13"></line>
+            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+          </svg>
+        </button>
+      </form>
+    </div>
+  </div>
+
   <script>
     (function () {
-      var header = document.querySelector('header.topbar');
-      var toggle = document.getElementById('menu-toggle');
-      var nav = document.getElementById('topnav-menu');
-      if (!header || !toggle || !nav) return;
+      var btn = document.getElementById('to-top');
+      if (btn) {
+        window.addEventListener('scroll', function () { btn.hidden = window.scrollY < 400; }, { passive: true });
+        btn.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+      }
+    })();
+  </script>
 
-      function setOpen(open) {
-        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-        header.classList.toggle('topbar--menu-open', open);
+  <script>
+    (function () {
+      var contentNode = document.getElementById('center-column-content');
+      var mainTitleEl = document.getElementById('feed-main-title');
+      var superTitleEl = document.getElementById('feed-super-title');
+      var rightRailDefault = document.getElementById('social-right-rail-default');
+      var rightRailDetail = document.getElementById('social-right-rail-detail');
+      var tocRoot = document.querySelector('[data-detail-toc]');
+      var relatedRoot = document.querySelector('[data-detail-related]');
+
+      function setMode(mode, data) {
+        var isDetail = mode === 'detail';
+        if (rightRailDefault) rightRailDefault.hidden = isDetail;
+        if (rightRailDetail) rightRailDetail.hidden = !isDetail;
+
+        if (data) {
+          if (mainTitleEl && data.title) mainTitleEl.textContent = data.title;
+          if (superTitleEl && data.super) superTitleEl.textContent = data.super;
+        } else if (mode === 'stream') {
+          if (mainTitleEl) mainTitleEl.textContent = 'Home';
+          if (superTitleEl) superTitleEl.textContent = 'Timeline';
+        }
       }
 
-      toggle.addEventListener('click', function () {
-        setOpen(!header.classList.contains('topbar--menu-open'));
-      });
+      function slugify(text) {
+        return String(text || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+      }
 
-      nav.addEventListener('click', function (e) {
-        if (e.target.closest('a')) setOpen(false);
+      function renderTOC() {
+        if (!tocRoot) return;
+        tocRoot.innerHTML = '';
+        var article = contentNode.querySelector('.essay__body');
+        if (!article) return;
+        var headings = article.querySelectorAll('h2, h3');
+        if (!headings.length) {
+          tocRoot.innerHTML = '<p class="social-reading-panel__empty">Không có mục lục.</p>';
+          return;
+        }
+        var list = document.createElement('ul');
+        list.className = 'social-reading-list';
+        list.style.listStyleType = 'none';
+        list.style.paddingLeft = '0';
+        list.style.marginTop = '0.5rem';
+
+        headings.forEach(function (h, i) {
+          if (!h.id) h.id = 'h-' + slugify(h.textContent) + '-' + i;
+          var li = document.createElement('li');
+          li.style.marginBottom = '0.5rem';
+          if (h.tagName.toLowerCase() === 'h3') {
+            li.style.marginLeft = '1rem';
+          }
+          li.style.listStyleType = 'none';
+          var a = document.createElement('a');
+          a.href = '#' + h.id;
+          a.textContent = h.textContent;
+          a.style.color = 'var(--muted)';
+          a.style.textDecoration = 'none';
+          a.style.fontSize = '0.9rem';
+          a.style.fontWeight = '500';
+
+          a.addEventListener('click', function (e) {
+            e.preventDefault();
+            var target = document.getElementById(h.id);
+            if (target) {
+              var offset = 60; // Better offset for the topbar + breathing room
+              var top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+              window.scrollTo({ top: top, behavior: 'smooth' });
+              
+              // Briefly highlight the target heading
+              target.style.transition = 'color 0.3s ease';
+              var oldColor = target.style.color;
+              target.style.color = 'var(--link)';
+              setTimeout(function() { target.style.color = oldColor; }, 1000);
+            }
+          });
+          li.appendChild(a);
+          list.appendChild(li);
+        });
+        tocRoot.appendChild(list);
+      }
+
+      function renderRelated(doc) {
+        if (!relatedRoot) return;
+        relatedRoot.innerHTML = '';
+        var rel = doc.querySelector('.related__list');
+        if (rel) {
+          relatedRoot.appendChild(rel.cloneNode(true));
+        } else {
+          relatedRoot.innerHTML = '<p class="social-reading-panel__empty">Không có bài liên quan.</p>';
+        }
+      }
+
+      function navigateTo(url, updateHistory) {
+        if (!url || (url.startsWith('http') && !url.includes(window.location.host))) return;
+        
+        // Close mobile drawer if open
+        closeMobileMenu();
+
+        fetch(url, { headers: { 'X-Requested-With': 'fetch' }, cache: 'no-cache' })
+          .then(res => res.text())
+          .then(html => {
+            var parser = new DOMParser();
+            var doc = parser.parseFromString(html, 'text/html');
+            var mainContent = doc.querySelector('#center-column-content') || doc.querySelector('.layout-main-inner') || doc.body;
+
+            if (contentNode && mainContent) {
+              contentNode.innerHTML = mainContent.innerHTML;
+
+              var title = doc.querySelector('.essay__title')?.textContent || doc.querySelector('.taxo-title')?.textContent || doc.querySelector('h1')?.textContent || 'Home';
+              var isPost = url.includes('/posts/');
+              var isTaxo = url.includes('/categories/') || url.includes('/tags/');
+
+              setMode(isPost ? 'detail' : 'stream', {
+                title: title,
+                super: isPost ? 'Bài viết' : (isTaxo ? 'Khám phá' : 'Timeline')
+              });
+
+              if (isPost) {
+                renderTOC();
+                renderRelated(doc);
+                initGiscus();
+              }
+
+              if (updateHistory !== false) {
+                history.pushState(null, '', url);
+              }
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+
+              // Sync menu active state
+              document.querySelectorAll('.social-feed-header__tab, .social-side-nav__item').forEach(el => {
+                var href = el.getAttribute('href');
+                el.classList.toggle('social-feed-header__tab--active', href === window.location.pathname);
+                el.classList.toggle('social-side-nav__item--active', href === window.location.pathname);
+              });
+            }
+          });
+      }
+
+      window.addEventListener('popstate', function () {
+        navigateTo(window.location.pathname, false);
       });
 
       document.addEventListener('click', function (e) {
-        if (!header.classList.contains('topbar--menu-open')) return;
-        if (header.contains(e.target)) return;
-        setOpen(false);
-      });
-
-      document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape') setOpen(false);
-      });
-    })();
-  </script>
-
-  <script>
-    (function () {
-      var root = document.documentElement;
-      var btn = document.getElementById('theme-toggle');
-      var icon = document.getElementById('theme-icon');
-      if (!btn || !icon) return;
-
-      function applyTheme(theme) {
-        root.setAttribute('data-theme', theme);
-        localStorage.setItem('siteTheme', theme);
-        icon.textContent = theme === 'dark' ? '☀' : '☾';
-      }
-
-      function init() {
-        var saved = localStorage.getItem('siteTheme');
-        if (saved === 'dark' || saved === 'light') {
-          applyTheme(saved);
-          return;
+        var link = e.target.closest('a');
+        if (link && !link.getAttribute('target') && isLocal(link.href)) {
+          var u = new URL(link.href);
+          // If it's just a hash change on the current page, don't intercept with SPA navigation
+          if (u.pathname === window.location.pathname && u.hash) {
+            return;
+          }
+          e.preventDefault();
+          navigateTo(link.href);
         }
-        // Default theme: dark
-        applyTheme('dark');
-      }
-
-      btn.addEventListener('click', function () {
-        var current = root.getAttribute('data-theme') || 'light';
-        applyTheme(current === 'dark' ? 'light' : 'dark');
       });
 
-      init();
+      function isLocal(url) {
+        try {
+          var u = new URL(url, window.location.href);
+          return u.origin === window.location.origin;
+        } catch (e) { return false; }
+      }
+
+      function initGiscus() {
+        var container = contentNode.querySelector('.giscus-container');
+        if (!container) return;
+        var script = document.createElement('script');
+        script.src = 'https://giscus.app/client.js';
+        script.setAttribute('data-repo', 'kientranasia/kien-blog');
+        script.setAttribute('data-repo-id', 'R_kgDOMuXofw');
+        script.setAttribute('data-mapping', 'pathname');
+        script.setAttribute('data-strict', '0');
+        script.setAttribute('data-reactions-enabled', '1');
+        script.setAttribute('data-emit-metadata', '0');
+        script.setAttribute('data-input-position', 'bottom');
+        script.setAttribute('data-theme', document.documentElement.getAttribute('data-theme') || 'light');
+        script.setAttribute('data-lang', 'vi');
+        script.setAttribute('crossorigin', 'anonymous');
+        script.async = true;
+        container.appendChild(script);
+      }
+
+      // Search Logic
+      var searchInput = document.getElementById('home-search');
+      var searchResults = document.getElementById('home-search-results');
+      if (searchInput && searchResults) {
+        var timer = null;
+        searchInput.addEventListener('input', function () {
+          clearTimeout(timer);
+          timer = setTimeout(function () {
+            var q = searchInput.value.trim();
+            if (!q) { searchResults.hidden = true; return; }
+            fetch('/index.json').then(r => r.json()).then(data => {
+              var matches = data.filter(it => (it.title + ' ' + it.description).toLowerCase().includes(q.toLowerCase())).slice(0, 8);
+              if (matches.length) {
+                searchResults.innerHTML = '<ul class="social-search-list">' + matches.map(it => `<li class="social-search-item"><a href="${it.url}">${it.title}</a></li>`).join('') + '</ul>';
+                searchResults.hidden = false;
+              } else {
+                searchResults.innerHTML = '<div style="padding:1rem;color:var(--muted)">Không tìm thấy kết quả.</div>';
+                searchResults.hidden = false;
+              }
+            });
+          }, 200);
+        });
+      }
+
+      // Mobile Menu Logic
+      (function() {
+        var burger = document.getElementById('mobile-burger');
+        var drawer = document.getElementById('mobile-drawer');
+        var closeBtn = document.getElementById('mobile-drawer-close');
+        var backdrop = document.getElementById('mobile-drawer-backdrop');
+
+        if (!burger || !drawer) return;
+
+        function openMenu() {
+          drawer.hidden = false;
+          document.body.style.overflow = 'hidden';
+          setTimeout(() => drawer.classList.add('mobile-drawer--open'), 10);
+        }
+
+        window.closeMobileMenu = function() {
+          drawer.classList.remove('mobile-drawer--open');
+          document.body.style.overflow = '';
+          setTimeout(() => { if (!drawer.classList.contains('mobile-drawer--open')) drawer.hidden = true; }, 300);
+        }
+
+        burger.addEventListener('click', openMenu);
+        if (closeBtn) closeBtn.addEventListener('click', closeMobileMenu);
+        if (backdrop) backdrop.addEventListener('click', closeMobileMenu);
+
+        // Mobile Search Toggle
+        var searchBtn = document.getElementById('mobile-search-btn');
+        if (searchBtn) {
+          searchBtn.addEventListener('click', function() {
+            var searchInput = document.getElementById('home-search');
+            if (searchInput) {
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+              setTimeout(function() { searchInput.focus(); }, 300);
+            }
+          });
+        }
+      })();
+
+      // Newsletter Logic
+      // Chatbot Logic
+      (function () {
+        var chatbot = document.getElementById('chatbot');
+        if (!chatbot) return;
+        var trigger = document.getElementById('chatbot-trigger');
+        var windowChat = document.getElementById('chatbot-window');
+        var closeBtn = document.getElementById('chatbot-close');
+        var form = document.getElementById('chatbot-form');
+        var input = document.getElementById('chatbot-input');
+        var messages = document.getElementById('chatbot-messages');
+
+        // --- CONFIGURATION ---
+        // Lấy địa chỉ Webhook n8n từ CMS (Trang chủ)
+        var n8nWebhookURL = '{{ site.Home.Params.chatbot_webhook | default "https://primary-production-47e1.up.railway.app/webhook/chat" | safeJS }}';
+
+        function toggleChat() {
+          windowChat.hidden = !windowChat.hidden;
+          if (!windowChat.hidden) input.focus();
+        }
+
+        trigger.addEventListener('click', toggleChat);
+        closeBtn.addEventListener('click', toggleChat);
+
+        function appendMessage(text, role) {
+          var msg = document.createElement('div');
+          msg.className = 'chatbot__msg chatbot__msg--' + role;
+          msg.textContent = text;
+          messages.appendChild(msg);
+          messages.scrollTop = messages.scrollHeight;
+          return msg;
+        }
+
+        form.addEventListener('submit', function (e) {
+          e.preventDefault();
+          var text = input.value.trim();
+          if (!text) return;
+
+          appendMessage(text, 'user');
+          input.value = '';
+
+          // Add typing indicator
+          var typing = appendMessage('...', 'bot');
+
+          fetch(n8nWebhookURL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ message: text })
+          })
+            .then(res => res.json())
+            .then(data => {
+              typing.remove();
+              // n8n response usually in a property like 'output' or 'message'
+              var botReply = data.output || data.message || (typeof data === 'string' ? data : 'Cảm ơn bạn, tôi đã nhận được tin nhắn!');
+              appendMessage(botReply, 'bot');
+            })
+            .catch(err => {
+              typing.remove();
+              appendMessage('Xin lỗi, đã có lỗi kết nối. Vui lòng thử lại sau.', 'bot');
+            });
+        });
+      })();
+
+      document.addEventListener('click', function (e) {
+        var btn = e.target.closest('.home-newsletter__btn');
+        if (!btn) return;
+        var wrapper = btn.closest('.home-newsletter');
+        var input = wrapper.querySelector('input');
+        var status = wrapper.querySelector('.home-newsletter__status');
+        var url = wrapper.querySelector('.home-newsletter__pill').dataset.subscribeUrl;
+        if (!input.value) return;
+        btn.disabled = true;
+        status.textContent = 'Đang gửi...';
+        status.classList.remove('visually-hidden');
+        fetch(url, { method: 'POST', body: JSON.stringify({ email: input.value }), headers: { 'Content-Type': 'application/json' } })
+          .then(() => { status.textContent = 'Thành công!'; input.value = ''; })
+          .catch(() => { status.textContent = 'Lỗi, thử lại sau.'; })
+          .finally(() => { btn.disabled = false; });
+      });
+
+      // Auto-run for initial load if it's a post
+      if (window.location.pathname.includes('/posts/')) {
+        setMode('detail', {
+          title: document.querySelector('.essay__title')?.textContent || 'Bài viết',
+          super: 'Bài viết'
+        });
+        renderTOC();
+        initGiscus();
+      }
     })();
   </script>
 </body>
+
 </html>

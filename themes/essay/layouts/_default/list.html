@@ -1,20 +1,18 @@
 {{ define "main" }}
-<div class="layout-main-inner wrap-page">
-  <header class="page-intro">
-    <h1 class="page-intro__title">{{ .Title }}</h1>
-    {{- with .Content }}<div class="prose page-intro__body">{{ . }}</div>{{ end }}
-  </header>
+<div class="taxo-page">
+  <!-- Hidden title for SPA JS to pick up -->
+  <h1 class="visually-hidden taxo-title">{{ .Title }}</h1>
+  
+  <div class="taxo-info-bar" style="margin-bottom: 1rem; color: var(--muted); font-size: 0.85rem; font-weight: 500;">
+    {{ len .Pages }} bài viết
+  </div>
+
   {{- if .Pages }}
-  <ul class="index-posts">
+  <section class="social-feed-list" aria-label="Danh sách bài viết">
     {{- range (.Paginate .Pages).Pages }}
-    <li class="index-posts__row">
-      <time class="index-posts__date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>
-      <a class="index-posts__title" href="{{ .Permalink }}">{{ .Title }}</a>
-      {{- if .Draft }}<span class="draft-pill">draft</span>{{ end }}
-      {{ partial "post-list-desc.html" . }}
-    </li>
+    {{ partial "post-card.html" (dict "page" . "isFeatured" false) }}
     {{- end }}
-  </ul>
+  </section>
   {{- partial "pagination.html" . }}
   {{- end }}
 </div>

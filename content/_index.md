@@ -1,6 +1,7 @@
 ---
 title: "Kiên Trần"
 description: "Blog — Startup, Essays và Happiness: chuyển đổi số, AI, vận hành và những ghi chép cá nhân."
+chatbot_webhook: "https://primary-production-47e1.up.railway.app/webhook/chat"
 ---
 
 <blockquote class="home-quote">

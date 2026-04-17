@@ -1,0 +1,23 @@
+{{- $pages := where (where site.RegularPages "Section" "posts") "Draft" false -}}
+{{- $items := slice -}}
+{{- range $pages.ByDate.Reverse -}}
+  {{- $desc := "" -}}
+  {{- if .Description -}}
+    {{- $desc = .Description -}}
+  {{- else if .Summary -}}
+    {{- $desc = .Summary | plainify -}}
+  {{- else -}}
+    {{- $desc = .Plain | plainify | truncate 200 -}}
+  {{- end -}}
+  {{- $items = $items | append (dict
+    "title" .Title
+    "url" .RelPermalink
+    "date" (.Date.Format "2006-01-02")
+    "readingTime" .ReadingTime
+    "description" ($desc | replaceRE "^\\s+|\\s+$" "")
+    "tags" (.Params.tags | default slice)
+    "categories" (.Params.categories | default slice)
+  ) -}}
+{{- end -}}
+{{- $items | jsonify -}}
+

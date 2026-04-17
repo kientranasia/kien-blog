@@ -1,20 +1,39 @@
 {{ define "main" }}
-<div class="layout-main-inner wrap-page">
-  <header class="page-intro">
-    <p class="page-intro__crumb"><a href="{{ absURL "/" }}">Trang chủ</a></p>
-    <h1 class="page-intro__title">{{ .Title }}</h1>
-    {{- with .Content }}<div class="prose page-intro__body">{{ . }}</div>{{ end }}
+<div class="taxo-page wrap-page">
+  <header class="taxo-head">
+    <p class="taxo-crumb"><a href="{{ absURL "/" }}">Trang chủ</a></p>
+    <h1 class="taxo-title">{{ .Title }}</h1>
+    {{- with .Content }}<div class="taxo-sub prose">{{ . }}</div>{{ end }}
   </header>
-  <ul class="index-posts">
+  <section class="taxo-posts" aria-label="Danh sách bài viết">
     {{- range (.Paginate .Pages).Pages }}
-    <li class="index-posts__row">
-      <time class="index-posts__date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>
-      <a class="index-posts__title" href="{{ .Permalink }}">{{ .Title }}</a>
-      {{- if .Draft }}<span class="draft-pill">draft</span>{{ end }}
-      {{ partial "post-list-desc.html" . }}
-    </li>
+    {{- $img := partial "post-feature-image.html" (dict "page" .) -}}
+    <article class="taxo-post">
+      <a class="taxo-post__media" href="{{ .RelPermalink }}" aria-label="{{ .Title }}"{{ if $img }} style="background-image: linear-gradient(180deg, rgba(15, 23, 42, 0.08), rgba(15, 23, 42, 0.18)), url('{{ $img }}');"{{ end }}></a>
+      <div class="taxo-post__body">
+        <div class="taxo-post__meta">
+          <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>
+          {{- if gt .ReadingTime 0 }} · {{ .ReadingTime }} phút đọc{{ end -}}
+        </div>
+        <h2 class="taxo-post__title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+        {{ partial "post-list-desc.html" . }}
+        <div class="taxo-post__chips">
+          {{- with .Params.categories }}
+            {{- range first 2 . }}
+            <a class="social-feed-tag" href="{{ absURL (printf "/categories/%s/" (urlize .)) }}">{{ . }}</a>
+            {{- end }}
+          {{- end }}
+          {{- with .Params.tags }}
+            {{- range first 3 . }}
+            {{- $turl := partial "taxonomy-term-permalink.html" (dict "taxonomy" "tags" "term" .) -}}
+            <a class="taxo-chip taxo-chip--tag" href="{{ $turl }}">#{{ . }}</a>
+            {{- end }}
+          {{- end }}
+        </div>
+      </div>
+    </article>
     {{- end }}
-  </ul>
+  </section>
   {{- partial "pagination.html" . }}
 </div>
 {{ end }}

@@ -1,8 +1,7 @@
 {{ define "main" }}
 <div class="layout-main-inner wrap-page {{ if eq .Section "posts" }}layout-main-inner--post{{ end }}">
-  {{- if eq .Section "posts" }}
-  <p class="back"><a href="{{ absURL "/posts/" }}">← Bài viết</a></p>
   <article class="essay prose">
+    {{ if eq .Section "posts" }}
     <header class="essay__head">
       <h1 class="essay__title">{{ .Title }}</h1>
       <p class="essay__meta">
@@ -10,313 +9,32 @@
         {{- if gt .ReadingTime 0 }} · {{ .ReadingTime }} phút đọc{{ end -}}
         {{- with .Params.categories }}
         ·
-        {{- range $i, $c := . }}{{ if $i }}, {{ end }}<a href="{{ absURL (printf "/categories/%s/" (urlize $c)) }}">{{ $c }}</a>{{ end }}
+        {{- range $i, $c := . }}{{ if $i }}, {{ end }}<a href="{{ relURL (printf "/categories/%s/" (urlize $c)) }}">{{ $c }}</a>{{ end }}
         {{- end }}
-        {{- with .Params.tags }}
-        ·
-        {{- range $i, $t := . }}
-          {{- if $i }}, {{ end -}}
-          {{- $tagURL := "" -}}
-          {{- range $slug, $_ := $.Site.Taxonomies.tags -}}
-            {{- with $.Site.GetPage (printf "/tags/%s" $slug) -}}
-              {{- if eq .Title $t -}}
-                {{- $tagURL = .RelPermalink -}}
-              {{- end -}}
-            {{- end -}}
-          {{- end -}}
-          {{- if eq $tagURL "" -}}
-          <a href="{{ absURL (printf "/tags/%s/" (urlize $t)) }}">{{ $t }}</a>
-          {{- else -}}
-          <a href="{{ absURL $tagURL }}">{{ $t }}</a>
-          {{- end -}}
-        {{- end }}
-        {{- end }}
+        <div class="essay__share">
+          <span class="essay__share-label">Share via:</span>
+          <a class="essay__share-link" href="https://www.facebook.com/sharer/sharer.php?u={{ .Permalink }}" target="_blank" rel="noopener noreferrer" title="Share on Facebook">
+            {{ partial "social-icon.html" (dict "icon" "facebook") }}
+          </a>
+          <a class="essay__share-link" href="https://twitter.com/intent/tweet?url={{ .Permalink }}&text={{ .Title }}" target="_blank" rel="noopener noreferrer" title="Share on X">
+            {{ partial "social-icon.html" (dict "icon" "x") }}
+          </a>
+          <a class="essay__share-link" href="https://www.linkedin.com/sharing/share-offsite/?url={{ .Permalink }}" target="_blank" rel="noopener noreferrer" title="Share on LinkedIn">
+            {{ partial "social-icon.html" (dict "icon" "linkedin") }}
+          </a>
+        </div>
       </p>
-      {{ partial "post-tts.html" . }}
       {{- with .Description }}<p class="essay__lede">{{ . }}</p>{{ end }}
     </header>
+    {{ end }}
     <div class="essay__body">
       {{ .Content }}
     </div>
   </article>
-  {{ partial "related-posts.html" . }}
-  <section class="block post-newsletter" aria-label="Đăng ký nhận bài qua email">
-    {{- $newsletterSubscribeURL := site.Params.home.newsletter_subscribe_url | default "" -}}
-    {{- $newsletterSubscribeFormat := site.Params.home.newsletter_subscribe_format | default "json" -}}
-    {{- $nlPlaceholder := site.Params.home.newsletter_placeholder | default "Nhận bản tin qua email" -}}
-
-    <div style="max-width: 26rem; margin: 0 auto;">
-      <div class="home-newsletter home-newsletter--pill home-newsletter--mobile-hide">
-        <h2 class="visually-hidden">Đăng ký nhận bài qua email</h2>
-        <div class="home-newsletter__pill" role="group" aria-label="Đăng ký newsletter"
-          data-subscribe-url="{{ $newsletterSubscribeURL }}" data-subscribe-format="{{ $newsletterSubscribeFormat }}">
-          <label class="visually-hidden" for="post-nl-email">Email</label>
-          <input id="post-nl-email" class="home-newsletter__input" type="email" name="email" autocomplete="email" placeholder="{{ $nlPlaceholder }}">
-          <button type="button" class="home-newsletter__btn">Đăng ký</button>
-        </div>
-        <p class="home-newsletter__status visually-hidden" aria-live="polite"></p>
-      </div>
-
-      <div class="home-newsletter home-newsletter--pill home-newsletter--mobile-show">
-        <h2 class="visually-hidden">Đăng ký nhận bài qua email</h2>
-        <div class="home-newsletter__pill" role="group" aria-label="Đăng ký newsletter"
-          data-subscribe-url="{{ $newsletterSubscribeURL }}" data-subscribe-format="{{ $newsletterSubscribeFormat }}">
-          <label class="visually-hidden" for="post-nl-email-mobile">Email</label>
-          <input id="post-nl-email-mobile" class="home-newsletter__input" type="email" name="email" autocomplete="email" placeholder="{{ $nlPlaceholder }}">
-          <button type="button" class="home-newsletter__btn">Đăng ký</button>
-        </div>
-        <p class="home-newsletter__status visually-hidden" aria-live="polite"></p>
-      </div>
-    </div>
-  </section>
-
-  <script>
-    (function () {
-      function isValidEmail(email) {
-        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(email || '').trim());
-      }
-
-      function setStatus(wrapper, msg) {
-        var status = wrapper.querySelector('.home-newsletter__status');
-        if (!status) return;
-        status.textContent = msg;
-        status.classList.remove('visually-hidden');
-      }
-
-      document.addEventListener('click', function (e) {
-        var btn = e.target.closest('.home-newsletter__btn');
-        if (!btn) return;
-
-        var wrapper = btn.closest('.home-newsletter');
-        var pill = btn.closest('.home-newsletter__pill');
-        if (!wrapper || !pill) return;
-
-        var input = pill.querySelector('input[type="email"]');
-        if (!input) return;
-
-        var email = input.value;
-        if (!isValidEmail(email)) {
-          setStatus(wrapper, 'Vui lòng nhập email hợp lệ.');
-          return;
-        }
-
-        var url = pill.getAttribute('data-subscribe-url') || '';
-        var format = pill.getAttribute('data-subscribe-format') || 'json';
-
-        if (!url) {
-          setStatus(wrapper, 'Chưa cấu hình URL đăng ký newsletter.');
-          return;
-        }
-
-        btn.disabled = true;
-        setStatus(wrapper, 'Đang gửi...');
-
-        var headers = {};
-        var body = null;
-        if (format === 'form') {
-          var params = new URLSearchParams();
-          params.set('email', email);
-          body = params.toString();
-          headers['Content-Type'] = 'application/x-www-form-urlencoded';
-        } else {
-          headers['Content-Type'] = 'application/json';
-          body = JSON.stringify({ email: email });
-        }
-
-        fetch(url, { method: 'POST', headers: headers, body: body })
-          .then(function (res) {
-            if (!res.ok) throw new Error('Bad response: ' + res.status);
-            input.value = '';
-            setStatus(wrapper, 'Cảm ơn bạn. Bạn đã đăng ký thành công.');
-          })
-          .catch(function () {
-            setStatus(wrapper, 'Không thể gửi đăng ký. Vui lòng thử lại.');
-          })
-          .finally(function () {
-            btn.disabled = false;
-          });
-      });
-    })();
-  </script>
-  <script>
-    (function () {
-      var root = document.querySelector('[data-tts-root]');
-      var fallback = document.querySelector('[data-tts-fallback]');
-      if (!root || !('speechSynthesis' in window)) {
-        if (fallback) {
-          fallback.hidden = false;
-          fallback.classList.remove('visually-hidden');
-        }
-        return;
-      }
-      root.hidden = false;
-
-      var article = document.querySelector('article.essay');
-      if (!article) return;
-
-      var btnPlay = root.querySelector('[data-tts-action="play"]');
-      var btnPause = root.querySelector('[data-tts-action="pause"]');
-      var btnStop = root.querySelector('[data-tts-action="stop"]');
-      if (!btnPlay || !btnPause || !btnStop) return;
-
-      var chunks = [];
-      var chunkIndex = 0;
-      var state = 'idle';
-
-      function siteLang() {
-        var l = (document.documentElement.getAttribute('lang') || 'vi').toLowerCase();
-        return l.indexOf('en') === 0 ? 'en' : 'vi';
-      }
-
-      function pickVoice(utterance) {
-        var primary = siteLang();
-        var voices = speechSynthesis.getVoices();
-        if (!voices || !voices.length) return;
-        var i;
-        var v;
-        for (i = 0; i < voices.length; i++) {
-          var lang = (voices[i].lang || '').toLowerCase();
-          if (primary === 'vi' && lang.indexOf('vi') === 0) {
-            v = voices[i];
-            break;
-          }
-          if (primary === 'en' && lang.indexOf('en') === 0) {
-            v = voices[i];
-            break;
-          }
-        }
-        if (!v) {
-          for (i = 0; i < voices.length; i++) {
-            if ((voices[i].lang || '').toLowerCase().indexOf('en') === 0) {
-              v = voices[i];
-              break;
-            }
-          }
-        }
-        if (!v) v = voices[0];
-        utterance.voice = v;
-        utterance.lang = primary === 'en' ? 'en-US' : 'vi-VN';
-      }
-
-      function extractText() {
-        var el = article.cloneNode(true);
-        el.querySelectorAll('.essay-tts, script, style, .visually-hidden').forEach(function (n) {
-          n.remove();
-        });
-        var t = (el.innerText || '').replace(/\s+/g, ' ').trim();
-        return t;
-      }
-
-      function splitChunks(text, maxLen) {
-        var out = [];
-        var rest = text;
-        maxLen = maxLen || 220;
-        while (rest.length > maxLen) {
-          var cut = rest.lastIndexOf(' ', maxLen);
-          if (cut < 40) cut = maxLen;
-          out.push(rest.slice(0, cut).trim());
-          rest = rest.slice(cut).trim();
-        }
-        if (rest) out.push(rest);
-        return out.filter(Boolean);
-      }
-
-      function setButtons() {
-        if (state === 'idle') {
-          btnPlay.hidden = false;
-          btnPlay.textContent = 'Nghe';
-          btnPause.hidden = true;
-          btnStop.hidden = true;
-        } else if (state === 'playing') {
-          btnPlay.hidden = true;
-          btnPause.hidden = false;
-          btnPause.textContent = 'Tạm dừng';
-          btnStop.hidden = false;
-        } else if (state === 'paused') {
-          btnPlay.hidden = false;
-          btnPlay.textContent = 'Tiếp tục';
-          btnPause.hidden = true;
-          btnStop.hidden = false;
-        }
-      }
-
-      function speakNext() {
-        if (chunkIndex >= chunks.length) {
-          state = 'idle';
-          chunkIndex = 0;
-          setButtons();
-          return;
-        }
-        var u = new SpeechSynthesisUtterance(chunks[chunkIndex]);
-        chunkIndex++;
-        pickVoice(u);
-        u.onend = function () {
-          speakNext();
-        };
-        u.onerror = function () {
-          state = 'idle';
-          chunkIndex = 0;
-          setButtons();
-        };
-        speechSynthesis.speak(u);
-      }
-
-      function startFresh() {
-        var text = extractText();
-        if (!text) return;
-        speechSynthesis.cancel();
-        chunks = splitChunks(text);
-        chunkIndex = 0;
-        state = 'playing';
-        setButtons();
-        speakNext();
-      }
-
-      btnPlay.addEventListener('click', function () {
-        if (state === 'paused') {
-          speechSynthesis.resume();
-          state = 'playing';
-          setButtons();
-          return;
-        }
-        startFresh();
-      });
-
-      btnPause.addEventListener('click', function () {
-        if (state !== 'playing') return;
-        speechSynthesis.pause();
-        state = 'paused';
-        setButtons();
-      });
-
-      btnStop.addEventListener('click', function () {
-        speechSynthesis.cancel();
-        state = 'idle';
-        chunkIndex = 0;
-        setButtons();
-      });
-
-      function loadVoices() {
-        speechSynthesis.getVoices();
-      }
-      if (speechSynthesis.onvoiceschanged !== undefined) {
-        speechSynthesis.onvoiceschanged = loadVoices;
-      }
-      loadVoices();
-      setButtons();
-    })();
-  </script>
-  {{- else }}
-  <p class="back"><a href="{{ absURL "/" }}">← Trang chủ</a></p>
-  <article class="essay prose">
-    <header class="essay__head">
-      <h1 class="essay__title">{{ .Title }}</h1>
-      {{- with .Description }}<p class="essay__lede">{{ . }}</p>{{ end }}
-    </header>
-    <div class="essay__body">
-      {{ .Content }}
-    </div>
-  </article>
-  {{- end }}
+  
+  {{ if eq .Section "posts" }}
+    {{ partial "comments.html" . }}
+    {{ partial "related-posts.html" . }}
+  {{ end }}
 </div>
 {{ end }}

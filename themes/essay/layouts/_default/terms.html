@@ -1,24 +1,53 @@
 {{ define "main" }}
-<div class="layout-main-inner wrap-page">
-  <header class="page-intro">
-    <p class="page-intro__crumb"><a href="{{ absURL "/" }}">Trang chủ</a> · <a href="{{ absURL "/categories/" }}">Danh mục</a></p>
-    <h1 class="page-intro__title">{{ .Title }}</h1>
+{{- $singular := .Data.Singular | default "" -}}
+<script>
+  (function () {
+    // Always view taxonomies inside the homepage shell.
+    var target = "{{ .RelPermalink }}";
+    if (target && window.location.pathname !== "/" ) {
+      window.location.replace("/#" + target);
+    }
+  })();
+</script>
+<noscript>
+  <p><a href="/#{{ .RelPermalink }}">Open in homepage</a></p>
+</noscript>
+<div class="taxo-page wrap-page">
+  <header class="taxo-head">
+    <p class="taxo-crumb"><a href="{{ absURL "/" }}">Trang chủ</a></p>
+    <h1 class="taxo-title">{{ if eq $singular "tag" }}Hashtags{{ else }}Categories{{ end }}</h1>
+    <p class="taxo-sub">{{ if eq $singular "tag" }}Tất cả tags theo độ phổ biến{{ else }}Các nhóm nội dung chính{{ end }}</p>
   </header>
 
-  {{- if .Pages }}
-  <ul class="index-posts">
-    {{- range .Pages.ByDate.Reverse }}
-    <li class="index-posts__row">
-      <time class="index-posts__date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>
-      <a class="index-posts__title" href="{{ .Permalink }}">{{ .Title }}</a>
-      {{- if .Draft }}<span class="draft-pill">draft</span>{{ end }}
-      {{- with .Description }}<span class="index-posts__desc">{{ . }}</span>{{ end }}
-    </li>
+  {{- if eq $singular "category" }}
+  <section class="taxo-grid" aria-label="Danh sách categories">
+    {{- range site.Params.pillars }}
+      {{- $p := . }}
+      {{- $path := printf "/categories/%s" $p.slug }}
+      {{- with site.GetPage $path }}
+      <a class="taxo-tile" href="{{ .RelPermalink }}">
+        <h2 class="taxo-tile__title">{{ $p.name }}</h2>
+        <p class="taxo-tile__desc">{{ $p.hint }}</p>
+        <p class="taxo-tile__meta">{{ len .Pages }} bài</p>
+      </a>
+      {{- else }}
+      <div class="taxo-tile taxo-tile--disabled">
+        <h2 class="taxo-tile__title">{{ $p.name }}</h2>
+        <p class="taxo-tile__desc">{{ $p.hint }}</p>
+        <p class="taxo-tile__meta">0 bài</p>
+      </div>
+      {{- end }}
     {{- end }}
-  </ul>
-  {{- else }}
-  <p class="page-intro__desc">Chưa có bài viết trong nhóm này.</p>
+  </section>
+  {{- else if eq $singular "tag" }}
+  <section class="taxo-grid" aria-label="Danh sách tags">
+    {{- range first 48 site.Taxonomies.tags.ByCount }}
+    <a class="taxo-tag" href="{{ .Page.RelPermalink }}">
+      <span class="taxo-tag__name">#{{ .Page.Title }}</span>
+      <span class="taxo-tag__count">{{ .Count }}</span>
+    </a>
+    {{- end }}
+  </section>
   {{- end }}
 </div>
 {{ end }}
-
