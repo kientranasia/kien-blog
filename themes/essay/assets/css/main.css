@@ -3108,11 +3108,13 @@ html[data-theme="dark"] .social-feed-post:hover {
 
 .social-feed-post__image {
   width: 100%;
+  max-width: 100%;
   aspect-ratio: 21 / 9;
   border-radius: 1.15rem;
   background-color: #e7e8e9;
   background-size: cover;
   background-position: center;
+  overflow: hidden;
 }
 
 .social-feed-post__image--featured {
@@ -3157,6 +3159,7 @@ html[data-theme="dark"] .social-feed-post:hover {
   overflow: hidden;
   margin-bottom: 1.25rem;
   aspect-ratio: 16/10;
+  max-width: 100%;
 }
 
 .social-gallery--1 { grid-template-columns: 1fr; }
