@@ -2254,23 +2254,29 @@ html[data-theme="dark"] .home-social__link:hover {
 }
 
 .site-footer .home-social__list {
-  margin: 0.85rem auto 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 1.5rem auto 0;
 }
 
-.site-footer .home-social--hero .home-social__list {
-  gap: 0.35rem 0.45rem;
+.site-footer .home-social__link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  color: var(--muted);
+  border-radius: 99px;
+  transition: all 0.2s ease;
 }
 
-.site-footer .home-social--hero .home-social__link {
-  width: 1.85rem;
-  height: 1.85rem;
-  min-width: 1.85rem;
-  min-height: 1.85rem;
-  padding: 0.12rem;
-}
-
-.site-footer .home-social--hero .home-social__link:not(.home-social__link--placeholder):hover {
-  color: var(--fg);
+.site-footer .home-social__link:hover {
+  color: var(--link);
+  background: var(--faint);
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
 }
 
 .footer__sep {

@@ -375,7 +375,11 @@
   <footer class="site-footer">
     <div class="wrap wrap--narrow footer__inner">
       <p class="footer__line">
-        <span>{{ replace site.Copyright "{year}" (now.Format "2006") | safeHTML }}</span>
+        {{- $orgName := site.Params.footer.trandao_name | default "TRANDAO" -}}
+        {{- $orgURL := site.Params.footer.trandao_url | default "https://trandao.vn" -}}
+        {{- $copyright := replace site.Copyright "{year}" (now.Format "2006") -}}
+        {{- $copyrightWithLink := replace $copyright "@ TRANDAO" (printf "@ <a href=\"%s\" target=\"_blank\" rel=\"noopener\" style=\"color:inherit;text-decoration:underline\">%s</a>" $orgURL $orgName) -}}
+        <span>{{ $copyrightWithLink | safeHTML }}</span>
       </p>
 
       {{- $rawSocial := site.Params.social | default slice -}}
@@ -679,9 +683,6 @@
           drawer.classList.remove('mobile-drawer--open');
           document.body.style.overflow = '';
           setTimeout(() => { if (!drawer.classList.contains('mobile-drawer--open')) drawer.hidden = true; }, 300);
-        }
-
-              setTimeout(function() { if (!drawer.classList.contains('mobile-drawer--open')) drawer.hidden = true; }, 300);
         }
 
         burger.addEventListener('click', openMenu);
