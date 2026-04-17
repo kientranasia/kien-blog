@@ -31,13 +31,25 @@
         {{- end }}
       </div>
     {{- else if $images }}
-      <!-- Gallery Grid -->
+      <!-- Card Mini Slider -->
       {{- $count := len $images -}}
-      <div class="social-feed-post__gallery social-gallery--{{ if gt $count 4 }}many{{ else }}{{ $count }}{{ end }}">
-        {{- range $images }}
-        <div class="social-gallery__item">
-          <img src="{{ relURL . }}" alt="Post image" loading="lazy">
+      <div class="card-slider" data-card-slider>
+        <div class="card-slider__track">
+          {{- range $i, $img := $images }}
+          <div class="card-slider__slide{{ if eq $i 0 }} card-slider__slide--active{{ end }}">
+            <img src="{{ relURL $img }}" alt="Ảnh {{ add $i 1 }}" loading="{{ if eq $i 0 }}lazy{{ else }}lazy{{ end }}">
+          </div>
+          {{- end }}
         </div>
+        {{- if gt $count 1 }}
+        <button class="card-slider__btn card-slider__btn--prev" type="button" aria-label="Ảnh trước">‹</button>
+        <button class="card-slider__btn card-slider__btn--next" type="button" aria-label="Ảnh tiếp">›</button>
+        <div class="card-slider__dots">
+          {{- range $i, $img := $images }}
+          <span class="card-slider__dot{{ if eq $i 0 }} card-slider__dot--active{{ end }}"></span>
+          {{- end }}
+        </div>
+        <span class="card-slider__counter">1 / {{ $count }}</span>
         {{- end }}
       </div>
     {{- else if $postImg }}

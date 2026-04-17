@@ -576,6 +576,8 @@
                 renderRelated(doc);
                 initGiscus();
                 initCopyButtons();
+              } else {
+                initCardSliders();
               }
 
               if (updateHistory !== false) {
@@ -744,6 +746,46 @@
         initCopyButtons();
         // Since navigateTo is global, we can hook it or just call init in .then
       })();
+
+      // Card Sliders (home feed gallery)
+      window.initCardSliders = function() {
+        document.querySelectorAll('[data-card-slider]:not([data-slider-init])').forEach(function(slider) {
+          slider.setAttribute('data-slider-init', '1');
+          var slides = slider.querySelectorAll('.card-slider__slide');
+          var dots = slider.querySelectorAll('.card-slider__dot');
+          var counter = slider.querySelector('.card-slider__counter');
+          var total = slides.length;
+          if (total <= 1) return;
+          var current = 0;
+
+          function goTo(n) {
+            slides[current].classList.remove('card-slider__slide--active');
+            if (dots[current]) dots[current].classList.remove('card-slider__dot--active');
+            current = (n + total) % total;
+            slides[current].classList.add('card-slider__slide--active');
+            if (dots[current]) dots[current].classList.add('card-slider__dot--active');
+            if (counter) counter.textContent = (current + 1) + ' / ' + total;
+          }
+
+          var prevBtn = slider.querySelector('.card-slider__btn--prev');
+          var nextBtn = slider.querySelector('.card-slider__btn--next');
+          if (prevBtn) prevBtn.addEventListener('click', function(e) { e.preventDefault(); e.stopPropagation(); goTo(current - 1); });
+          if (nextBtn) nextBtn.addEventListener('click', function(e) { e.preventDefault(); e.stopPropagation(); goTo(current + 1); });
+
+          dots.forEach(function(dot, i) {
+            dot.addEventListener('click', function(e) { e.preventDefault(); e.stopPropagation(); goTo(i); });
+          });
+
+          // Swipe support
+          var startX = 0;
+          slider.addEventListener('touchstart', function(e) { startX = e.touches[0].clientX; }, { passive: true });
+          slider.addEventListener('touchend', function(e) {
+            var diff = startX - e.changedTouches[0].clientX;
+            if (Math.abs(diff) > 40) goTo(diff > 0 ? current + 1 : current - 1);
+          }, { passive: true });
+        });
+      };
+      initCardSliders();
 
       // Newsletter Logic (Existing)
       // Chatbot Logic
