@@ -14,9 +14,9 @@
       <div class="social-feed-post__video">
         {{- $ytId := "" -}}
         {{- if (findRE `youtube\.com/watch\?v=([^&]+)` $videoUrl) -}}
-          {{- $ytId = index (findRESubmatch `youtube\.com/watch\?v=([^&]+)` $videoUrl) 0 1 -}}
+          {{- $ytId = replaceRE `.*youtube\.com/watch\?v=([^&]+).*` "$1" $videoUrl -}}
         {{- else if (findRE `youtu\.be/([^?]+)` $videoUrl) -}}
-          {{- $ytId = index (findRESubmatch `youtu\.be/([^?]+)` $videoUrl) 0 1 -}}
+          {{- $ytId = replaceRE `.*youtu\.be/([^?]+).*` "$1" $videoUrl -}}
         {{- end -}}
         
         {{- if $ytId }}
