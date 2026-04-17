@@ -222,7 +222,14 @@
     <section class="social-home" aria-label="Media Platform">
       <aside class="social-home__rail social-home__rail--left">
         <div class="social-card social-profile">
-          <div class="social-profile__avatar" aria-hidden="true">{{ slicestr site.Title 0 1 }}</div>
+          {{- $avatar := resources.Get "avatar.jpg" -}}
+          <div class="social-profile__avatar">
+            {{- if $avatar }}
+            <img src="{{ $avatar.RelPermalink }}" alt="{{ site.Title }}" width="76" height="76">
+            {{- else }}
+            {{ slicestr site.Title 0 1 }}
+            {{- end }}
+          </div>
           <p class="social-profile__eyebrow">The Curator</p>
           <h1 class="social-profile__name">{{ site.Title }}</h1>
           {{- with $profile.roleLine }}
