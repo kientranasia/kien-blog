@@ -197,6 +197,7 @@
           {{- range $pillars }}
           <a href="{{ relURL (printf "/categories/%s/" .slug) }}" class="mobile-drawer__link">{{ .name }}</a>
           {{- end }}
+          <a href="{{ site.Params.consulting.url | default "https://kientran.asia" }}" class="mobile-drawer__link" target="_blank" rel="noopener noreferrer">Consulting</a>
         </nav>
       </div>
 
@@ -301,6 +302,7 @@
               }}" href="{{ relURL "/about/" }}" data-page-link>About</a>
             <a class="social-feed-header__tab {{ if eq .RelPermalink "/contact/" }}social-feed-header__tab--active{{
               end }}" href="{{ relURL "/contact/" }}" data-page-link>Contact</a>
+            <a class="social-feed-header__tab" href="{{ site.Params.consulting.url | default "https://kientran.asia" }}" target="_blank" rel="noopener noreferrer">Consulting</a>
           </nav>
         </header>
 
@@ -363,6 +365,12 @@
           <section class="social-card social-reading-panel">
             <h2 class="social-card__title">Bài liên quan</h2>
             <div class="social-reading-panel__related" data-detail-related></div>
+          </section>
+          <section class="social-card social-reading-panel">
+            <h2 class="social-card__title">Consulting</h2>
+            <div class="social-reading-panel__cta">
+              {{ partial "consulting-cta.html" (dict "page" . "variant" "rail") }}
+            </div>
           </section>
         </div>
       </aside>

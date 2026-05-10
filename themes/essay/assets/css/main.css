@@ -17,7 +17,8 @@
   --shadow-luxe: 0 20px 25px -5px rgb(15 23 42 / 0.1), 0 8px 10px -6px rgb(15 23 42 / 0.1);
 
   /* Layout */
-  --max: 42rem;
+  /* Reading width: keep 680–760px sweet spot */
+  --max: 45rem;
   --max-wide: 52rem;
   --max-layout: 72rem;
   
@@ -28,7 +29,8 @@
   
   --lh: 1.75;
   --lh-tight: 1.4;
-  --size: 1.0625rem;
+  /* Comfortable long-form reading */
+  --size: 1.125rem;
 }
 
 
@@ -1961,7 +1963,7 @@ html[data-theme="dark"] .home-social__link:hover {
 
 /* Essay */
 .essay__title {
-  font-size: 1.25rem;
+  font-size: 1.6rem;
   font-weight: 700;
   line-height: 1.35;
   margin: 0 0 0.5rem;
@@ -1971,6 +1973,55 @@ html[data-theme="dark"] .home-social__link:hover {
   font-size: 0.8125rem;
   color: var(--muted);
   margin: 0 0 1rem;
+}
+
+.essay__meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 0.5rem;
+  align-items: center;
+}
+
+.essay__meta-row a {
+  color: inherit;
+}
+
+.essay__meta-row a:hover {
+  color: var(--link);
+}
+
+.essay__meta-sep {
+  color: var(--faint);
+}
+
+.essay__meta-actions {
+  margin-left: auto;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.essay__copylink {
+  appearance: none;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--muted);
+  border-radius: 999px;
+  padding: 0.25rem 0.6rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.2;
+  cursor: pointer;
+}
+
+.essay__copylink:hover {
+  color: var(--fg);
+  border-color: var(--muted);
+}
+
+.essay__copylink.is-ok {
+  color: var(--fg);
+  border-color: var(--fg);
 }
 
 /* Text-to-speech (Web Speech API) */
@@ -2224,14 +2275,14 @@ html[data-theme="dark"] .home-social__link:hover {
 }
 
 .prose h2 {
-  font-size: 1.85rem;
+  font-size: 1.65rem;
   font-weight: 700;
   margin-top: 3rem;
   letter-spacing: -0.01em;
 }
 
 .prose h3 {
-  font-size: 1.45rem;
+  font-size: 1.35rem;
   font-weight: 600;
   margin-top: 2.5rem;
 }
@@ -2245,6 +2296,89 @@ html[data-theme="dark"] .home-social__link:hover {
 .prose p {
   margin: 0 0 1em;
   line-height: 1.85;
+}
+
+/* Consulting CTA (editorial, low-friction) */
+.consulting-cta {
+  margin: 1.75rem 0;
+  padding: 1.1rem 1.1rem;
+  border: 1px solid var(--border);
+  border-radius: 0.9rem;
+  background: rgba(255, 255, 255, 0.55);
+  box-shadow: var(--shadow-sm);
+}
+
+.consulting-cta__eyebrow {
+  margin: 0 0 0.4rem;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.consulting-cta__title {
+  margin: 0 0 0.4rem;
+  font-family: var(--font-title);
+  font-size: 1.15rem;
+  line-height: 1.35;
+}
+
+.consulting-cta__desc {
+  margin: 0 0 0.75rem;
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.65;
+}
+
+.consulting-cta__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  align-items: center;
+}
+
+.consulting-cta__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  border-radius: 999px;
+  padding: 0.45rem 0.9rem;
+  font-weight: 700;
+  border: 1px solid var(--fg);
+  background: var(--fg);
+  color: var(--bg);
+  font-size: 0.875rem;
+}
+
+.consulting-cta__btn:hover {
+  opacity: 0.93;
+  color: var(--bg);
+}
+
+.consulting-cta__link {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.consulting-cta__link:hover {
+  color: var(--link);
+}
+
+.social-reading-panel__cta {
+  margin-top: 0.5rem;
+}
+
+@media (max-width: 520px) {
+  .consulting-cta {
+    padding: 1rem 0.95rem;
+  }
+  .essay__meta-actions {
+    width: 100%;
+    margin-left: 0;
+  }
 }
 
 .prose img {

@@ -9,6 +9,11 @@ title: Kiên Trần
 theme: essay
 
 params:
+  consulting:
+    url: "https://kientran.asia"
+    # Optional: point to your best “send brief / book a call” URL if you have one
+    contact_url: "https://kientran.asia?utm_source=blog&utm_medium=cta&utm_campaign=consulting&utm_content=brief"
+
   home:
     hero_kicker: ""
     hero_lead: |
