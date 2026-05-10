@@ -5,18 +5,20 @@
     {{- $base := site.Params.consulting.url | default "https://kientran.asia" -}}
     {{- $utm := printf "%s?utm_source=blog&utm_medium=cta&utm_campaign=consulting&utm_content=%s" $base $variant -}}
     <aside class="consulting-cta" aria-label="Consulting CTA">
-      <p class="consulting-cta__eyebrow">Consulting</p>
-      <h2 class="consulting-cta__title">Cần triển khai AI / BPR / Workflow cho doanh nghiệp?</h2>
-      <p class="consulting-cta__desc">Nếu bạn muốn biến ý tưởng trong bài viết thành hệ thống vận hành được (từ quy trình đến tự động hóa), hãy xem landingpage dịch vụ và gửi brief.</p>
-      <div class="consulting-cta__actions">
-        <a class="consulting-cta__btn" href="{{ $utm }}" target="_blank" rel="noopener noreferrer">Xem consulting</a>
-        {{- with site.Params.consulting.contact_url -}}
-          <a class="consulting-cta__link" href="{{ . }}" target="_blank" rel="noopener noreferrer">Gửi brief</a>
-        {{- else -}}
-          <a class="consulting-cta__link" href="{{ $utm }}" target="_blank" rel="noopener noreferrer">Gửi brief</a>
-        {{- end -}}
-      </div>
-    </aside>
+    <p class="consulting-cta__eyebrow">Consulting</p>
+    <h2 class="consulting-cta__title">Cần triển khai AI / BPR / Workflow cho doanh nghiệp?</h2>
+    <p class="consulting-cta__desc">Nếu bạn muốn biến ý tưởng trong bài viết thành hệ thống vận hành được (từ quy trình đến tự động hóa), hãy xem landingpage dịch vụ và gửi brief.</p>
+    <div class="consulting-cta__actions">
+      <a class="consulting-cta__btn" href="{{ $utm }}" target="_blank" rel="noopener noreferrer">Xem consulting</a>
+      {{- $email := site.Params.consulting.contact_email | default "" -}}
+      {{- if $email -}}
+        {{- $subject := printf "Brief consulting (from blog) — %s" ($page.Title | default "Kiên Trần") -}}
+        {{- $body := printf "Chào team TRANDAO,%0D%0A%0D%0AEm muốn trao đổi về nhu cầu consulting (AI/BPR/Workflow).%0D%0A%0D%0A- Công ty:%0D%0A- Ngành:%0D%0A- Vấn đề hiện tại:%0D%0A- Mục tiêu:%0D%0A- Timeline:%0D%0A- Ngân sách dự kiến:%0D%0A%0D%0ATham chiếu bài viết: %s%0D%0A%0D%0AThanks!" $page.Permalink -}}
+        <a class="consulting-cta__link" href="mailto:{{ $email }}?subject={{ $subject | urlquery }}&body={{ $body }}">Gửi brief</a>
+      {{- else -}}
+        <a class="consulting-cta__link" href="{{ $utm }}" target="_blank" rel="noopener noreferrer">Gửi brief</a>
+      {{- end }}
+    </div>
+  </aside>
   {{- end -}}
 {{- end -}}
-

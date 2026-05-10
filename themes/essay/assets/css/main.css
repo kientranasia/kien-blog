@@ -2304,8 +2304,7 @@ html[data-theme="dark"] .home-social__link:hover {
   padding: 1.1rem 1.1rem;
   border: 1px solid var(--border);
   border-radius: 0.9rem;
-  background: rgba(255, 255, 255, 0.55);
-  box-shadow: var(--shadow-sm);
+  background: #ffffff;
 }
 
 .consulting-cta__eyebrow {
@@ -2346,15 +2345,16 @@ html[data-theme="dark"] .home-social__link:hover {
   border-radius: 999px;
   padding: 0.45rem 0.9rem;
   font-weight: 700;
-  border: 1px solid var(--fg);
-  background: var(--fg);
-  color: var(--bg);
+  border: 1px solid #f97316;
+  background: #f97316;
+  color: #ffffff;
   font-size: 0.875rem;
 }
 
 .consulting-cta__btn:hover {
-  opacity: 0.93;
-  color: var(--bg);
+  background: #ea580c;
+  border-color: #ea580c;
+  color: #ffffff;
 }
 
 .consulting-cta__link {

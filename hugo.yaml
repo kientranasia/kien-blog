@@ -11,8 +11,8 @@ theme: essay
 params:
   consulting:
     url: "https://kientran.asia"
-    # Optional: point to your best “send brief / book a call” URL if you have one
-    contact_url: "https://kientran.asia?utm_source=blog&utm_medium=cta&utm_campaign=consulting&utm_content=brief"
+    # Send brief via email
+    contact_email: "contact@trandao.vn"
 
   home:
     hero_kicker: ""
