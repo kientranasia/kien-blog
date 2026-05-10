@@ -1,5 +1,6 @@
 {{ define "main" }}
-{{- $images := .Params.images -}}
+{{- /* Hugo <= 0.92 can error on len(nil); normalize to empty slice */ -}}
+{{- $images := (.Params.images | default (slice)) -}}
 {{- $featuredImg := partial "post-feature-image.html" (dict "page" .) -}}
 {{- $videoUrl := .Params.video_url -}}
 
@@ -91,7 +92,7 @@
   {{ end }}
 </div>
 
-{{- if and .Params.images (gt (len .Params.images) 1) }}
+{{- if gt (len $images) 1 }}
 <script>
 (function() {
   var track = document.getElementById('post-slider-track');
@@ -152,4 +153,3 @@
 })();
 </script>
 {{ end }}
-
