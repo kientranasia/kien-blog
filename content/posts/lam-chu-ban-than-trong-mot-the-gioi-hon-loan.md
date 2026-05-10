@@ -6,6 +6,8 @@ draft: false
 description: Tại đây, trong sự tĩnh lặng, giữa những ồn ào của cuộc sống, con
   người rèn luyện ý chí, xây dựng thói quen và đặt nền móng cho mọi thành công
   trong tương lai.
+categories:
+  - Essays
 ---
 Tại đây, trong sự tĩnh lặng, giữa những ồn ào của cuộc sống, con người rèn luyện ý chí, xây dựng thói quen và đặt nền móng cho mọi thành công trong tương lai.
 
