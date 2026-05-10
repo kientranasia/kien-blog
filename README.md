@@ -14,7 +14,7 @@ Open <http://localhost:1313/> and <http://localhost:1313/admin/>.
 
 ## First-time configuration
 
-1. **`baseURL`** — Trong `hugo.yaml` đang dùng **`https://kientran.asia/`** (canonical, Open Graph, RSS, sitemap). Xem thêm `enableRobotsTXT` và `sitemap` trong cùng file.
+1. **`baseURL`** — Trong `hugo.yaml` đang dùng **`https://blog.kientran.asia/`** (canonical, Open Graph, RSS, sitemap). Xem thêm `enableRobotsTXT` và `sitemap` trong cùng file.
    - **Đổi domain:** sửa `baseURL` trong `hugo.yaml` (và `static/admin/config.yml` nếu dùng Decap).
    - **Preview local:** `hugo server` dùng host dev; không cần truyền `--baseURL` trừ khi bạn muốn ép URL.
 

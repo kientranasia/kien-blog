@@ -1,0 +1,18 @@
+{{- $destination := .Destination -}}
+{{- if $destination -}}
+  {{- $destination = replace $destination "__GHOST_URL__" "" -}}
+{{- end -}}
+
+{{- $url := $destination -}}
+{{- if and $destination (hasPrefix $destination "/") -}}
+  {{- $url = absURL $destination -}}
+{{- end -}}
+
+<img
+  src="{{ $url | safeURL }}"
+  alt="{{ .Text }}"
+  loading="lazy"
+  decoding="async"
+  {{- with .Title }} title="{{ . }}"{{- end -}}
+/>
+

@@ -1,0 +1,16 @@
+{{- $destination := .Destination -}}
+{{- if $destination -}}
+  {{- $destination = replace $destination "__GHOST_URL__" "" -}}
+{{- end -}}
+
+{{- $url := $destination -}}
+{{- if and $destination (hasPrefix $destination "/") -}}
+  {{- $url = absURL $destination -}}
+{{- end -}}
+
+<a href="{{ $url | safeURL }}"
+  {{- with .Title }} title="{{ . }}"{{- end -}}
+  {{- if hasPrefix $url "http" }} rel="noopener noreferrer" target="_blank"{{- end -}}
+>
+  {{- .Text | safeHTML -}}
+</a>

@@ -1,5 +1,5 @@
 # URL tuyệt đối cho canonical, Open Graph, RSS, sitemap (SEO). Local: `hugo server` tự dùng host dev.
-baseURL: https://kientran.asia/
+baseURL: https://blog.kientran.asia/
 relativeURLs: false
 enableRobotsTXT: true
 defaultContentLanguage: vi
@@ -69,7 +69,7 @@ params:
     # Meta description trang chủ (~150–160 ký tự; khớp Google snippet)
     home_description: >-
       Blog của Kiên Trần — CEO TRANDAO: chuyển đổi số, AI và tự động hóa cho doanh nghiệp.
-      Bài viết về startup, essays và happiness; 11+ năm thực chiến tại kientran.asia.
+      Bài viết về startup, essays và happiness; 11+ năm thực chiến tại blog.kientran.asia.
   # Mặc định toàn site + fallback khi trang không có description riêng
   description: >-
     Kiên Trần — CEO TRANDAO: tư vấn chuyển đổi số, AI & workflow automation cho doanh nghiệp.

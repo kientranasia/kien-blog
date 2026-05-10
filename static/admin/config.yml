@@ -10,7 +10,7 @@ backend:
   repo: kientranasia/kien-blog
   branch: main
   # Public origin used by the OAuth backend (nginx reverse-proxy /auth and /callback)
-  base_url: https://kientran.asia
+  base_url: https://blog.kientran.asia
   # Optional: use a single commit without opening PRs
   # commit_messages:
   #   create: "Create {{collection}} “{{slug}}”"
@@ -21,8 +21,8 @@ media_folder: static/uploads
 public_folder: /uploads
 
 # Used by Decap CMS to generate correct live/admin URLs when behind a reverse proxy.
-site_url: https://kientran.asia
-display_url: https://kientran.asia
+site_url: https://blog.kientran.asia
+display_url: https://blog.kientran.asia
 
 slug:
   encoding: ascii
