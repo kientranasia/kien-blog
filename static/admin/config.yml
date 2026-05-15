@@ -35,12 +35,12 @@ collections:
     label_singular: Essay
     folder: content/posts
     create: true
-    # Tên file = slugify(title). KHÔNG thêm field tên "slug" — trùng biến {{slug}} trong template → lỗi rỗng/sai URL.
+    # Tên file = slugify(title).
+    # Lưu ý: KHÔNG dùng field name "slug" trong UI vì sẽ trùng biến {{slug}} (macro) của Decap → dễ lỗi không auto-generate.
     identifier_field: title
     slug: "{{slug}}"
     fields:
       - { label: Title, name: title, widget: string }
-      - { label: "Slug (Tùy chỉnh URL)", name: slug, widget: string, required: false, hint: "Ví dụ: 'con-nguoi-va-ai' - Để trống nếu muốn dùng mặc định." }
       - { label: Publish date, name: date, widget: datetime }
       - { label: "Feature Image (Ảnh đại diện)", name: featured_image, widget: image, required: false, hint: "Ảnh chính hiển thị ở đầu bài viết." }
       - { label: "Video URL (YouTube)", name: video_url, widget: string, required: false, hint: "Dán link YouTube (ví dụ: https://www.youtube.com/watch?v=...) để hiển thị video." }
