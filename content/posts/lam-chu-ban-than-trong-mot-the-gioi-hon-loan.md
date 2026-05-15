@@ -1,6 +1,6 @@
 ---
 title: Làm Chủ Bản Thân Trong Một Thế Giới Hỗn Loạn
-slug: ""
+slug: lam-chu-ban-than-trong-mot-the-gioi-hon-loan
 date: 2026-05-10T22:59:00.000+07:00
 draft: false
 description: Tại đây, trong sự tĩnh lặng, giữa những ồn ào của cuộc sống, con
